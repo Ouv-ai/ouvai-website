@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="lang-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouv.ai — Ouvidoria Inteligente para Instituições Financeiras</title>
+    <meta name="description" content="Plataforma SaaS com IA generativa para gestão automatizada de reclamações regulatórias. Integração BACEN, multi-canal, compliance BCB 222.">
+    <meta name="keywords" content="ouvidoria, BACEN, RDR, reclamações, IA, inteligência artificial, compliance, BCB 222, fintech, SaaS, banco, instituição financeira">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ouv.ai — Ouvidoria Inteligente para Instituições Financeiras">
+    <meta property="og:description" content="Plataforma SaaS com IA generativa para gestão automatizada de reclamações regulatórias. Integração BACEN, multi-canal, compliance BCB 222.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Logo_final.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Logo_final.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            --primary: #28CCCC;
+            --primary-dark: #1da8a8;
+            --primary-light: rgba(40, 204, 204, 0.08);
+            --primary-glow: rgba(40, 204, 204, 0.15);
+
+            --bg: #F8FAFC;
+            --bg-dark: #0F172A;
+            --bg-dark-2: #1E293B;
+            --bg-card: #FFFFFF;
+            --text: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --border: #E2E8F0;
+
+            --success: #059669;
+            --warning: #D97706;
+            --danger: #E11D48;
+            --info: #2563EB;
+
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+        button { border: none; cursor: pointer; font-family: inherit; }
+        ul { list-style: none; }
+
+        /* ============================================
+           UTILITIES
+           ============================================ */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-headline {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+
+        .section-subtext {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header .section-subtext {
+            margin: 0 auto;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 0 0 rgba(40,204,204,0), var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 0 24px rgba(40,204,204,0.3), var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.25);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(40,204,204,0.05);
+        }
+
+        .btn-outline-dark {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-outline-dark:hover {
+            border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+
+        /* ============================================
+           LANGUAGE TOGGLE — class-based
+           ============================================ */
+        html.lang-pt [data-lang="en"] { display: none !important; }
+        html.lang-en [data-lang="pt"] { display: none !important; }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 24px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: background var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.92);
+        }
+
+        .navbar-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Logo — inline text */
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, #1da8a8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .navbar-logo-text {
+            font-size: 1.375rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .navbar-logo-text .dot-ai {
+            color: var(--primary);
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .navbar-links a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color var(--transition);
+        }
+
+        .navbar-links a:hover {
+            color: #fff;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .lang-toggle button {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            transition: all var(--transition);
+            letter-spacing: 0.05em;
+        }
+
+        .lang-toggle button.active {
+            color: #fff;
+            background: rgba(40,204,204,0.15);
+        }
+
+        .nav-cta {
+            padding: 10px 20px;
+            font-size: 0.8125rem;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            color: #fff;
+            padding: 8px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 40px 24px;
+            flex-direction: column;
+            gap: 24px;
+            z-index: 999;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .mobile-menu a:hover {
+            color: #fff;
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(160deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            overflow: hidden;
+            padding-top: 72px;
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(40,204,204,0.5) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(40,204,204,0.12) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-lines {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .hero-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(40,204,204,0.15), transparent);
+            animation: heroLineDrift 8s ease-in-out infinite;
+        }
+
+        .hero-line:nth-child(1) { top: 20%; width: 60%; left: 10%; animation-delay: 0s; }
+        .hero-line:nth-child(2) { top: 40%; width: 40%; left: 30%; animation-delay: 2s; }
+        .hero-line:nth-child(3) { top: 60%; width: 50%; left: 20%; animation-delay: 4s; }
+        .hero-line:nth-child(4) { top: 80%; width: 35%; left: 40%; animation-delay: 6s; }
+
+        @keyframes heroLineDrift {
+            0%, 100% { opacity: 0.3; transform: translateX(0); }
+            50% { opacity: 0.8; transform: translateX(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 60px 24px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(40,204,204,0.08);
+            border: 1px solid rgba(40,204,204,0.2);
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 32px;
+            font-family: var(--font-mono);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 3.75rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, #5eead4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.1875rem);
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-ctas {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           PROBLEM
+           ============================================ */
+        .problem {
+            background: var(--bg);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            transition: all var(--transition);
+        }
+
+        .problem-card:hover {
+            border-color: rgba(40,204,204,0.3);
+            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(40,204,204,0.1);
+            transform: translateY(-2px);
+        }
+
+        .problem-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .problem-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .problem-card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ============================================
+           SOLUTION
+           ============================================ */
+        .solution {
+            background: var(--bg);
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .solution-text .section-headline {
+            text-align: left;
+        }
+
+        .solution-text p {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-top: 20px;
+        }
+
+        .solution-flow {
+            position: relative;
+        }
+
+        .flow-container {
+            background: var(--bg-dark);
+            border-radius: var(--radius-xl);
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0;
+            position: relative;
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 100%;
+            width: 1px;
+            height: 14px;
+            background: rgba(40,204,204,0.3);
+        }
+
+        .flow-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+
+        .flow-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        /* ============================================
+           HOW IT WORKS
+           ============================================ */
+        .how-it-works {
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .how-it-works .section-headline {
+            color: #fff;
+        }
+
+        .how-it-works .section-subtext {
+            color: var(--text-muted);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step-card {
+            position: relative;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius-lg);
+            padding: 36px 24px;
+            backdrop-filter: blur(10px);
+            transition: all var(--transition);
+        }
+
+        .step-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(40,204,204,0.2);
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+        }
+
+        .step-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(40,204,204,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .step-card h3 {
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* Connector line between steps */
+        .step-card:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 58px;
+            right: -12px;
+            width: 24px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(40,204,204,0.3), transparent);
+        }
+
+        /* ============================================
+           FEATURES
+           ============================================ */
+        .features {
+            background: var(--bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: all var(--transition);
+        }
+
+        .feature-card:hover {
+            border-color: rgba(40,204,204,0.3);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           DIFFERENTIALS
+           ============================================ */
+        .differentials {
+            background: #fff;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .diff-card {
+            display: flex;
+            gap: 20px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            transition: all var(--transition);
+        }
+
+        .diff-card:hover {
+            border-color: rgba(40,204,204,0.3);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .diff-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+
+        .diff-card h3 {
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .diff-card p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ============================================
+           DEPLOYMENT MODELS (ex-PLANS)
+           ============================================ */
+        .plans {
+            background: var(--bg);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            align-items: stretch;
+        }
+
+        .plan-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 48px 40px;
+            position: relative;
+            transition: all var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
+        }
+
+        .plan-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+
+        .plan-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            background: var(--primary-light);
+            border: 1px solid rgba(40,204,204,0.15);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-family: var(--font-mono);
+            width: fit-content;
+        }
+
+        .plan-name {
+            font-size: 1.375rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .plan-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .plan-features {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 36px;
+            flex-grow: 1;
+        }
+
+        .plan-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .plan-feature i {
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .plan-card .btn {
+            width: 100%;
+        }
+
+        .plans-note {
+            text-align: center;
+            margin-top: 48px;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.65;
+        }
+
+        /* ============================================
+           METRICS
+           ============================================ */
+        .metrics {
+            background: #fff;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition);
+        }
+
+        .metric-card:hover {
+            border-color: rgba(40,204,204,0.3);
+            box-shadow: var(--shadow-md);
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           COMPLIANCE / LGPD
+           ============================================ */
+        .compliance {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .compliance .section-headline {
+            color: #fff;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .compliance-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            transition: all var(--transition);
+        }
+
+        .compliance-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(40,204,204,0.15);
+        }
+
+        .compliance-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(40,204,204,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .compliance-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .compliance-card p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .compliance-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .compliance-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            transition: all var(--transition);
+        }
+
+        .compliance-badge:hover {
+            border-color: rgba(40,204,204,0.3);
+            background: rgba(40,204,204,0.06);
+        }
+
+        .compliance-badge i {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .compliance-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           WAITLIST / CTA
+           ============================================ */
+        .waitlist {
+            background: linear-gradient(160deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waitlist::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(40,204,204,0.6) 1px, transparent 0);
+            background-size: 32px 32px;
+        }
+
+        .waitlist-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .waitlist .section-headline {
+            color: #fff;
+        }
+
+        .waitlist .section-subtext {
+            color: var(--text-muted);
+            margin: 0 auto 48px;
+        }
+
+        .waitlist-form-container {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-xl);
+            padding: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .waitlist-form-container iframe {
+            width: 100%;
+            min-height: 500px;
+            border: none;
+            border-radius: var(--radius-lg);
+        }
+
+        .waitlist-fallback {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .waitlist-fallback p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .waitlist-contact-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .waitlist-contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            transition: all var(--transition);
+        }
+
+        .waitlist-contact-links a:hover {
+            border-color: var(--primary);
+            background: rgba(40,204,204,0.08);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 64px 0 32px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        .footer-links-group h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .footer-links-group a {
+            display: block;
+            font-size: 0.875rem;
+            color: #94a3b8;
+            padding: 4px 0;
+            transition: color var(--transition);
+        }
+
+        .footer-links-group a:hover {
+            color: #fff;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: rgba(40,204,204,0.1);
+            border-color: rgba(40,204,204,0.3);
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            transition: color var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: #fff;
+        }
+
+        /* Footer logo */
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo .logo-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .footer-logo .logo-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.125rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-logo-text .dot-ai {
+            color: var(--primary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .step-card::after {
+                display: none;
+            }
+
+            .solution-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 80px 0;
+            }
+
+            .navbar-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-cta.desktop-only {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 2.75rem);
+            }
+
+            .problem-grid,
+            .features-grid,
+            .diff-grid,
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .hero-ctas .btn {
+                width: 100%;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 64px 0;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .section-headline {
+                font-size: 1.75rem;
+            }
+
+            .plan-card {
+                padding: 32px 24px;
+            }
+
+            .waitlist-contact-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .waitlist-contact-links a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="navbar-logo">
+                <div class="logo-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                    </svg>
+                </div>
+                <span class="navbar-logo-text">Ouv<span class="dot-ai">.ai</span></span>
+            </a>
+
+            <div class="navbar-links" id="navLinks">
+                <a href="#solucao" data-lang="pt">Solução</a>
+                <a href="#solucao" data-lang="en">Solution</a>
+                <a href="#funcionalidades" data-lang="pt">Funcionalidades</a>
+                <a href="#funcionalidades" data-lang="en">Features</a>
+                <a href="#planos" data-lang="pt">Planos</a>
+                <a href="#planos" data-lang="en">Plans</a>
+                <a href="#contato" data-lang="pt">Contato</a>
+                <a href="#contato" data-lang="en">Contact</a>
+            </div>
+
+            <div class="navbar-right">
+                <div class="lang-toggle">
+                    <button class="active" id="langPt" onclick="setLang('pt')">PT</button>
+                    <button id="langEn" onclick="setLang('en')">EN</button>
+                </div>
+                <a href="#contato" class="btn btn-primary nav-cta desktop-only">
+                    <span data-lang="pt">Lista de Espera</span>
+                    <span data-lang="en">Waitlist</span>
+                </a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" width="24" height="24"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#solucao" data-lang="pt" onclick="closeMobileMenu()">Solução</a>
+        <a href="#solucao" data-lang="en" onclick="closeMobileMenu()">Solution</a>
+        <a href="#funcionalidades" data-lang="pt" onclick="closeMobileMenu()">Funcionalidades</a>
+        <a href="#funcionalidades" data-lang="en" onclick="closeMobileMenu()">Features</a>
+        <a href="#planos" data-lang="pt" onclick="closeMobileMenu()">Planos</a>
+        <a href="#planos" data-lang="en" onclick="closeMobileMenu()">Plans</a>
+        <a href="#contato" data-lang="pt" onclick="closeMobileMenu()">Contato</a>
+        <a href="#contato" data-lang="en" onclick="closeMobileMenu()">Contact</a>
+        <a href="#contato" class="btn btn-primary" style="margin-top:16px;" onclick="closeMobileMenu()">
+            <span data-lang="pt">Lista de Espera</span>
+            <span data-lang="en">Waitlist</span>
+        </a>
+    </div>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-lines">
+            <div class="hero-line"></div>
+            <div class="hero-line"></div>
+            <div class="hero-line"></div>
+            <div class="hero-line"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge fade-in">
+                <span>Powered by GPT-4.1 + pgvector</span>
+            </div>
+
+            <h1 class="fade-in fade-in-delay-1">
+                <span data-lang="pt">Ouvidoria <span class="text-gradient">inteligente</span> para instituições financeiras</span>
+                <span data-lang="en"><span class="text-gradient">Intelligent</span> ombudsman management for financial institutions</span>
+            </h1>
+
+            <p class="hero-sub fade-in fade-in-delay-2">
+                <span data-lang="pt">O Ouv.ai automatiza a gestão de reclamações regulatórias com IA generativa. Da captura no BACEN até a resposta final — em minutos, não dias.</span>
+                <span data-lang="en">Ouv.ai automates regulatory complaint management with generative AI. From BACEN capture to final response — in minutes, not days.</span>
+            </p>
+
+            <div class="hero-ctas fade-in fade-in-delay-3">
+                <a href="#contato" class="btn btn-primary">
+                    <span data-lang="pt">Entrar na Lista de Espera</span>
+                    <span data-lang="en">Join the Waitlist</span>
+                    <i data-lucide="arrow-right" width="18" height="18"></i>
+                </a>
+                <a href="#funcionalidades" class="btn btn-outline">
+                    <span data-lang="pt">Ver Funcionalidades</span>
+                    <span data-lang="en">See Features</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROBLEM ========== -->
+    <section class="section problem" id="problema">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">O desafio da ouvidoria bancária no Brasil</span>
+                    <span data-lang="en">The challenge of banking ombudsman in Brazil</span>
+                </h2>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card fade-in fade-in-delay-1">
+                    <div class="problem-card-icon">
+                        <i data-lucide="clock" width="24" height="24"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Prazos apertados</span>
+                        <span data-lang="en">Tight deadlines</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">10 dias úteis para responder ao BACEN. Cada dia conta — e cada atraso gera penalidade.</span>
+                        <span data-lang="en">10 business days to respond to BACEN. Every day counts — every delay triggers penalties.</span>
+                    </p>
+                </div>
+                <div class="problem-card fade-in fade-in-delay-2">
+                    <div class="problem-card-icon">
+                        <i data-lucide="file-warning" width="24" height="24"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Volume crescente</span>
+                        <span data-lang="en">Growing volume</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Reclamações no RDR crescem ano a ano. Equipes pequenas não conseguem escalar.</span>
+                        <span data-lang="en">RDR complaints grow year over year. Small teams can't scale.</span>
+                    </p>
+                </div>
+                <div class="problem-card fade-in fade-in-delay-3">
+                    <div class="problem-card-icon">
+                        <i data-lucide="scale" width="24" height="24"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Risco regulatório</span>
+                        <span data-lang="en">Regulatory risk</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Respostas mal fundamentadas geram procedência. Procedência vira ranking negativo no BACEN.</span>
+                        <span data-lang="en">Poorly substantiated responses lead to adverse rulings. Adverse rulings damage BACEN rankings.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SOLUTION ========== -->
+    <section class="section solution" id="solucao">
+        <div class="container">
+            <div class="solution-content">
+                <div class="solution-text fade-in">
+                    <h2 class="section-headline">
+                        <span data-lang="pt">Ouv.ai: da reclamação à resposta em minutos</span>
+                        <span data-lang="en">Ouv.ai: from complaint to response in minutes</span>
+                    </h2>
+                    <p>
+                        <span data-lang="pt">O Ouv.ai é uma plataforma SaaS que conecta inteligência artificial à gestão regulatória. Nosso sistema captura automaticamente as demandas do BACEN, classifica com IA, direciona ao backoffice, e gera respostas personalizadas — tudo dentro dos prazos da Resolução BCB 222.</span>
+                        <span data-lang="en">Ouv.ai is a SaaS platform that connects artificial intelligence to regulatory management. Our system automatically captures demands from BACEN, classifies with AI, routes to back-office, and generates personalized responses — all within BCB Resolution 222 deadlines.</span>
+                    </p>
+                </div>
+                <div class="solution-flow fade-in fade-in-delay-2">
+                    <div class="flow-container">
+                        <div class="flow-step">
+                            <div class="flow-dot"><i data-lucide="building-2" width="16" height="16"></i></div>
+                            <span class="flow-label">BACEN</span>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-dot"><i data-lucide="scan" width="16" height="16"></i></div>
+                            <span class="flow-label" data-lang="pt">Captura IA</span>
+                            <span class="flow-label" data-lang="en">AI Capture</span>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-dot"><i data-lucide="tags" width="16" height="16"></i></div>
+                            <span class="flow-label" data-lang="pt">Classificação</span>
+                            <span class="flow-label" data-lang="en">Classification</span>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-dot"><i data-lucide="users" width="16" height="16"></i></div>
+                            <span class="flow-label">Backoffice</span>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-dot"><i data-lucide="sparkles" width="16" height="16"></i></div>
+                            <span class="flow-label" data-lang="pt">Resposta IA</span>
+                            <span class="flow-label" data-lang="en">AI Response</span>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-dot"><i data-lucide="send" width="16" height="16"></i></div>
+                            <span class="flow-label" data-lang="pt">Envio Automático</span>
+                            <span class="flow-label" data-lang="en">Auto Delivery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="section how-it-works" id="como-funciona">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">Como funciona</span>
+                    <span data-lang="en">How it works</span>
+                </h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card fade-in fade-in-delay-1">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">
+                        <i data-lucide="download" width="22" height="22"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Captura Automática</span>
+                        <span data-lang="en">Automatic Capture</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Integração direta com a API do BACEN (RDR Web Service). Demandas são capturadas automaticamente — zero digitação manual.</span>
+                        <span data-lang="en">Direct integration with BACEN API (RDR Web Service). Demands are captured automatically — zero manual entry.</span>
+                    </p>
+                </div>
+                <div class="step-card fade-in fade-in-delay-2">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">
+                        <i data-lucide="brain" width="22" height="22"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Classificação Inteligente</span>
+                        <span data-lang="en">Intelligent Classification</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">5 agentes de IA analisam a reclamação: classificam, priorizam, direcionam ao backoffice e sugerem procedência.</span>
+                        <span data-lang="en">5 AI agents analyze the complaint: classify, prioritize, route to back-office, and suggest merit assessment.</span>
+                    </p>
+                </div>
+                <div class="step-card fade-in fade-in-delay-3">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">
+                        <i data-lucide="pen-tool" width="22" height="22"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Resposta com IA Generativa</span>
+                        <span data-lang="en">AI-Powered Response</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">O motor de escrita gera duas versões: uma para o cliente (empática) e outra para o BACEN (técnica). Templates RAG garantem consistência.</span>
+                        <span data-lang="en">The writing engine generates two versions: one for the customer (empathetic) and one for BACEN (technical). RAG templates ensure consistency.</span>
+                    </p>
+                </div>
+                <div class="step-card fade-in fade-in-delay-4">
+                    <div class="step-number">04</div>
+                    <div class="step-icon">
+                        <i data-lucide="send" width="22" height="22"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Envio Simultâneo</span>
+                        <span data-lang="en">Simultaneous Delivery</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Resposta enviada ao BACEN via API e ao cliente por e-mail — em um único clique. PDF gerado automaticamente.</span>
+                        <span data-lang="en">Response sent to BACEN via API and to the customer by email — in a single click. PDF generated automatically.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FEATURES ========== -->
+    <section class="section features" id="funcionalidades">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">Tudo que sua ouvidoria precisa</span>
+                    <span data-lang="en">Everything your ombudsman needs</span>
+                </h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="zap" width="20" height="20"></i></div>
+                    <h3>
+                        <span data-lang="pt">5 Agentes de IA</span>
+                        <span data-lang="en">5 AI Agents</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Triagem, direcionamento, contexto, template RAG e escrita — pipeline completo.</span>
+                        <span data-lang="en">Triage, routing, context, RAG template and writing — complete pipeline.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="git-branch" width="20" height="20"></i></div>
+                    <h3>
+                        <span data-lang="pt">Classificadores N1-N5</span>
+                        <span data-lang="en">N1-N5 Classifiers</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Árvore hierárquica de classificadores editável, com busca semântica por embeddings.</span>
+                        <span data-lang="en">Editable hierarchical classifier tree with semantic search via embeddings.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="file-text" width="20" height="20"></i></div>
+                    <h3>Templates RAG</h3>
+                    <p>
+                        <span data-lang="pt">Busca por similaridade semântica (pgvector). Top 5 templates sugeridos por caso.</span>
+                        <span data-lang="en">Semantic similarity search (pgvector). Top 5 templates suggested per case.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="shield" width="20" height="20"></i></div>
+                    <h3>
+                        <span data-lang="pt">RBAC Dinâmico</span>
+                        <span data-lang="en">Dynamic RBAC</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">16 permissões configuráveis por perfil, sem deploy. Gestor controla tudo.</span>
+                        <span data-lang="en">16 configurable permissions per profile, no deploy needed. Manager controls everything.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="bar-chart-3" width="20" height="20"></i></div>
+                    <h3>
+                        <span data-lang="pt">Analytics Completo</span>
+                        <span data-lang="en">Complete Analytics</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">KPIs, gráficos de evolução, procedência, canal, timeline de qualidade.</span>
+                        <span data-lang="en">KPIs, evolution charts, merit tracking, channel analysis, quality timeline.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="calendar" width="20" height="20"></i></div>
+                    <h3>
+                        <span data-lang="pt">SLA Automático</span>
+                        <span data-lang="en">Automatic SLA</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Cálculo de prazo com feriados nacionais, alertas de vencimento, prorrogação via API.</span>
+                        <span data-lang="en">Deadline calculation with national holidays, expiry alerts, extension via API.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="mail" width="20" height="20"></i></div>
+                    <h3>
+                        <span data-lang="pt">E-mail Integrado</span>
+                        <span data-lang="en">Integrated Email</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">SMTP configurável, multi-destinatário, preview antes do envio.</span>
+                        <span data-lang="en">Configurable SMTP, multi-recipient, preview before sending.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="refresh-cw" width="20" height="20"></i></div>
+                    <h3>Feedback Loop</h3>
+                    <p>
+                        <span data-lang="pt">O sistema aprende com julgamentos do BACEN. Vitórias viram exemplos. Derrotas viram alertas.</span>
+                        <span data-lang="en">The system learns from BACEN rulings. Wins become examples. Losses become alerts.</span>
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i data-lucide="globe" width="20" height="20"></i></div>
+                    <h3>Multi-Canal</h3>
+                    <p>
+                        <span data-lang="pt">BACEN, Consumidor.gov, Ouvidoria Direta, Reclame Aqui — um único painel.</span>
+                        <span data-lang="en">BACEN, Consumidor.gov, Direct Ombudsman, Reclame Aqui — one single panel.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== DIFFERENTIALS ========== -->
+    <section class="section differentials" id="diferenciais">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">Por que Ouv.ai?</span>
+                    <span data-lang="en">Why Ouv.ai?</span>
+                </h2>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-card fade-in fade-in-delay-1">
+                    <div class="diff-icon"><i data-lucide="brain" width="24" height="24"></i></div>
+                    <div>
+                        <h3>
+                            <span data-lang="pt">IA que aprende</span>
+                            <span data-lang="en">AI that learns</span>
+                        </h3>
+                        <p>
+                            <span data-lang="pt">Motor de aprendizado contínuo: respostas aprovadas pelo BACEN retroalimentam a IA. Quanto mais usa, melhor fica.</span>
+                            <span data-lang="en">Continuous learning engine: BACEN-approved responses feed back into AI. The more you use it, the better it gets.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="diff-card fade-in fade-in-delay-2">
+                    <div class="diff-icon"><i data-lucide="lock" width="24" height="24"></i></div>
+                    <div>
+                        <h3>
+                            <span data-lang="pt">Compliance nativo</span>
+                            <span data-lang="en">Native compliance</span>
+                        </h3>
+                        <p>
+                            <span data-lang="pt">Construído sobre a Resolução BCB 222. Cada funcionalidade respeita os requisitos regulatórios.</span>
+                            <span data-lang="en">Built on BCB Resolution 222. Every feature respects regulatory requirements.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="diff-card fade-in fade-in-delay-3">
+                    <div class="diff-icon"><i data-lucide="puzzle" width="24" height="24"></i></div>
+                    <div>
+                        <h3>
+                            <span data-lang="pt">Integração real</span>
+                            <span data-lang="en">Real integration</span>
+                        </h3>
+                        <p>
+                            <span data-lang="pt">API BACEN 100% automatizada. Não é scraping — é integração oficial via Web Service SOAP.</span>
+                            <span data-lang="en">100% automated BACEN API. Not scraping — official SOAP Web Service integration.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="diff-card fade-in fade-in-delay-4">
+                    <div class="diff-icon"><i data-lucide="layers" width="24" height="24"></i></div>
+                    <div>
+                        <h3>Multi-canal</h3>
+                        <p>
+                            <span data-lang="pt">Um único sistema para todos os canais regulatórios. Sem silos, sem retrabalho.</span>
+                            <span data-lang="en">One system for all regulatory channels. No silos, no rework.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== DEPLOYMENT MODELS ========== -->
+    <section class="section plans" id="planos">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">Modelos de Implantação</span>
+                    <span data-lang="en">Deployment Models</span>
+                </h2>
+            </div>
+            <div class="plans-grid">
+                <!-- PoC -->
+                <div class="plan-card fade-in fade-in-delay-1">
+                    <div class="plan-card-icon">
+                        <i data-lucide="flask-conical" width="28" height="28"></i>
+                    </div>
+                    <div class="plan-tag">
+                        <span data-lang="pt">Validação</span>
+                        <span data-lang="en">Validation</span>
+                    </div>
+                    <div class="plan-name">
+                        <span data-lang="pt">Prova de Conceito (PoC)</span>
+                        <span data-lang="en">Proof of Concept (PoC)</span>
+                    </div>
+                    <p class="plan-desc">
+                        <span data-lang="pt">Ideal para instituições que desejam validar a IA com segurança antes da implantação completa. Teste o Ouv.ai com dados reais em um ambiente controlado.</span>
+                        <span data-lang="en">Ideal for institutions that want to validate AI safely before full deployment. Test Ouv.ai with real data in a controlled environment.</span>
+                    </p>
+                    <div class="plan-features">
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Ambiente isolado e seguro para testes</span>
+                            <span data-lang="en">Isolated and secure testing environment</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Teste com dados históricos do BACEN</span>
+                            <span data-lang="en">Testing with historical BACEN data</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Validação completa de segurança (InfoSec)</span>
+                            <span data-lang="en">Full security validation (InfoSec)</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Duração de 30 a 60 dias</span>
+                            <span data-lang="en">30 to 60 day duration</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Relatório de resultados e ROI projetado</span>
+                            <span data-lang="en">Results report and projected ROI</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Acompanhamento técnico dedicado</span>
+                            <span data-lang="en">Dedicated technical support</span>
+                        </div>
+                    </div>
+                    <a href="#contato" class="btn btn-outline-dark">
+                        <i data-lucide="calendar" width="18" height="18"></i>
+                        <span data-lang="pt">Agendar Demonstração</span>
+                        <span data-lang="en">Schedule a Demo</span>
+                    </a>
+                </div>
+
+                <!-- Enterprise License -->
+                <div class="plan-card fade-in fade-in-delay-2">
+                    <div class="plan-card-icon">
+                        <i data-lucide="building-2" width="28" height="28"></i>
+                    </div>
+                    <div class="plan-tag">
+                        <span data-lang="pt">Implantação</span>
+                        <span data-lang="en">Deployment</span>
+                    </div>
+                    <div class="plan-name">
+                        <span data-lang="pt">Licença Enterprise</span>
+                        <span data-lang="en">Enterprise License</span>
+                    </div>
+                    <p class="plan-desc">
+                        <span data-lang="pt">Implantação completa com integração total ao ecossistema da sua instituição. Infraestrutura dedicada, SLAs sob medida e suporte VIP.</span>
+                        <span data-lang="en">Full deployment with complete integration into your institution's ecosystem. Dedicated infrastructure, custom SLAs, and VIP support.</span>
+                    </p>
+                    <div class="plan-features">
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Integração total via API (BACEN + multi-canal)</span>
+                            <span data-lang="en">Full API integration (BACEN + multi-channel)</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">SLAs dedicados e personalizados</span>
+                            <span data-lang="en">Dedicated and customized SLAs</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Acesso multi-tenant para conglomerados</span>
+                            <span data-lang="en">Multi-tenant access for conglomerates</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Suporte VIP com gerente de conta dedicado</span>
+                            <span data-lang="en">VIP support with dedicated account manager</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Integração CRM / ServiceNow / sistemas internos</span>
+                            <span data-lang="en">CRM / ServiceNow / internal systems integration</span>
+                        </div>
+                        <div class="plan-feature">
+                            <i data-lucide="check" width="18" height="18"></i>
+                            <span data-lang="pt">Demandas ilimitadas + analytics avançado</span>
+                            <span data-lang="en">Unlimited demands + advanced analytics</span>
+                        </div>
+                    </div>
+                    <a href="#contato" class="btn btn-primary">
+                        <i data-lucide="message-square" width="18" height="18"></i>
+                        <span data-lang="pt">Falar com Especialista</span>
+                        <span data-lang="en">Talk to a Specialist</span>
+                    </a>
+                </div>
+            </div>
+            <p class="plans-note fade-in">
+                <span data-lang="pt">Nossa equipe técnica está pronta para desenhar a arquitetura ideal para a sua instituição.</span>
+                <span data-lang="en">Our technical team is ready to design the ideal architecture for your institution.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== METRICS ========== -->
+    <section class="section metrics" id="metricas">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">Números que importam</span>
+                    <span data-lang="en">Numbers that matter</span>
+                </h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card fade-in fade-in-delay-1">
+                    <div class="metric-value">&lt; 15s</div>
+                    <div class="metric-label">
+                        <span data-lang="pt">Tempo de geração de resposta IA</span>
+                        <span data-lang="en">AI response generation time</span>
+                    </div>
+                </div>
+                <div class="metric-card fade-in fade-in-delay-2">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">
+                        <span data-lang="pt">Agentes de IA especializados</span>
+                        <span data-lang="en">Specialized AI agents</span>
+                    </div>
+                </div>
+                <div class="metric-card fade-in fade-in-delay-3">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">
+                        <span data-lang="pt">Automação da integração BACEN</span>
+                        <span data-lang="en">BACEN integration automation</span>
+                    </div>
+                </div>
+                <div class="metric-card fade-in fade-in-delay-1">
+                    <div class="metric-value">~R$ 0,22</div>
+                    <div class="metric-label">
+                        <span data-lang="pt">Custo de IA por demanda</span>
+                        <span data-lang="en">AI cost per demand</span>
+                    </div>
+                </div>
+                <div class="metric-card fade-in fade-in-delay-2">
+                    <div class="metric-value">10</div>
+                    <div class="metric-label">
+                        <span data-lang="pt">Dias úteis — SLA monitorado automaticamente</span>
+                        <span data-lang="en">Business days — automatically monitored SLA</span>
+                    </div>
+                </div>
+                <div class="metric-card fade-in fade-in-delay-3">
+                    <div class="metric-value">17</div>
+                    <div class="metric-label">
+                        <span data-lang="pt">Migrations de banco — pronto para produção</span>
+                        <span data-lang="en">Database migrations — production ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COMPLIANCE / LGPD ========== -->
+    <section class="section compliance" id="compliance">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">Segurança, privacidade e compliance</span>
+                    <span data-lang="en">Security, privacy and compliance</span>
+                </h2>
+            </div>
+            <div class="compliance-grid">
+                <div class="compliance-card fade-in fade-in-delay-1">
+                    <div class="compliance-card-icon">
+                        <i data-lucide="shield-check" width="22" height="22"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">LGPD — Lei Geral de Proteção de Dados</span>
+                        <span data-lang="en">LGPD — Brazilian Data Protection Law</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Todas as operações do Ouv.ai seguem os princípios da Lei 13.709/2018 (LGPD). Dados pessoais de reclamantes são tratados com base legal legítima, finalidade específica e minimização de dados. Consentimento e direitos dos titulares são respeitados em todo o fluxo.</span>
+                        <span data-lang="en">All Ouv.ai operations follow the principles of Law 13.709/2018 (LGPD — Brazilian General Data Protection Law). Personal data is processed under legitimate legal basis, specific purpose, and data minimization. Data subject rights and consent are respected throughout the entire flow.</span>
+                    </p>
+                </div>
+                <div class="compliance-card fade-in fade-in-delay-2">
+                    <div class="compliance-card-icon">
+                        <i data-lucide="lock" width="22" height="22"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Criptografia e segurança</span>
+                        <span data-lang="en">Encryption and security</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Dados em trânsito protegidos por TLS 1.3. Dados em repouso criptografados com AES-256. Controle de acesso RBAC com 16 permissões granulares. Logs de auditoria completos para rastreabilidade de cada ação no sistema.</span>
+                        <span data-lang="en">Data in transit protected by TLS 1.3. Data at rest encrypted with AES-256. RBAC access control with 16 granular permissions. Complete audit logs for traceability of every action in the system.</span>
+                    </p>
+                </div>
+                <div class="compliance-card fade-in fade-in-delay-3">
+                    <div class="compliance-card-icon">
+                        <i data-lucide="file-check" width="22" height="22"></i>
+                    </div>
+                    <h3>
+                        <span data-lang="pt">Resolução BCB 222 e regulatório</span>
+                        <span data-lang="en">BCB Resolution 222 and regulatory</span>
+                    </h3>
+                    <p>
+                        <span data-lang="pt">Plataforma construída em conformidade com a Resolução BCB 222/2024 e normativos do Banco Central. Prazos, classificações e fluxos de resposta seguem rigorosamente as exigências regulatórias do setor financeiro brasileiro.</span>
+                        <span data-lang="en">Platform built in compliance with BCB Resolution 222/2024 and Central Bank regulations. Deadlines, classifications, and response flows strictly follow the regulatory requirements of the Brazilian financial sector.</span>
+                    </p>
+                </div>
+            </div>
+            <div class="compliance-badges fade-in">
+                <div class="compliance-badge">
+                    <i data-lucide="shield" width="16" height="16"></i>
+                    LGPD
+                </div>
+                <div class="compliance-badge">
+                    <i data-lucide="landmark" width="16" height="16"></i>
+                    BCB 222
+                </div>
+                <div class="compliance-badge">
+                    <i data-lucide="lock" width="16" height="16"></i>
+                    AES-256
+                </div>
+                <div class="compliance-badge">
+                    <i data-lucide="scan-eye" width="16" height="16"></i>
+                    <span data-lang="pt">Audit Logs</span>
+                    <span data-lang="en">Audit Logs</span>
+                </div>
+                <div class="compliance-badge">
+                    <i data-lucide="key-round" width="16" height="16"></i>
+                    TLS 1.3
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WAITLIST ========== -->
+    <section class="section waitlist" id="contato">
+        <div class="container">
+            <div class="waitlist-content fade-in">
+                <h2 class="section-headline">
+                    <span data-lang="pt">Pronto para transformar sua ouvidoria?</span>
+                    <span data-lang="en">Ready to transform your ombudsman?</span>
+                </h2>
+                <p class="section-subtext">
+                    <span data-lang="pt">Entre na lista de espera e seja um dos primeiros a usar o Ouv.ai. Vagas limitadas para o programa de acesso antecipado.</span>
+                    <span data-lang="en">Join the waitlist and be one of the first to use Ouv.ai. Limited spots for the early access program.</span>
+                </p>
+
+                <!-- Google Form Embed -->
+                <div class="waitlist-form-container">
+                    <!-- GOOGLE_FORM_EMBED_URL -->
+                    <iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" loading="lazy">
+                    </iframe>
+                </div>
+
+                <div class="waitlist-fallback">
+                    <p>
+                        <span data-lang="pt">Canais de contato e redes sociais em breve.</span>
+                        <span data-lang="en">Contact channels and social media coming soon.</span>
+                    </p>
+                    <div class="waitlist-contact-links" style="opacity:0.5;pointer-events:none;">
+                        <a href="#">
+                            <i data-lucide="message-circle" width="18" height="18"></i>
+                            WhatsApp
+                        </a>
+                        <a href="#">
+                            <i data-lucide="linkedin" width="18" height="18"></i>
+                            LinkedIn
+                        </a>
+                        <a href="#">
+                            <i data-lucide="instagram" width="18" height="18"></i>
+                            Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <div class="logo-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                            </svg>
+                        </div>
+                        <span class="footer-logo-text">Ouv<span class="dot-ai">.ai</span></span>
+                    </a>
+                    <p>
+                        <span data-lang="pt">Ouv.ai — Ouvidoria inteligente para instituições financeiras. Desenvolvido com IA generativa + compliance regulatório.</span>
+                        <span data-lang="en">Ouv.ai — Intelligent ombudsman management for financial institutions. Built with generative AI + regulatory compliance.</span>
+                    </p>
+                </div>
+
+                <div class="footer-links-group">
+                    <h4>
+                        <span data-lang="pt">Navegação</span>
+                        <span data-lang="en">Navigation</span>
+                    </h4>
+                    <a href="#solucao">
+                        <span data-lang="pt">Solução</span>
+                        <span data-lang="en">Solution</span>
+                    </a>
+                    <a href="#funcionalidades">
+                        <span data-lang="pt">Funcionalidades</span>
+                        <span data-lang="en">Features</span>
+                    </a>
+                    <a href="#planos">
+                        <span data-lang="pt">Implantação</span>
+                        <span data-lang="en">Deployment</span>
+                    </a>
+                    <a href="#contato">
+                        <span data-lang="pt">Contato</span>
+                        <span data-lang="en">Contact</span>
+                    </a>
+                </div>
+
+                <div class="footer-links-group">
+                    <h4>
+                        <span data-lang="pt">Contato e Redes</span>
+                        <span data-lang="en">Contact & Social</span>
+                    </h4>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn" title="Em breve" style="opacity:0.4;pointer-events:none;">
+                            <i data-lucide="linkedin" width="18" height="18"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" title="Em breve" style="opacity:0.4;pointer-events:none;">
+                            <i data-lucide="instagram" width="18" height="18"></i>
+                        </a>
+                        <a href="#" aria-label="WhatsApp" title="Em breve" style="opacity:0.4;pointer-events:none;">
+                            <i data-lucide="message-circle" width="18" height="18"></i>
+                        </a>
+                        <a href="#" aria-label="Email" title="Em breve" style="opacity:0.4;pointer-events:none;">
+                            <i data-lucide="mail" width="18" height="18"></i>
+                        </a>
+                    </div>
+                    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;opacity:0.7;">
+                        <span data-lang="pt">Redes sociais e contato em breve</span>
+                        <span data-lang="en">Social media and contact coming soon</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ouv.ai. <span data-lang="pt">Todos os direitos reservados.</span><span data-lang="en">All rights reserved.</span></p>
+                <div class="footer-bottom-links">
+                    <a href="#">
+                        <span data-lang="pt">Termos de Uso</span>
+                        <span data-lang="en">Terms of Use</span>
+                    </a>
+                    <a href="#">
+                        <span data-lang="pt">Política de Privacidade</span>
+                        <span data-lang="en">Privacy Policy</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            initScrollAnimations();
+            restoreLanguage();
+        });
+
+        /* ---- Language Toggle (class-based) ---- */
+        function setLang(lang) {
+            var html = document.documentElement;
+            html.classList.remove('lang-pt', 'lang-en');
+            html.classList.add('lang-' + lang);
+            html.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+            document.getElementById('langPt').classList.toggle('active', lang === 'pt');
+            document.getElementById('langEn').classList.toggle('active', lang === 'en');
+
+            try { localStorage.setItem('ouvai-lang', lang); } catch(e) {}
+        }
+
+        function restoreLanguage() {
+            var saved = null;
+            try { saved = localStorage.getItem('ouvai-lang'); } catch(e) {}
+            setLang(saved || 'pt');
+        }
+
+        /* ---- Navbar scroll effect ---- */
+        var navbar = document.getElementById('navbar');
+        var lastScroll = 0;
+
+        window.addEventListener('scroll', function() {
+            var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            lastScroll = scrollY;
+        }, { passive: true });
+
+        /* ---- Mobile Menu ---- */
+        function toggleMobileMenu() {
+            var menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+        }
+
+        /* ---- Scroll Animations (Intersection Observer) ---- */
+        function initScrollAnimations() {
+            var elements = document.querySelectorAll('.fade-in');
+            if (!('IntersectionObserver' in window)) {
+                elements.forEach(function(el) { el.classList.add('visible'); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            elements.forEach(function(el) {
+                observer.observe(el);
+            });
+        }
+
+        /* ---- Smooth scroll for anchor links ---- */
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                var target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    var offset = 72;
+                    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
