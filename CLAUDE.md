@@ -7,8 +7,9 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 ## Stack
 - HTML puro + CSS puro (variáveis CSS em `:root`)
 - JavaScript vanilla
-- Lucide Icons (via CDN)
+- Lucide Icons (via CDN) + SVG inline (marcas)
 - Google Fonts: Inter + JetBrains Mono
+- GSAP 3.12 + ScrollTrigger (hero scroll-video)
 - Single-file: `index.html`
 
 ## Regras de Design (OBRIGATÓRIAS)
@@ -18,40 +19,45 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 - Logo: NÃO alterar cores, formas ou fonte do logo
 - Design: limpo, corporativo, fundos brancos/cinza claro, textos escuros
 - Manter bilinguismo PT/EN com sistema `data-lang` + classes CSS
+- Degradês suaves de 200px entre todas as transições de cor claro/escuro
 
 ## Estrutura de Seções
-1. Navbar (fixed)
-2. Hero (scroll-video pinned)
+1. Navbar (fixed, blur)
+2. Hero (canvas rede neural + suporte scroll-video)
 3. Problem (desafios da ouvidoria)
 4. Solution (fluxo Ouv.ai)
-5. How It Works (4 steps)
+5. How It Works (4 steps com vídeos demo)
 6. Features (grid de funcionalidades)
 7. Differentials (por que Ouv.ai)
 8. Deployment Models (PoC + Enterprise)
 9. Metrics (KPIs)
 10. Compliance (LGPD, segurança)
-11. Waitlist/CTA (Google Form embed)
+11. Contato (formulário nativo B2B com validação e-mail corporativo)
 12. Footer
 
-## Dependências Externas (CDN)
-- GSAP 3.12 + ScrollTrigger — controle do scroll-video na Hero
-- Lucide Icons — ícones SVG
+## Formulário de Contato
+- Validação client-side: campos obrigatórios + bloqueio de e-mails pessoais (Gmail, Outlook, etc.)
+- Submissão: atualmente simulada (setTimeout). TODO: conectar ao backend POST /api/contact
+- Mensagem de sucesso substitui o formulário após envio
+
+## Backend (FastAPI — preparado)
+- `backend/app/main.py` — app + CORS
+- `backend/app/contact.py` — POST /api/contact + email HTML + Reply-To
+- `backend/.env.example` — template SMTP
+- Iniciar: `cd backend && python -m uvicorn app.main:app --reload`
 
 ## Hero Scroll-Video
-- O Hero é envolvido por `.hero-scroll-wrapper` e pinned via GSAP ScrollTrigger
-- O vídeo (`hero-video.mp4`) é controlado pelo scroll (video scrubbing)
-- Quando não há vídeo, um canvas animado (partículas + ondas teal) serve como fallback
-- Os decoradores CSS (pattern, glow, lines) são ocultados quando o vídeo carrega
+- Quando `hero-video.mp4` existe na raiz, ativa pin + scrubbing via GSAP
+- Sem vídeo: canvas animado com 160 partículas teal (rede neural)
+- Recodificar vídeo: `ffmpeg -i input.mp4 -vcodec libx264 -x264-params keyint=1:scenecut=0 -an hero-video.mp4`
 
-### Para adicionar o vídeo de produção:
-1. Recodificar com todos keyframes: `ffmpeg -i input.mp4 -vcodec libx264 -x264-params keyint=1:scenecut=0 -an hero-video.mp4`
-2. Colocar `hero-video.mp4` na raiz do projeto
-3. O sistema detecta automaticamente e ativa o scrubbing
-
-### Para adicionar vídeos nos Step Cards (How It Works):
-1. Criar pasta `assets/` com vídeos curtos (5-10s, loop)
-2. Substituir `<div class="video-placeholder">` por `<video src="assets/step-xxx.mp4" muted autoplay loop playsinline></video>`
+## Vídeos Demo (How It Works)
+- `videos/captura_automatica.mp4` — Step 01
+- `videos/classificacao_inteligente.mp4` — Step 02
+- `videos/resposta_com_ia_generativa.mp4` — Step 03
+- Step 04: placeholder (aguardando vídeo)
 
 ## Comandos
-- Abrir local: abrir `index.html` no navegador
-- Não há build system — edição direta no HTML
+- Frontend: abrir `index.html` no navegador
+- Backend: `cd backend && python -m uvicorn app.main:app --reload --port 8000`
+- Não há build system
