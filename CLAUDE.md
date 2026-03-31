@@ -55,7 +55,7 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 - `videos/captura_automatica.mp4` — Step 01
 - `videos/classificacao_inteligente.mp4` — Step 02
 - `videos/resposta_com_ia_generativa.mp4` — Step 03
-- Step 04: placeholder (aguardando vídeo)
+- `videos/envio_simultaneo.mp4` — Step 04
 
 ## Comandos
 - Frontend: abrir `index.html` no navegador
