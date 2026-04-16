@@ -157,17 +157,26 @@
         .btn-primary {
             background: var(--primary);
             color: var(--bg-dark);
-            box-shadow: 0 0 0 0 rgba(40,204,204,0), var(--shadow);
+            box-shadow: 0 0 16px rgba(40,204,204,0.25), 0 0 0 0 rgba(40,204,204,0), var(--shadow);
+            animation: ctaGlow 2.5s ease-in-out infinite;
         }
 
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
-            box-shadow: 0 0 24px rgba(40,204,204,0.3), var(--shadow-md);
+            box-shadow: 0 0 32px rgba(40,204,204,0.45), 0 0 64px rgba(40,204,204,0.15), var(--shadow-md);
+            animation: none;
+        }
+
+        @keyframes ctaGlow {
+            0%, 100% { box-shadow: 0 0 16px rgba(40,204,204,0.2), var(--shadow); }
+            50% { box-shadow: 0 0 28px rgba(40,204,204,0.4), 0 0 48px rgba(40,204,204,0.1), var(--shadow); }
         }
 
         .btn-outline {
-            background: transparent;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: #fff;
             border: 1.5px solid rgba(255,255,255,0.25);
         }
@@ -175,7 +184,7 @@
         .btn-outline:hover {
             border-color: var(--primary);
             color: var(--primary);
-            background: rgba(40,204,204,0.05);
+            background: rgba(40,204,204,0.12);
         }
 
         .btn-outline-dark {
@@ -612,8 +621,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(180deg, #1E293B 0%, var(--bg) 100%);
+            height: 320px;
+            background: linear-gradient(180deg, #1E293B 0%, rgba(30,41,59,0.4) 40%, var(--bg) 100%);
             pointer-events: none;
             z-index: 0;
         }
@@ -639,8 +648,8 @@
 
         .problem-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(40,204,204,0.1);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            transform: translateY(-4px);
         }
 
         .problem-card-icon {
@@ -656,10 +665,11 @@
         }
 
         .problem-card h3 {
-            font-size: 1.125rem;
-            font-weight: 700;
+            font-size: 1.25rem;
+            font-weight: 800;
             margin-bottom: 10px;
             color: var(--text);
+            letter-spacing: -0.01em;
         }
 
         .problem-card p {
@@ -757,8 +767,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(180deg, var(--bg) 0%, var(--bg-dark) 100%);
+            height: 320px;
+            background: linear-gradient(180deg, var(--bg) 0%, rgba(248,250,252,0.3) 35%, var(--bg-dark) 100%);
             pointer-events: none;
             z-index: 0;
         }
@@ -794,7 +804,8 @@
 
         .step-card:hover {
             background: rgba(255,255,255,0.06);
-            border-color: rgba(40,204,204,0.2);
+            border-color: rgba(40,204,204,0.25);
+            box-shadow: 0 8px 24px rgba(40,204,204,0.1), 0 0 0 1px rgba(40,204,204,0.08);
             transform: translateY(-4px);
         }
 
@@ -820,10 +831,11 @@
         }
 
         .step-card h3 {
-            font-size: 1.0625rem;
-            font-weight: 700;
+            font-size: 1.1875rem;
+            font-weight: 800;
             color: #fff;
             margin-bottom: 10px;
+            letter-spacing: -0.01em;
         }
 
         .step-card p {
@@ -915,8 +927,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg) 100%);
+            height: 320px;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(30,41,59,0.4) 40%, var(--bg) 100%);
             pointer-events: none;
             z-index: 0;
         }
@@ -942,8 +954,8 @@
 
         .feature-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            transform: translateY(-4px);
         }
 
         .feature-icon {
@@ -959,10 +971,11 @@
         }
 
         .feature-card h3 {
-            font-size: 0.9375rem;
-            font-weight: 700;
+            font-size: 1.0625rem;
+            font-weight: 800;
             color: var(--text);
             margin-bottom: 8px;
+            letter-spacing: -0.01em;
         }
 
         .feature-card p {
@@ -1037,7 +1050,8 @@
 
         .diff-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            transform: translateY(-3px);
         }
 
         .diff-icon {
@@ -1053,10 +1067,11 @@
         }
 
         .diff-card h3 {
-            font-size: 1.0625rem;
-            font-weight: 700;
+            font-size: 1.1875rem;
+            font-weight: 800;
             color: var(--text);
             margin-bottom: 8px;
+            letter-spacing: -0.01em;
         }
 
         .diff-card p {
@@ -1202,7 +1217,8 @@
 
         .metric-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            transform: translateY(-3px);
         }
 
         .metric-value {
@@ -1235,8 +1251,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(180deg, #fff 0%, var(--bg-dark) 100%);
+            height: 320px;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.3) 35%, var(--bg-dark) 100%);
             pointer-events: none;
             z-index: 0;
         }
@@ -1489,7 +1505,7 @@
         .btn-submit:hover:not(:disabled) {
             background: var(--primary-dark);
             transform: translateY(-1px);
-            box-shadow: 0 0 24px rgba(40,204,204,0.3);
+            box-shadow: 0 0 32px rgba(40,204,204,0.4), 0 0 64px rgba(40,204,204,0.12);
         }
 
         .btn-submit:disabled {
@@ -1720,6 +1736,62 @@
         /* ============================================
            RESPONSIVE
            ============================================ */
+        /* ============================================
+           CAROUSEL — Scroll Snap (tablet / mobile)
+           ============================================ */
+        .carousel-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 16px;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+
+        .carousel-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-scroll > * {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        /* Scroll indicators (dots) */
+        .carousel-dots {
+            display: none;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            border: none;
+            padding: 0;
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Dark-section dots */
+        .carousel-dots-dark .carousel-dot {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .carousel-dots-dark .carousel-dot.active {
+            background: var(--primary);
+        }
+
         @media (max-width: 1024px) {
             .steps-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1732,6 +1804,10 @@
             .solution-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1760,18 +1836,46 @@
                 font-size: clamp(2rem, 8vw, 2.75rem);
             }
 
+            /* Carousel mode for card grids on mobile */
             .problem-grid,
+            .steps-grid,
             .features-grid,
-            .diff-grid,
+            .diff-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 16px;
+                padding-bottom: 8px;
+                scrollbar-width: none;
+            }
+
+            .problem-grid::-webkit-scrollbar,
+            .steps-grid::-webkit-scrollbar,
+            .features-grid::-webkit-scrollbar,
+            .diff-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .problem-grid > *,
+            .steps-grid > *,
+            .features-grid > *,
+            .diff-grid > * {
+                scroll-snap-align: start;
+                flex-shrink: 0;
+                width: 85vw;
+                max-width: 340px;
+            }
+
+            .carousel-dots {
+                display: flex;
+            }
+
             .metrics-grid {
                 grid-template-columns: 1fr;
             }
 
             .plans-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .steps-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1952,7 +2056,7 @@
                     <span data-lang="en">The challenge of banking ombudsman in Brazil</span>
                 </h2>
             </div>
-            <div class="problem-grid">
+            <div class="problem-grid" id="problemGrid">
                 <div class="problem-card fade-in fade-in-delay-1">
                     <div class="problem-card-icon">
                         <i data-lucide="clock" width="24" height="24"></i>
@@ -1993,6 +2097,7 @@
                     </p>
                 </div>
             </div>
+            <div class="carousel-dots" data-carousel="problem-grid"></div>
         </div>
     </section>
 
@@ -2055,7 +2160,7 @@
                     <span data-lang="en">How it works</span>
                 </h2>
             </div>
-            <div class="steps-grid">
+            <div class="steps-grid" id="stepsGrid">
                 <div class="step-card fade-in fade-in-delay-1">
                     <div class="step-number">01</div>
                     <div class="step-icon">
@@ -2125,6 +2230,7 @@
                     </div>
                 </div>
             </div>
+            <div class="carousel-dots carousel-dots-dark" data-carousel="steps-grid"></div>
         </div>
     </section>
 
@@ -2137,7 +2243,7 @@
                     <span data-lang="en">Everything your ombudsman needs</span>
                 </h2>
             </div>
-            <div class="features-grid">
+            <div class="features-grid" id="featuresGrid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon"><i data-lucide="zap" width="20" height="20"></i></div>
                     <h3>
@@ -2240,6 +2346,7 @@
                     </p>
                 </div>
             </div>
+            <div class="carousel-dots" data-carousel="features-grid"></div>
         </div>
     </section>
 
@@ -2252,7 +2359,7 @@
                     <span data-lang="en">Why Ouv.ai?</span>
                 </h2>
             </div>
-            <div class="diff-grid">
+            <div class="diff-grid" id="diffGrid">
                 <div class="diff-card fade-in fade-in-delay-1">
                     <div class="diff-icon"><i data-lucide="brain" width="24" height="24"></i></div>
                     <div>
@@ -2316,6 +2423,7 @@
                     </div>
                 </div>
             </div>
+            <div class="carousel-dots" data-carousel="diff-grid"></div>
         </div>
     </section>
 
@@ -2810,6 +2918,7 @@
             restoreLanguage();
             initHeroScrollVideo();
             initCanvasFallback();
+            initCarouselDots();
         });
 
         /* ---- Language Toggle (class-based) ---- */
@@ -3134,6 +3243,46 @@
                     : 'Failed to send. Please try again or contact us by email.';
             }
         })();
+
+        /* ---- Carousel Dots (mobile) ---- */
+        function initCarouselDots() {
+            var pairs = [
+                { grid: 'problemGrid', dots: 'problem-grid' },
+                { grid: 'stepsGrid', dots: 'steps-grid' },
+                { grid: 'featuresGrid', dots: 'features-grid' },
+                { grid: 'diffGrid', dots: 'diff-grid' }
+            ];
+
+            pairs.forEach(function(pair) {
+                var grid = document.getElementById(pair.grid);
+                var dotsContainer = document.querySelector('[data-carousel="' + pair.dots + '"]');
+                if (!grid || !dotsContainer) return;
+
+                var children = Array.from(grid.children);
+                dotsContainer.innerHTML = '';
+                children.forEach(function(_, i) {
+                    var dot = document.createElement('button');
+                    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+                    dot.addEventListener('click', function() {
+                        children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+
+                grid.addEventListener('scroll', function() {
+                    var scrollLeft = grid.scrollLeft;
+                    var cardWidth = children[0] ? children[0].offsetWidth + 16 : 1;
+                    var activeIndex = Math.round(scrollLeft / cardWidth);
+                    dotsContainer.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+                        d.classList.toggle('active', i === activeIndex);
+                    });
+                }, { passive: true });
+            });
+        }
+
+        // Re-init carousel on resize (handles orientation change)
+        window.addEventListener('resize', initCarouselDots);
 
         /* ---- Smooth scroll for anchor links ---- */
         document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
