@@ -55,9 +55,9 @@
             --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
 
-            --radius: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 24px;
+            --radius: 6px;
+            --radius-lg: 8px;
+            --radius-xl: 12px;
 
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
@@ -146,10 +146,10 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 14px 28px;
+            padding: 12px 24px;
             font-size: 0.9375rem;
             font-weight: 600;
-            border-radius: 10px;
+            border-radius: var(--radius);
             transition: all var(--transition);
             white-space: nowrap;
         }
@@ -157,26 +157,17 @@
         .btn-primary {
             background: var(--primary);
             color: var(--bg-dark);
-            box-shadow: 0 0 16px rgba(40,204,204,0.25), 0 0 0 0 rgba(40,204,204,0), var(--shadow);
-            animation: ctaGlow 2.5s ease-in-out infinite;
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
-            box-shadow: 0 0 32px rgba(40,204,204,0.45), 0 0 64px rgba(40,204,204,0.15), var(--shadow-md);
-            animation: none;
-        }
-
-        @keyframes ctaGlow {
-            0%, 100% { box-shadow: 0 0 16px rgba(40,204,204,0.2), var(--shadow); }
-            50% { box-shadow: 0 0 28px rgba(40,204,204,0.4), 0 0 48px rgba(40,204,204,0.1), var(--shadow); }
+            box-shadow: var(--shadow-md);
         }
 
         .btn-outline {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: transparent;
             color: #fff;
             border: 1.5px solid rgba(255,255,255,0.25);
         }
@@ -234,15 +225,13 @@
             height: 72px;
             display: flex;
             align-items: center;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            transition: background var(--transition);
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            transition: all var(--transition);
         }
 
         .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.92);
+            box-shadow: var(--shadow-sm);
         }
 
         .navbar-inner {
@@ -276,7 +265,7 @@
         .navbar-logo-text {
             font-size: 1.375rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--text);
             letter-spacing: -0.02em;
         }
 
@@ -293,12 +282,12 @@
         .navbar-links a {
             font-size: 0.875rem;
             font-weight: 500;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             transition: color var(--transition);
         }
 
         .navbar-links a:hover {
-            color: #fff;
+            color: var(--text);
         }
 
         .navbar-right {
@@ -310,25 +299,25 @@
         .lang-toggle {
             display: flex;
             align-items: center;
-            background: rgba(255,255,255,0.06);
+            background: var(--bg);
             border-radius: 8px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid var(--border);
         }
 
         .lang-toggle button {
             padding: 6px 12px;
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             background: transparent;
             transition: all var(--transition);
             letter-spacing: 0.05em;
         }
 
         .lang-toggle button.active {
-            color: #fff;
-            background: rgba(40,204,204,0.15);
+            color: var(--primary-dark);
+            background: var(--primary-light);
         }
 
         .nav-cta {
@@ -340,7 +329,7 @@
         .menu-toggle {
             display: none;
             background: none;
-            color: #fff;
+            color: var(--text);
             padding: 8px;
         }
 
@@ -582,10 +571,7 @@
         }
 
         .hero h1 .text-gradient {
-            background: linear-gradient(135deg, var(--primary) 0%, #5eead4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
         }
 
         .hero-sub {
@@ -614,18 +600,7 @@
             position: relative;
         }
 
-        /* Smooth dark-to-light transition between hero and content */
-        .problem::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 320px;
-            background: linear-gradient(180deg, #1E293B 0%, rgba(30,41,59,0.4) 40%, var(--bg) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
+
 
         .problem > .container {
             position: relative;
@@ -648,8 +623,8 @@
 
         .problem-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
-            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
         .problem-card-icon {
@@ -708,7 +683,8 @@
         }
 
         .flow-container {
-            background: var(--bg-dark);
+            background: #F8FAFC;
+            border: 1px solid var(--border);
             border-radius: var(--radius-xl);
             padding: 40px 32px;
             display: flex;
@@ -749,28 +725,15 @@
         .flow-label {
             font-size: 0.875rem;
             font-weight: 600;
-            color: #e2e8f0;
+            color: var(--text);
         }
 
         /* ============================================
            HOW IT WORKS
            ============================================ */
         .how-it-works {
-            background: var(--bg-dark);
+            background: #F8FAFC;
             position: relative;
-        }
-
-        /* Smooth light-to-dark gradient at top */
-        .how-it-works::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 320px;
-            background: linear-gradient(180deg, var(--bg) 0%, rgba(248,250,252,0.3) 35%, var(--bg-dark) 100%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         .how-it-works > .container {
@@ -779,7 +742,7 @@
         }
 
         .how-it-works .section-headline {
-            color: #fff;
+            color: var(--text);
         }
 
         .how-it-works .section-subtext {
@@ -794,19 +757,17 @@
 
         .step-card {
             position: relative;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 36px 24px;
-            backdrop-filter: blur(10px);
             transition: all var(--transition);
         }
 
         .step-card:hover {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(40,204,204,0.25);
-            box-shadow: 0 8px 24px rgba(40,204,204,0.1), 0 0 0 1px rgba(40,204,204,0.08);
-            transform: translateY(-4px);
+            border-color: rgba(40,204,204,0.3);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
         .step-number {
@@ -833,7 +794,7 @@
         .step-card h3 {
             font-size: 1.1875rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--text);
             margin-bottom: 10px;
             letter-spacing: -0.01em;
         }
@@ -920,18 +881,7 @@
             position: relative;
         }
 
-        /* Smooth dark-to-light gradient at top */
-        .features::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 320px;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(30,41,59,0.4) 40%, var(--bg) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
+
 
         .features > .container {
             position: relative;
@@ -954,8 +904,8 @@
 
         .feature-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
-            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
         .feature-icon {
@@ -1029,7 +979,7 @@
            DIFFERENTIALS
            ============================================ */
         .differentials {
-            background: linear-gradient(180deg, var(--bg) 0%, #fff 15%, #fff 100%);
+            background: #fff;
         }
 
         .diff-grid {
@@ -1050,8 +1000,8 @@
 
         .diff-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
-            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
         .diff-icon {
@@ -1084,7 +1034,7 @@
            DEPLOYMENT MODELS (ex-PLANS)
            ============================================ */
         .plans {
-            background: linear-gradient(180deg, #fff 0%, var(--bg) 15%, var(--bg) 100%);
+            background: var(--bg);
         }
 
         .plans-grid {
@@ -1197,7 +1147,7 @@
            METRICS
            ============================================ */
         .metrics {
-            background: linear-gradient(180deg, var(--bg) 0%, #fff 15%, #fff 100%);
+            background: #fff;
         }
 
         .metrics-grid {
@@ -1217,8 +1167,8 @@
 
         .metric-card:hover {
             border-color: rgba(40,204,204,0.3);
-            box-shadow: 0 8px 24px rgba(40,204,204,0.12), 0 4px 12px rgba(0,0,0,0.06);
-            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
         .metric-value {
@@ -1240,21 +1190,8 @@
            COMPLIANCE / LGPD
            ============================================ */
         .compliance {
-            background: var(--bg-dark);
+            background: var(--bg-card);
             position: relative;
-        }
-
-        /* Smooth light-to-dark gradient at top */
-        .compliance::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 320px;
-            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.3) 35%, var(--bg-dark) 100%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         .compliance > .container {
@@ -1263,7 +1200,7 @@
         }
 
         .compliance .section-headline {
-            color: #fff;
+            color: var(--text);
         }
 
         .compliance-grid {
@@ -1274,16 +1211,17 @@
         }
 
         .compliance-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: #F8FAFC;
+            border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 32px 24px;
             transition: all var(--transition);
         }
 
         .compliance-card:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: rgba(40,204,204,0.15);
+            border-color: rgba(40,204,204,0.3);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
         .compliance-card-icon {
@@ -1301,7 +1239,7 @@
         .compliance-card h3 {
             font-size: 1rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--text);
             margin-bottom: 8px;
         }
 
@@ -1324,18 +1262,18 @@
             align-items: center;
             gap: 8px;
             padding: 10px 20px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: #F8FAFC;
+            border: 1px solid var(--border);
             border-radius: 100px;
             font-size: 0.8125rem;
             font-weight: 600;
-            color: #e2e8f0;
+            color: var(--text);
             transition: all var(--transition);
         }
 
         .compliance-badge:hover {
             border-color: rgba(40,204,204,0.3);
-            background: rgba(40,204,204,0.06);
+            background: #fff;
         }
 
         .compliance-badge i {
@@ -1352,7 +1290,7 @@
            WAITLIST / CTA
            ============================================ */
         .waitlist {
-            background: linear-gradient(160deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            background: var(--bg-dark);
             position: relative;
             overflow: hidden;
         }
@@ -1505,7 +1443,7 @@
         .btn-submit:hover:not(:disabled) {
             background: var(--primary-dark);
             transform: translateY(-1px);
-            box-shadow: 0 0 32px rgba(40,204,204,0.4), 0 0 64px rgba(40,204,204,0.12);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-submit:disabled {
@@ -2001,13 +1939,6 @@
 
             <!-- Fallback decorations (hidden when video loads) -->
             <div class="hero-bg-pattern"></div>
-            <div class="hero-glow"></div>
-            <div class="hero-lines">
-                <div class="hero-line"></div>
-                <div class="hero-line"></div>
-                <div class="hero-line"></div>
-                <div class="hero-line"></div>
-            </div>
 
             <div class="hero-content">
                 <div class="hero-badge fade-in">
