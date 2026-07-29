@@ -7,10 +7,10 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 ## Stack
 - HTML puro + CSS puro (variáveis CSS em `:root`)
 - JavaScript vanilla
-- Lucide Icons (via CDN) + SVG inline (marcas)
+- Lucide Icons 0.454.0 (CDN pinado + SRI) + SVG inline (marcas)
 - Google Fonts: Inter + JetBrains Mono
-- GSAP 3.12 + ScrollTrigger (hero scroll-video)
-- Single-file: `index.html`
+- GSAP 3.12.5 + ScrollTrigger (CDN pinado + SRI; hero scroll-video)
+- Paginas: `index.html` (landing) + `privacidade.html` + `termos.html` (legais, PT-BR)
 
 ## Regras de Design (OBRIGATÓRIAS)
 - Cor primária: Teal `--primary: #28CCCC` — NÃO alterar
@@ -32,13 +32,22 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 8. Deployment Models (PoC + Enterprise)
 9. Metrics (KPIs)
 10. Compliance (LGPD, segurança)
-11. Contato (formulário nativo B2B com validação e-mail corporativo)
+11. Contato (formulario B2B com validacao de e-mail corporativo — envio via mailto)
 12. Footer
 
 ## Formulário de Contato
 - Validação client-side: campos obrigatórios + bloqueio de e-mails pessoais (Gmail, Outlook, etc.)
-- Submissão: atualmente simulada (setTimeout). TODO: conectar ao backend POST /api/contact
-- Mensagem de sucesso substitui o formulário após envio
+- Submissão: SEM backend — monta mailto: para contato@ouvai.com.br com a mensagem preenchida
+  e abre o cliente de e-mail do visitante. NUNCA simular envio (compliance).
+- Mensagem de sucesso explica que o e-mail foi preparado no aplicativo do visitante
+
+## Regras de Compliance (OBRIGATÓRIAS)
+- ZERO claims falsos: numeros citados (permissões, canais, prazos, normativos) devem refletir o produto real
+- Resolução correta: BCB nº 222/2022 (não 2024)
+- Sem "Lista de Espera" — a empresa está lançada; CTAs são "Agendar/Solicitar Demonstração"
+- Não expor custos internos (ex: custo de IA por demanda)
+- Links legais reais: termos.html e privacidade.html (manter atualizados a cada mudança de coleta de dados)
+- CDNs sempre pinados com SRI (integrity) — nunca @latest
 
 ## Backend (FastAPI — preparado)
 - `backend/app/main.py` — app + CORS

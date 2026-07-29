@@ -101,11 +101,11 @@ Site institucional ultra profissional para a **Ouv.ai**, uma startup B2B SaaS qu
 ### Validacao de E-mail Corporativo
 Dominios bloqueados: gmail, outlook, hotmail, yahoo, icloud, aol, protonmail, zoho, uol, bol, terra, ig, globo, r7, zipmail e variantes.
 
-### Fluxo de Submissao
+### Fluxo de Submissao (sem backend)
 1. Validacao client-side (campos obrigatorios + e-mail corporativo)
-2. Estado "Enviando..." (botao desabilitado + spinner)
-3. Mensagem de sucesso substitui o formulario
-4. **TODO:** Conectar ao `POST /api/contact` quando SMTP estiver configurado
+2. Monta `mailto:contato@ouvai.com.br` com assunto e corpo preenchidos e abre o
+   cliente de e-mail do visitante — nenhum dado e armazenado ou enviado a terceiros
+3. Mensagem de confirmacao explica o envio pelo proprio e-mail do visitante
 
 ---
 
@@ -149,7 +149,7 @@ Features (light) → [inline gradient] → Differentials (white)
 Differentials → [inline gradient] → Plans (light)
 Plans → [inline gradient] → Metrics (white)
 Metrics (white) → [degrade] → Compliance (dark)
-Compliance → Waitlist → Footer (dark continuo)
+Compliance → Contato → Footer (dark continuo)
 ```
 
 ---
@@ -214,4 +214,4 @@ SITE_OUV.AI/
 - [ ] Hero scroll-video (aguardando hero-video.mp4)
 - [ ] Ativar integracao backend (SMTP)
 - [ ] Instagram e WhatsApp
-- [ ] Termos de Uso e Politica de Privacidade
+- [x] Termos de Uso e Politica de Privacidade (termos.html + privacidade.html)

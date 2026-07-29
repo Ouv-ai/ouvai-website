@@ -11,10 +11,14 @@
     <meta property="og:title" content="Ouv.ai — Ouvidoria Inteligente para Instituições Financeiras">
     <meta property="og:description" content="Plataforma SaaS com IA generativa para gestão automatizada de reclamações regulatórias. Integração BACEN, multi-canal, compliance BCB 222.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="Logo_final.png">
+    <meta property="og:image" content="https://www.ouvai.com.br/capa.png">
+    <meta property="og:url" content="https://www.ouvai.com.br/">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="Logo_final.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2328CCCC' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 18v-6a9 9 0 0 1 18 0v6'/%3E%3Cpath d='M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z'/%3E%3C/svg%3E">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,11 +26,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script defer src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.min.js" integrity="sha384-m/CoPp6wBQz6MoZXP+VveuxfvSx0NGXiQyyakzXVOVHgG1fP5bM/UiO4pSNPV6PT" crossorigin="anonymous"></script>
 
     <!-- GSAP + ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
 
     <style>
         /* ============================================
@@ -1896,8 +1900,8 @@
                     <button id="langEn" onclick="setLang('en')">EN</button>
                 </div>
                 <a href="#contato" class="btn btn-primary nav-cta desktop-only">
-                    <span data-lang="pt">Lista de Espera</span>
-                    <span data-lang="en">Waitlist</span>
+                    <span data-lang="pt">Agendar Demonstração</span>
+                    <span data-lang="en">Book a Demo</span>
                 </a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="toggleMobileMenu()">
                     <i data-lucide="menu" width="24" height="24"></i>
@@ -1917,8 +1921,8 @@
         <a href="#contato" data-lang="pt" onclick="closeMobileMenu()">Contato</a>
         <a href="#contato" data-lang="en" onclick="closeMobileMenu()">Contact</a>
         <a href="#contato" class="btn btn-primary" style="margin-top:16px;" onclick="closeMobileMenu()">
-            <span data-lang="pt">Lista de Espera</span>
-            <span data-lang="en">Waitlist</span>
+            <span data-lang="pt">Agendar Demonstração</span>
+            <span data-lang="en">Book a Demo</span>
         </a>
     </div>
 
@@ -1928,8 +1932,8 @@
             <!-- Video background (replace src with your hero-video.mp4) -->
             <video class="hero-video" id="heroVideo"
                    muted playsinline preload="auto"
-                   src="hero-video.mp4"
                    aria-hidden="true"></video>
+            <!-- Para ativar o scroll-video: adicionar src="hero-video.mp4" quando o arquivo existir -->
 
             <!-- Canvas fallback (animated 3D-style placeholder) -->
             <canvas class="hero-canvas-fallback" id="heroCanvas"></canvas>
@@ -1952,14 +1956,14 @@
                 </h1>
 
                 <p class="hero-sub fade-in fade-in-delay-2">
-                    <span data-lang="pt">O Ouv.ai automatiza a gestão de reclamações regulatórias com IA generativa. Da captura no BACEN até a resposta final — em minutos, não dias.</span>
-                    <span data-lang="en">Ouv.ai automates regulatory complaint management with generative AI. From BACEN capture to final response — in minutes, not days.</span>
+                    <span data-lang="pt">O Ouv.ai automatiza a gestão de reclamações regulatórias com IA generativa. Da captura no BACEN à resposta pronta para aprovação do ouvidor — em minutos, não dias.</span>
+                    <span data-lang="en">Ouv.ai automates regulatory complaint management with generative AI. From BACEN capture to an approval-ready response — in minutes, not days.</span>
                 </p>
 
                 <div class="hero-ctas fade-in fade-in-delay-3">
                     <a href="#contato" class="btn btn-primary">
-                        <span data-lang="pt">Entrar na Lista de Espera</span>
-                        <span data-lang="en">Join the Waitlist</span>
+                        <span data-lang="pt">Solicitar Demonstração</span>
+                        <span data-lang="en">Request a Demo</span>
                         <i data-lucide="arrow-right" width="18" height="18"></i>
                     </a>
                     <a href="#funcionalidades" class="btn btn-outline">
@@ -2042,8 +2046,8 @@
                         <span data-lang="en">Ouv.ai: from complaint to response in minutes</span>
                     </h2>
                     <p>
-                        <span data-lang="pt">O Ouv.ai é uma plataforma SaaS que conecta inteligência artificial à gestão regulatória. Nosso sistema captura automaticamente as demandas do BACEN, classifica com IA, direciona ao backoffice, e gera respostas personalizadas — tudo dentro dos prazos da Resolução BCB 222.</span>
-                        <span data-lang="en">Ouv.ai is a SaaS platform that connects artificial intelligence to regulatory management. Our system automatically captures demands from BACEN, classifies with AI, routes to back-office, and generates personalized responses — all within BCB Resolution 222 deadlines.</span>
+                        <span data-lang="pt">O Ouv.ai é uma plataforma SaaS que conecta inteligência artificial à gestão regulatória. Nosso sistema captura automaticamente as demandas do BACEN, classifica com IA, direciona ao backoffice, e gera respostas personalizadas para revisão e aprovação do ouvidor — tudo dentro dos prazos da Resolução BCB nº 222/2022.</span>
+                        <span data-lang="en">Ouv.ai is a SaaS platform that connects artificial intelligence to regulatory management. Our system automatically captures demands from BACEN, classifies with AI, routes to back-office, and generates personalized responses for the ombudsman’s review and approval — all within BCB Resolution 222/2022 deadlines.</span>
                     </p>
                 </div>
                 <div class="solution-flow fade-in fade-in-delay-2">
@@ -2073,8 +2077,8 @@
                         </div>
                         <div class="flow-step">
                             <div class="flow-dot"><i data-lucide="send" width="16" height="16"></i></div>
-                            <span class="flow-label" data-lang="pt">Envio Automático</span>
-                            <span class="flow-label" data-lang="en">Auto Delivery</span>
+                            <span class="flow-label" data-lang="pt">Envio Integrado</span>
+                            <span class="flow-label" data-lang="en">Integrated Delivery</span>
                         </div>
                     </div>
                 </div>
@@ -2212,8 +2216,8 @@
                         <span data-lang="en">Dynamic RBAC</span>
                     </h3>
                     <p>
-                        <span data-lang="pt">16 permissões configuráveis por perfil, sem deploy. Gestor controla tudo.</span>
-                        <span data-lang="en">16 configurable permissions per profile, no deploy needed. Manager controls everything.</span>
+                        <span data-lang="pt">21 permissões configuráveis por perfil, sem deploy. Gestor controla tudo.</span>
+                        <span data-lang="en">21 configurable permissions per profile, no deploy needed. Manager controls everything.</span>
                     </p>
                 </div>
                 <div class="feature-card fade-in">
@@ -2273,7 +2277,7 @@
                     </h3>
                     <p>
                         <span data-lang="pt">Integração nativa com Zendesk, Genesys e Salesforce. A IA analisa o histórico do cliente (janela de 90 dias) atuando como juiz imparcial para apontar onde o primeiro nível falhou e evitar novos vazamentos regulatórios.</span>
-                        <span data-lang="en">Native integration with Zendesk, Genesys, and Salesforce. AI analyzes 30-day customer history acting as an impartial judge to pinpoint N1 failures and prevent regulatory leaks.</span>
+                        <span data-lang="en">Native integration with Zendesk, Genesys, and Salesforce. AI analyzes 90-day customer history acting as an impartial judge to pinpoint N1 failures and prevent regulatory leaks.</span>
                     </p>
                 </div>
             </div>
@@ -2519,10 +2523,10 @@
                     </div>
                 </div>
                 <div class="metric-card fade-in fade-in-delay-1">
-                    <div class="metric-value">~R$ 0,22</div>
+                    <div class="metric-value">6</div>
                     <div class="metric-label">
-                        <span data-lang="pt">Custo de IA por demanda</span>
-                        <span data-lang="en">AI cost per demand</span>
+                        <span data-lang="pt">Canais em um único painel — do BACEN ao SAC</span>
+                        <span data-lang="en">Channels in a single panel — from BACEN to customer service</span>
                     </div>
                 </div>
                 <div class="metric-card fade-in fade-in-delay-2">
@@ -2533,10 +2537,10 @@
                     </div>
                 </div>
                 <div class="metric-card fade-in fade-in-delay-3">
-                    <div class="metric-value">17</div>
+                    <div class="metric-value">5 anos</div>
                     <div class="metric-label">
-                        <span data-lang="pt">Migrations de banco — pronto para produção</span>
-                        <span data-lang="en">Database migrations — production ready</span>
+                        <span data-lang="pt">Retenção de documentos conforme BCB 222</span>
+                        <span data-lang="en">Document retention per BCB 222</span>
                     </div>
                 </div>
             </div>
@@ -2562,8 +2566,8 @@
                         <span data-lang="en">LGPD — Brazilian Data Protection Law</span>
                     </h3>
                     <p>
-                        <span data-lang="pt">Todas as operações do Ouv.ai seguem os princípios da Lei 13.709/2018 (LGPD). Dados pessoais de reclamantes são tratados com base legal legítima, finalidade específica e minimização de dados. Consentimento e direitos dos titulares são respeitados em todo o fluxo.</span>
-                        <span data-lang="en">All Ouv.ai operations follow the principles of Law 13.709/2018 (LGPD — Brazilian General Data Protection Law). Personal data is processed under legitimate legal basis, specific purpose, and data minimization. Data subject rights and consent are respected throughout the entire flow.</span>
+                        <span data-lang="pt">Todas as operações do Ouv.ai seguem os princípios da Lei 13.709/2018 (LGPD). Dados pessoais de reclamantes são tratados com base legal adequada — o cumprimento de obrigação legal e regulatória — com finalidade específica e minimização de dados. Os direitos dos titulares são atendidos em todo o fluxo.</span>
+                        <span data-lang="en">All Ouv.ai operations follow the principles of Law 13.709/2018 (LGPD — Brazilian General Data Protection Law). Personal data is processed under the appropriate legal basis — compliance with legal and regulatory obligations — with specific purpose and data minimization. Data subject rights are honored throughout the entire flow.</span>
                     </p>
                 </div>
                 <div class="compliance-card fade-in fade-in-delay-2">
@@ -2575,8 +2579,8 @@
                         <span data-lang="en">Encryption and security</span>
                     </h3>
                     <p>
-                        <span data-lang="pt">Dados em trânsito protegidos por TLS 1.3. Dados em repouso criptografados com AES-256. Controle de acesso RBAC com 16 permissões granulares. Logs de auditoria completos para rastreabilidade de cada ação no sistema. Infraestrutura 100% hospedada em ambiente de alta disponibilidade na AWS.</span>
-                        <span data-lang="en">Data in transit protected by TLS 1.3. Data at rest encrypted with AES-256. RBAC access control with 16 granular permissions. Complete audit logs for traceability of every action in the system. Infrastructure 100% hosted in a high-availability AWS environment.</span>
+                        <span data-lang="pt">Dados em trânsito protegidos por criptografia TLS. Ambientes de cliente provisionados com criptografia em repouso (AES-256). Controle de acesso RBAC com 21 permissões granulares e trilha de auditoria completa de cada ação no sistema. Infraestrutura hospedada na AWS São Paulo — residência de dados no Brasil.</span>
+                        <span data-lang="en">Data in transit protected by TLS encryption. Client environments provisioned with encryption at rest (AES-256). RBAC access control with 21 granular permissions and a complete audit trail of every action. Infrastructure hosted on AWS São Paulo — data residency in Brazil.</span>
                     </p>
                 </div>
                 <div class="compliance-card fade-in fade-in-delay-3">
@@ -2588,8 +2592,8 @@
                         <span data-lang="en">BCB Resolution 222 and regulatory</span>
                     </h3>
                     <p>
-                        <span data-lang="pt">Plataforma construída em conformidade com a Resolução BCB 222/2024 e normativos do Banco Central. Prazos, classificações e fluxos de resposta seguem rigorosamente as exigências regulatórias do setor financeiro brasileiro.</span>
-                        <span data-lang="en">Platform built in compliance with BCB Resolution 222/2024 and Central Bank regulations. Deadlines, classifications, and response flows strictly follow the regulatory requirements of the Brazilian financial sector.</span>
+                        <span data-lang="pt">Plataforma construída em conformidade com a Resolução BCB nº 222/2022 e normativos do Banco Central. Prazos, classificações e fluxos de resposta seguem rigorosamente as exigências regulatórias do setor financeiro brasileiro.</span>
+                        <span data-lang="en">Platform built in compliance with BCB Resolution 222/2022 and Central Bank regulations. Deadlines, classifications, and response flows strictly follow the regulatory requirements of the Brazilian financial sector.</span>
                     </p>
                 </div>
             </div>
@@ -2613,13 +2617,13 @@
                 </div>
                 <div class="compliance-badge">
                     <i data-lucide="key-round" width="16" height="16"></i>
-                    TLS 1.3
+                    TLS
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========== WAITLIST ========== -->
+    <!-- ========== CONTATO / DEMONSTRACAO ========== -->
     <section class="section waitlist" id="contato">
         <div class="container">
             <div class="waitlist-content fade-in">
@@ -2714,20 +2718,20 @@
                             <i data-lucide="check-circle" width="32" height="32"></i>
                         </div>
                         <h3>
-                            <span data-lang="pt">Mensagem enviada com sucesso!</span>
-                            <span data-lang="en">Message sent successfully!</span>
+                            <span data-lang="pt">Sua mensagem está pronta para envio!</span>
+                            <span data-lang="en">Your message is ready to send!</span>
                         </h3>
                         <p>
-                            <span data-lang="pt">Nossa equipe entrará em contato em breve pelo e-mail informado.</span>
-                            <span data-lang="en">Our team will reach out shortly via the email provided.</span>
+                            <span data-lang="pt">Abrimos o seu aplicativo de e-mail com a mensagem preenchida — basta clicar em enviar. Se ele não abriu, escreva direto para <a href="mailto:contato@ouvai.com.br" style="color:var(--primary-dark);font-weight:600;">contato@ouvai.com.br</a>.</span>
+                            <span data-lang="en">We opened your email app with the message pre-filled — just hit send. If it didn’t open, write directly to <a href="mailto:contato@ouvai.com.br" style="color:var(--primary-dark);font-weight:600;">contato@ouvai.com.br</a>.</span>
                         </p>
                     </div>
                 </div>
 
                 <div class="waitlist-fallback">
                     <p>
-                        <span data-lang="pt">Fale conosco por e-mail ou conecte-se no LinkedIn. Demais canais em breve.</span>
-                        <span data-lang="en">Reach us by email or connect on LinkedIn. More channels coming soon.</span>
+                        <span data-lang="pt">Prefere falar direto? Escreva para nós ou conecte-se no LinkedIn.</span>
+                        <span data-lang="en">Prefer to reach out directly? Write to us or connect on LinkedIn.</span>
                     </p>
                     <div class="waitlist-contact-links">
                         <a href="mailto:contato@ouvai.com.br">
@@ -2738,14 +2742,6 @@
                         <a href="https://www.linkedin.com/company/ouv-ai/" target="_blank" rel="noopener noreferrer">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                             LinkedIn
-                        </a>
-                        <a href="#" style="opacity:0.5;pointer-events:none;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                            WhatsApp
-                        </a>
-                        <a href="#" style="opacity:0.5;pointer-events:none;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                            Instagram
                         </a>
                     </div>
                 </div>
@@ -2770,6 +2766,10 @@
                     <p>
                         <span data-lang="pt">Ouv.ai — Ouvidoria inteligente para instituições financeiras. Desenvolvido com IA generativa e hospedado em infraestrutura AWS com compliance regulatório.</span>
                         <span data-lang="en">Ouv.ai — Intelligent ombudsman management for financial institutions. Built with generative AI and hosted on AWS infrastructure with regulatory compliance.</span>
+                    </p>
+                    <p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px;">
+                        Ouv.ai Tecnologia — Sociedade Limitada Unipessoal<br>
+                        Rua Pais Leme, 215 — Pinheiros, São Paulo/SP
                     </p>
                 </div>
 
@@ -2808,28 +2808,19 @@
                         <a href="mailto:contato@ouvai.com.br" aria-label="Email">
                             <i data-lucide="mail" width="18" height="18"></i>
                         </a>
-                        <a href="#" aria-label="Instagram" title="Em breve" style="opacity:0.4;pointer-events:none;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                        </a>
-                        <a href="#" aria-label="WhatsApp" title="Em breve" style="opacity:0.4;pointer-events:none;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        </a>
                     </div>
-                    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;opacity:0.7;">
-                        <span data-lang="pt">Demais redes sociais em breve</span>
-                        <span data-lang="en">More social media coming soon</span>
-                    </p>
+                    <a href="mailto:contato@ouvai.com.br" style="font-size:0.85rem;">contato@ouvai.com.br</a>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <p>&copy; 2026 Ouv.ai. <span data-lang="pt">Todos os direitos reservados.</span><span data-lang="en">All rights reserved.</span></p>
                 <div class="footer-bottom-links">
-                    <a href="#">
+                    <a href="termos.html">
                         <span data-lang="pt">Termos de Uso</span>
                         <span data-lang="en">Terms of Use</span>
                     </a>
-                    <a href="#">
+                    <a href="privacidade.html">
                         <span data-lang="pt">Política de Privacidade</span>
                         <span data-lang="en">Privacy Policy</span>
                     </a>
@@ -3091,87 +3082,32 @@
 
                 if (!valid) return;
 
-                // Disable button, show "Enviando..."
-                var btn = document.getElementById('cfSubmitBtn');
-                btn.disabled = true;
-                btn.querySelectorAll('.btn-submit-text').forEach(function(s) { s.style.display = 'none'; });
-                btn.querySelector('i, svg').style.display = 'none';
-                var spinner = document.createElement('span');
-                spinner.className = 'spinner';
-                btn.appendChild(spinner);
-                var loadingText = document.createElement('span');
-                loadingText.textContent = document.documentElement.classList.contains('lang-pt') ? 'Enviando...' : 'Sending...';
-                btn.appendChild(loadingText);
-
-                // Prepare payload
-                var payload = {
-                    name: name,
-                    email: email,
-                    company: company,
-                    role: role,
-                    volume: volume,
-                    message: message
-                };
-
-                /*
-                 * TODO: Conectar ao backend quando o SMTP estiver configurado.
-                 * Descomentar o bloco abaixo e remover o setTimeout.
-                 *
-                 * var API_URL = window.location.hostname === 'localhost'
-                 *     ? 'http://localhost:8000/api/contact'
-                 *     : 'https://api.ouvai.com.br/api/contact';
-                 *
-                 * fetch(API_URL, {
-                 *     method: 'POST',
-                 *     headers: { 'Content-Type': 'application/json' },
-                 *     body: JSON.stringify(payload)
-                 * })
-                 * .then(function(res) {
-                 *     if (!res.ok) throw new Error('HTTP ' + res.status);
-                 *     return res.json();
-                 * })
-                 * .then(function() { showSuccess(); })
-                 * .catch(function(err) { console.error(err); showError(); });
-                 */
-
-                // Simulated success (2s delay)
-                setTimeout(function() {
-                    showSuccess();
-                }, 2000);
+                // Monta a mensagem e abre o cliente de e-mail do visitante (mailto).
+                // O site nao tem backend: nenhum dado e armazenado nem enviado a
+                // terceiros — a mensagem sai do proprio e-mail do interessado.
+                var isPt = document.documentElement.classList.contains('lang-pt');
+                var subject = (isPt ? 'Solicita\u00e7\u00e3o de demonstra\u00e7\u00e3o \u2014 ' : 'Demo request \u2014 ') + company;
+                var lines = [
+                    (isPt ? 'Nome: ' : 'Name: ') + name,
+                    (isPt ? 'E-mail corporativo: ' : 'Corporate email: ') + email,
+                    (isPt ? 'Empresa/Institui\u00e7\u00e3o: ' : 'Company: ') + company
+                ];
+                if (role) lines.push((isPt ? 'Cargo: ' : 'Role: ') + role);
+                if (volume) lines.push((isPt ? 'Volume mensal de demandas: ' : 'Monthly demand volume: ') + volume);
+                lines.push('');
+                lines.push(isPt ? 'Mensagem:' : 'Message:');
+                lines.push(message);
+                var mailto = 'mailto:contato@ouvai.com.br'
+                    + '?subject=' + encodeURIComponent(subject)
+                    + '&body=' + encodeURIComponent(lines.join('\n'));
+                window.location.href = mailto;
+                showSuccess();
             }
 
             function showSuccess() {
                 document.getElementById('contactForm').style.display = 'none';
                 document.getElementById('formSuccess').style.display = 'block';
                 if (typeof lucide !== 'undefined') lucide.createIcons();
-            }
-
-            function showError() {
-                // Re-enable button
-                var btn = document.getElementById('cfSubmitBtn');
-                btn.disabled = false;
-                var spinner = btn.querySelector('.spinner');
-                if (spinner) spinner.remove();
-                var loadingTxt = btn.lastChild;
-                if (loadingTxt && loadingTxt.nodeType === 1 && !loadingTxt.classList.contains('btn-submit-text')) {
-                    loadingTxt.remove();
-                }
-                btn.querySelectorAll('.btn-submit-text').forEach(function(s) { s.style.display = ''; });
-                var arrow = btn.querySelector('i, svg');
-                if (arrow) arrow.style.display = '';
-
-                // Show error message
-                var errEl = document.getElementById('formErrorMsg');
-                if (!errEl) {
-                    errEl = document.createElement('p');
-                    errEl.id = 'formErrorMsg';
-                    errEl.style.cssText = 'color:#E11D48;font-size:0.875rem;text-align:center;margin-top:12px;';
-                    btn.parentNode.appendChild(errEl);
-                }
-                var isPt = document.documentElement.classList.contains('lang-pt');
-                errEl.textContent = isPt
-                    ? 'Erro ao enviar. Tente novamente ou entre em contato por e-mail.'
-                    : 'Failed to send. Please try again or contact us by email.';
             }
         })();
 
