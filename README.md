@@ -1,6 +1,6 @@
-# Ouv.ai — Site Institucional
+# Ouv ai — Site Institucional
 
-Site institucional da [Ouv.ai](https://www.ouvai.com.br), plataforma SaaS de ouvidoria inteligente para instituicoes financeiras brasileiras.
+Site institucional da [Ouv ai](https://www.ouvai.com.br), plataforma SaaS de ouvidoria inteligente para instituicoes financeiras brasileiras.
 
 ## Stack
 
@@ -57,4 +57,4 @@ python -m uvicorn app.main:app --reload --port 8000
 
 ## Licença
 
-Propriedade de Ouv.ai. Todos os direitos reservados.
+Propriedade de Ouv ai. Todos os direitos reservados.

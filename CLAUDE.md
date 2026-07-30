@@ -1,7 +1,7 @@
-# CLAUDE.md — Ouv.ai Landing Page
+# CLAUDE.md — Ouv ai Landing Page
 
 ## Projeto
-Landing page do SaaS Ouv.ai (www.ouvai.com.br) — Ouvidoria Inteligente para Instituições Financeiras.
+Landing page do SaaS Ouv ai (www.ouvai.com.br) — Ouvidoria Inteligente para Instituições Financeiras.
 Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 
 ## Stack
@@ -25,10 +25,10 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 1. Navbar (fixed, blur)
 2. Hero (canvas rede neural + suporte scroll-video)
 3. Problem (desafios da ouvidoria)
-4. Solution (fluxo Ouv.ai)
+4. Solution (fluxo Ouv ai)
 5. How It Works (4 steps com vídeos demo)
 6. Features (grid de funcionalidades)
-7. Differentials (por que Ouv.ai)
+7. Differentials (por que Ouv ai)
 8. Deployment Models (PoC + Enterprise)
 9. Metrics (KPIs)
 10. Compliance (LGPD, segurança)

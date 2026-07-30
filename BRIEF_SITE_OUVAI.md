@@ -1,8 +1,8 @@
-# BRIEF — Site Institucional Ouv.ai
+# BRIEF — Site Institucional Ouv ai
 
 ## Objetivo
 
-Site institucional ultra profissional para a **Ouv.ai**, uma startup B2B SaaS que vende software de gestao inteligente de reclamacoes regulatorias para instituicoes financeiras brasileiras. O site transmite **confianca, sofisticacao e inovacao** — nivel de produto enterprise fintech.
+Site institucional ultra profissional para a **Ouv ai**, uma startup B2B SaaS que vende software de gestao inteligente de reclamacoes regulatorias para instituicoes financeiras brasileiras. O site transmite **confianca, sofisticacao e inovacao** — nivel de produto enterprise fintech.
 
 **URL de producao:** https://www.ouvai.com.br
 **Repositorio:** https://github.com/Ouv-ai/ouvai-website
@@ -30,7 +30,7 @@ Site institucional ultra profissional para a **Ouv.ai**, uma startup B2B SaaS qu
 ## Identidade Visual
 
 ### Logo
-- Nome: **Ouv.ai** (de "Ouvidoria" + "AI")
+- Nome: **Ouv ai** (de "Ouvidoria" + "AI") — SEM ponto: nome fantasia registrado e "Ouv ai"
 - Logo: texto estilizado + icone de headset/atendimento
 - Arquivos: `Logo_final.png` (principal), `logo.gitpng.png` (alternativo)
 
