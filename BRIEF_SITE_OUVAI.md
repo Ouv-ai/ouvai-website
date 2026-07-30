@@ -32,7 +32,7 @@ Site institucional ultra profissional para a **Ouv ai**, uma startup B2B SaaS qu
 ### Logo
 - Nome: **Ouv ai** (de "Ouvidoria" + "AI") — SEM ponto: nome fantasia registrado e "Ouv ai"
 - Logo: texto estilizado + icone de headset/atendimento
-- Arquivos: `Logo_final.png` (principal), `logo.gitpng.png` (alternativo)
+- Arquivos: `ouv-ai-logo-fundo-claro.png` (principal), `ouv-ai-logo-fundo-escuro.png`, `ouv-ai-simbolo.png` (kit 30/07/2026)
 
 ### Paleta de Cores
 ```css
@@ -170,8 +170,8 @@ Compliance → Contato → Footer (dark continuo)
 ```
 SITE_OUV.AI/
 ├── index.html              # Landing page (frontend completo)
-├── Logo_final.png          # Logo principal
-├── logo.gitpng.png         # Logo alternativo
+├── ouv-ai-logo-fundo-claro.png   # Logo principal
+├── ouv-ai-logo-fundo-escuro.png  # Logo p/ fundo escuro
 ├── capa.png                # Imagem de capa
 ├── ouvai-linkedin-*.png    # Banners LinkedIn
 ├── CLAUDE.md               # Guidelines para IA

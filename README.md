@@ -29,7 +29,7 @@ python -m uvicorn app.main:app --reload --port 8000
 
 ```
 ├── index.html              # Landing page completa
-├── Logo_final.png          # Logo principal
+├── ouv-ai-logo-fundo-claro.png   # Logo principal (kit 30/07/2026; escuro/simbolo/capa og idem)
 ├── videos/                 # Videos demo (How It Works)
 ├── backend/                # API FastAPI (formulario de contato)
 │   ├── .env.example
