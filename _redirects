@@ -1,0 +1,7 @@
+# ouv.ai (dominio curto, comprado 31/07/2026) -> canonico ouvai.com.br
+# Regra por hostname: so dispara quando o dominio estiver conectado ao site
+# no Netlify. 301! = forcado, preservando o caminho (splat).
+https://ouv.ai/* https://ouvai.com.br/:splat 301!
+https://www.ouv.ai/* https://ouvai.com.br/:splat 301!
+http://ouv.ai/* https://ouvai.com.br/:splat 301!
+http://www.ouv.ai/* https://ouvai.com.br/:splat 301!
