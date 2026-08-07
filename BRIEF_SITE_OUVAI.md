@@ -4,7 +4,7 @@
 
 Site institucional ultra profissional para a **Ouv ai**, uma startup B2B SaaS que vende software de gestao inteligente de reclamacoes regulatorias para instituicoes financeiras brasileiras. O site transmite **confianca, sofisticacao e inovacao** — nivel de produto enterprise fintech.
 
-**URL de producao:** https://www.ouvai.com.br
+**URL de producao:** https://ouv.ai (dominio antigo ouvai.com.br responde 301 — ver `_redirects`)
 **Repositorio:** https://github.com/Ouv-ai/ouvai-website
 
 ---

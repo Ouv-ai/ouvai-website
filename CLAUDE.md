@@ -1,8 +1,25 @@
 # CLAUDE.md — Ouv ai Landing Page
 
 ## Projeto
-Landing page do SaaS Ouv ai (www.ouvai.com.br) — Ouvidoria Inteligente para Instituições Financeiras.
+Landing page do SaaS Ouv.ai (https://ouv.ai) — Ouvidoria Inteligente para Instituições Financeiras.
 Repositório de produção: https://github.com/Ouv-ai/ouvai-website
+
+## Domínios (OBRIGATÓRIO — leia antes de mexer em redirect, canonical ou OG)
+- **Canônico: `ouv.ai`** — primary domain na Netlify. É o domínio de SEO: `<link rel="canonical">`
+  das 3 páginas, `og:url` e `og:image` apontam para ele. `ouvai.com.br` é o domínio ANTIGO e
+  responde 301 para `ouv.ai` (regras em `_redirects`).
+- **E-mail permanece `@ouvai.com.br`** — `contato@ouvai.com.br` segue ativo e é o único canal de
+  contato do site (o formulário é `mailto:`, sem backend). E-mail não é URL: o MX não muda com
+  redirect. NÃO trocar por `@ouv.ai`.
+- **Páginas jurídicas mantêm `www.ouvai.com.br`** no corpo do texto (`termos.html`,
+  `privacidade.html`) — o documento oficial da empresa já foi protocolado com esse endereço, e
+  alterá-lo cria divergência jurídica. Vale para o texto; os rótulos de link do rodapé já são `ouv.ai`.
+- **NUNCA criar `netlify.toml` com regras de domínio.** O toml é avaliado ANTES do `_redirects`;
+  os dois arquivos com direções opostas geram loop infinito e derrubam os dois domínios. Toda
+  regra de redirect vive no `_redirects`.
+- Direção do redirect já foi invertida uma vez (o commit e297006 apontava para o lado errado
+  porque esta documentação declarava `ouvai.com.br` como produção). Se for mexer, confirme o
+  primary domain no painel da Netlify antes.
 
 ## Stack
 - HTML puro + CSS puro (variáveis CSS em `:root`)

@@ -1,6 +1,6 @@
 # Ouv ai — Site Institucional
 
-Site institucional da [Ouv ai](https://www.ouvai.com.br), plataforma SaaS de ouvidoria inteligente para instituicoes financeiras brasileiras.
+Site institucional da [Ouv.ai](https://ouv.ai), plataforma SaaS de ouvidoria inteligente para instituicoes financeiras brasileiras.
 
 ## Stack
 

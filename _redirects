@@ -1,7 +1,13 @@
-# ouv.ai (dominio curto, comprado 31/07/2026) -> canonico ouvai.com.br
-# Regra por hostname: so dispara quando o dominio estiver conectado ao site
-# no Netlify. 301! = forcado, preservando o caminho (splat).
-https://ouv.ai/* https://ouvai.com.br/:splat 301!
-https://www.ouv.ai/* https://ouvai.com.br/:splat 301!
-http://ouv.ai/* https://ouvai.com.br/:splat 301!
-http://www.ouv.ai/* https://ouvai.com.br/:splat 301!
+# ouvai.com.br (dominio antigo) -> ouv.ai (primary domain no Netlify desde 08/2026)
+# Regra por hostname: so dispara quando o dominio estiver conectado ao site.
+# 301! = forcado, preservando o caminho (splat).
+#
+# NAO criar netlify.toml com regras de dominio: o toml e avaliado ANTES deste
+# arquivo, e duas direcoes opostas geram loop infinito nos dois dominios.
+#
+# www.ouv.ai nao aparece aqui: o painel da Netlify ja redireciona qualquer alias
+# para o primary domain.
+# Regras http:// nao aparecem aqui: a Netlify termina TLS e promove para https
+# antes do motor de redirect, entao elas nunca disparariam.
+https://ouvai.com.br/* https://ouv.ai/:splat 301!
+https://www.ouvai.com.br/* https://ouv.ai/:splat 301!
