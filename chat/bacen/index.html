@@ -119,7 +119,9 @@ details.escopo li{margin:.2rem 0}
       <strong>Identificadores são removidos antes do envio.</strong>
       CPF, cartão, conta, agência e e-mail são substituídos por marcadores no
       servidor — o texto que o modelo recebe fica visível abaixo do resultado.
-      Nem o texto nem os dados são armazenados.
+      O texto não é armazenado; guardamos apenas registros de uso
+      (data, limites e consumo) — veja os
+      <a href="/chat/bacen/termos.html" style="color:#0F5E5C">termos</a>.
       <details class="escopo">
         <summary>O que é e o que não é removido</summary>
         <ul>
@@ -240,8 +242,12 @@ details.escopo li{margin:.2rem 0}
   }
 
   function atualizarRestantes(n){
+    // 9999 = eixo desligado no convite. Imprimir "9999 gerações restantes"
+    // na frente do avaliador seria ridiculo; nesse caso o contador some.
     $("restantes").textContent =
-      (typeof n === "number") ? (n + (n === 1 ? " geração restante hoje" : " gerações restantes hoje")) : "";
+      (typeof n === "number" && n < 9999)
+        ? (n + (n === 1 ? " geração restante hoje" : " gerações restantes hoje"))
+        : "";
   }
 
   // ---- ENTRAR
@@ -301,9 +307,14 @@ details.escopo li{margin:.2rem 0}
         : "nenhum identificador encontrado neste texto";
 
       if (d.avisos && d.avisos.length) {
+        // A frase NAO afirma origem. A versao anterior dizia "ele nao veio do
+        // seu texto", o que e falso para as classes sem detector (nome,
+        // endereco) e para documento com DV invalido, que a entrada nao redige
+        // por desenho. Afirmar isso ao time de seguranca do banco seria
+        // garantir o que o codigo nao sustenta.
         mostrar($("avisos"),
           "Confira antes de usar: o texto gerado contém o que parece ser um documento. " +
-          "Como os identificadores foram removidos da entrada, ele não veio do seu texto. (" +
+          "Se ele não pertencia a uma das classes removidas, pode ter vindo do seu texto. (" +
           d.avisos.join("; ") + ")", "atencao");
       } else { esconder($("avisos")); }
 
