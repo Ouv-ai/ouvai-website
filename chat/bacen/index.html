@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- NAO indexavel: acesso e por convite, e a pagina nao deve competir com a
+     landing no SEO nem sugerir que qualquer um pode entrar. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Agente BACEN — Demonstração | Ouv.ai</title>
+<link rel="canonical" href="https://ouv.ai/chat/bacen/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#28CCCC;--primary-dark:#1da8a8;--primary-light:rgba(40,204,204,.08);
+  --bg:#F8FAFC;--bg-card:#FFF;--bg-dark:#0F172A;
+  --text:#0F172A;--text-secondary:#475569;--text-muted:#94A3B8;--border:#E2E8F0;
+  --success:#059669;--warning:#D97706;--danger:#E11D48;
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+header{background:var(--bg-dark);color:#fff;padding:1rem 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em;color:#fff;text-decoration:none}
+.logo span{color:var(--primary)}
+.tag{font-size:.8rem;color:#CBD5E1}
+
+.hero{padding:2.5rem 0 1.5rem}
+.hero h1{font-size:clamp(1.6rem,3.4vw,2.2rem);letter-spacing:-.02em;line-height:1.2}
+.hero p{color:var(--text-secondary);margin-top:.6rem;max-width:60ch}
+
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem}
+.card h2{font-size:1rem;font-weight:700;margin-bottom:.35rem}
+.card .hint{font-size:.85rem;color:var(--text-muted);margin-bottom:.9rem}
+
+label{display:block;font-weight:600;font-size:.9rem;margin:.9rem 0 .35rem}
+input[type=text],input[type=password],textarea,select{
+  width:100%;font-family:inherit;font-size:.95rem;color:var(--text);
+  padding:.7rem .8rem;border:1px solid var(--border);border-radius:9px;background:#fff;resize:vertical}
+textarea{min-height:130px;line-height:1.55}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:transparent}
+
+.radios{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:.35rem}
+.radios label{display:flex;align-items:center;gap:.4rem;font-weight:500;margin:0;cursor:pointer}
+.radios input{width:auto}
+
+.btn{font-family:inherit;font-size:.95rem;font-weight:600;padding:.75rem 1.3rem;border-radius:9px;border:1px solid transparent;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--primary);color:#06312f}
+.btn-primary:hover:not(:disabled){background:var(--primary-dark);color:#fff}
+.btn-secondary{background:#fff;border-color:var(--border);color:var(--text-secondary)}
+.btn-secondary:hover{border-color:var(--text-muted)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.acoes{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:1.1rem}
+.restantes{font-size:.85rem;color:var(--text-muted)}
+
+.aviso{border-radius:10px;padding:.85rem 1rem;font-size:.9rem;margin-bottom:1rem;border:1px solid}
+.aviso-erro{background:#FEF2F2;border-color:#FECACA;color:#991B1B}
+.aviso-atencao{background:#FFFBEB;border-color:#FDE68A;color:#92400E}
+.aviso-info{background:var(--primary-light);border-color:rgba(40,204,204,.35);color:#0F5E5C}
+
+.prova{background:#0F172A;border-radius:12px;padding:1.1rem 1.2rem;margin-top:1rem}
+.prova h3{color:#fff;font-size:.85rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase;margin-bottom:.2rem}
+.prova .sub{color:#94A3B8;font-size:.8rem;margin-bottom:.7rem}
+.prova pre{font-family:var(--font-mono);font-size:.8rem;color:#E2E8F0;white-space:pre-wrap;word-break:break-word;max-height:220px;overflow:auto;line-height:1.6}
+.prova mark{background:rgba(40,204,204,.22);color:#7FF0F0;border-radius:3px;padding:0 .2em;font-weight:500}
+.contagem{margin-top:.7rem;font-size:.8rem;color:#94A3B8;font-family:var(--font-mono)}
+
+details.escopo{margin-top:.8rem;font-size:.85rem;color:var(--text-secondary)}
+details.escopo summary{cursor:pointer;font-weight:600;color:var(--text)}
+details.escopo ul{margin:.5rem 0 0 1.1rem}
+details.escopo li{margin:.2rem 0}
+
+.saida label{margin-top:1.1rem}
+.rodape{padding:2rem 0 3rem;font-size:.85rem;color:var(--text-muted);border-top:1px solid var(--border);margin-top:2rem}
+.rodape a{color:var(--text-secondary)}
+.oculto{display:none!important}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.2);border-top-color:#06312f;border-radius:50%;animation:g .7s linear infinite;vertical-align:-2px;margin-right:.4rem}
+@keyframes g{to{transform:rotate(360deg)}}
+@media(max-width:640px){.card{padding:1.1rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="https://ouv.ai">Ouv<span>.ai</span></a>
+    <span class="tag">Agente BACEN — demonstração</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Agente de resposta ao BACEN</h1>
+    <p>Cole a reclamação e a análise interna. O agente devolve a resposta ao cliente,
+       a manifestação técnica ao BACEN e a lista de evidências sugeridas.</p>
+  </section>
+
+  <!-- ACESSO -->
+  <section class="card" id="secao-acesso">
+    <h2>Código de acesso</h2>
+    <p class="hint">Esta demonstração é liberada por convite.</p>
+    <div id="erro-acesso" class="aviso aviso-erro oculto"></div>
+    <label for="codigo">Código</label>
+    <input type="password" id="codigo" autocomplete="off" spellcheck="false" placeholder="cole o código recebido">
+    <div class="acoes">
+      <button class="btn btn-primary" id="btn-entrar">Entrar</button>
+    </div>
+  </section>
+
+  <!-- FORMULARIO -->
+  <div id="app" class="oculto">
+    <div class="aviso aviso-info">
+      <strong>Identificadores são removidos antes do envio.</strong>
+      CPF, cartão, conta, agência e e-mail são substituídos por marcadores no
+      servidor — o texto que o modelo recebe fica visível abaixo do resultado.
+      Nem o texto nem os dados são armazenados.
+      <details class="escopo">
+        <summary>O que é e o que não é removido</summary>
+        <ul>
+          <li><strong>Removido:</strong> CPF, número de cartão, conta, agência e e-mail.</li>
+          <li><strong>Não removido:</strong> CNPJ — é dado público (Receita Federal).</li>
+          <li><strong>Não removido:</strong> datas, valores e números de protocolo —
+              são fatos da resposta e removê-los a tornaria inconclusiva.</li>
+          <li><strong>Não detectado:</strong> <strong>nome e endereço.</strong> Não há
+              forma determinística de identificá-los sem enviar o texto a um modelo,
+              que é o oposto do que fazemos aqui. Evite incluí-los.</li>
+        </ul>
+      </details>
+    </div>
+
+    <section class="card">
+      <h2>1. Reclamação do cliente</h2>
+      <p class="hint">Texto como recebido pelo RDR.</p>
+      <textarea id="reclamacao" placeholder="Cole aqui a reclamação..."></textarea>
+
+      <label for="analise">2. Análise interna (opcional)</label>
+      <textarea id="analise" placeholder="Apuração da área responsável, procedimentos verificados, evidências..."></textarea>
+
+      <label>3. Procedência</label>
+      <div class="radios">
+        <label><input type="radio" name="procedencia" value="Procedente"> Procedente</label>
+        <label><input type="radio" name="procedencia" value="Improcedente"> Improcedente</label>
+        <label><input type="radio" name="procedencia" value="Nao Avaliado" checked> Deixar para a IA</label>
+      </div>
+
+      <div class="acoes">
+        <button class="btn btn-primary" id="btn-gerar">Gerar</button>
+        <button class="btn btn-secondary" id="btn-limpar">Limpar</button>
+        <span class="restantes" id="restantes"></span>
+      </div>
+      <div id="erro-gerar" class="aviso aviso-erro oculto" style="margin-top:1rem"></div>
+    </section>
+
+    <section class="card saida oculto" id="secao-saida">
+      <h2>Resultado</h2>
+      <p class="hint">Rascunho. Não substitui a conferência do ouvidor antes do envio.</p>
+      <div id="avisos" class="aviso aviso-atencao oculto"></div>
+
+      <label for="out-cliente">Resposta ao cliente</label>
+      <textarea id="out-cliente" rows="10"></textarea>
+
+      <label for="out-bacen">Manifestação ao BACEN</label>
+      <textarea id="out-bacen" rows="7"></textarea>
+
+      <label for="out-evid">Evidências sugeridas</label>
+      <textarea id="out-evid" rows="5"></textarea>
+
+      <div class="prova">
+        <h3>O que o modelo recebeu</h3>
+        <p class="sub">Texto exato enviado, com os identificadores já substituídos.</p>
+        <pre id="prova-texto"></pre>
+        <div class="contagem" id="prova-contagem"></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="rodape">
+    <p>Ouv.ai — demonstração do agente de resposta ao BACEN.
+       <a href="/chat/bacen/termos.html">Termos de uso e privacidade desta demonstração</a>.</p>
+    <p style="margin-top:.4rem">Dúvidas: <a href="mailto:contato@ouvai.com.br">contato@ouvai.com.br</a></p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  // A API e outra origem (api.ouvai.com.br). `https://ouv.ai` precisa estar em
+  // CORS_ORIGINS na task definition do ECS — mudar `config.py` nao tem efeito,
+  // porque a task definition sobrescreve a variavel.
+  var API = "https://api.ouvai.com.br";
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    API = "http://localhost:8001";
+  }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var codigo = "";
+
+  function mostrar(el, texto, tipo){
+    el.textContent = texto;
+    el.className = "aviso aviso-" + (tipo || "erro");
+    el.classList.remove("oculto");
+  }
+  function esconder(el){ el.classList.add("oculto"); }
+
+  // O `detail` do servidor CHEGA a tela. Mensagem generica esconde justamente o
+  // que o avaliador precisa ler ("limite diario atingido", "codigo expirado").
+  function erroDe(resp, dados){
+    if (dados && dados.detail) {
+      if (typeof dados.detail === "string") return dados.detail;
+      if (Array.isArray(dados.detail) && dados.detail[0] && dados.detail[0].msg) {
+        return "Confira os campos: " + dados.detail[0].msg;
+      }
+    }
+    if (resp && resp.status === 413) return "O texto enviado é grande demais.";
+    if (resp && resp.status === 0) return "Não foi possível conectar. Verifique a rede.";
+    return "Não foi possível concluir agora. Tente novamente.";
+  }
+
+  async function chamar(rota, corpo){
+    var resp, dados = null;
+    try {
+      resp = await fetch(API + rota, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(corpo)
+      });
+    } catch (e) {
+      throw new Error("Não foi possível conectar. Verifique a rede.");
+    }
+    try { dados = await resp.json(); } catch (e) { dados = null; }
+    if (!resp.ok) throw new Error(erroDe(resp, dados));
+    return dados;
+  }
+
+  function atualizarRestantes(n){
+    $("restantes").textContent =
+      (typeof n === "number") ? (n + (n === 1 ? " geração restante hoje" : " gerações restantes hoje")) : "";
+  }
+
+  // ---- ENTRAR
+  async function entrar(){
+    var val = $("codigo").value.trim();
+    if (!val) { mostrar($("erro-acesso"), "Informe o código de acesso."); return; }
+    var btn = $("btn-entrar");
+    btn.disabled = true; btn.textContent = "Verificando...";
+    try {
+      var d = await chamar("/api/public/bacen/acesso", { codigo: val });
+      codigo = val;
+      esconder($("erro-acesso"));
+      $("secao-acesso").classList.add("oculto");
+      $("app").classList.remove("oculto");
+      atualizarRestantes(d.restantes_hoje);
+      document.querySelector(".tag").textContent = d.instituicao + " — demonstração";
+    } catch (e) {
+      mostrar($("erro-acesso"), e.message);
+    } finally {
+      btn.disabled = false; btn.textContent = "Entrar";
+    }
+  }
+
+  // ---- GERAR
+  async function gerar(){
+    var reclamacao = $("reclamacao").value.trim();
+    if (reclamacao.length < 20) {
+      mostrar($("erro-gerar"), "Cole a reclamação do cliente (mínimo 20 caracteres).");
+      return;
+    }
+    var btn = $("btn-gerar");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Gerando...';
+    esconder($("erro-gerar"));
+    try {
+      var d = await chamar("/api/public/bacen/gerar", {
+        codigo: codigo,
+        reclamacao: reclamacao,
+        analise: $("analise").value.trim(),
+        procedencia: document.querySelector('input[name=procedencia]:checked').value
+      });
+      $("out-cliente").value = d.resposta_cliente;
+      $("out-bacen").value   = d.manifestacao_bacen;
+      $("out-evid").value    = d.evidencias;
+
+      // PROVA: o texto exato que o modelo recebeu, com os marcadores realcados.
+      // `textContent` primeiro e realce por no de texto — nunca innerHTML com
+      // conteudo vindo do usuario.
+      var pre = $("prova-texto");
+      pre.textContent = d.reclamacao_redigida + (d.analise_redigida ? "\n\n---\n\n" + d.analise_redigida : "");
+      realcarMarcadores(pre);
+
+      var partes = [];
+      for (var k in d.redacoes) { if (d.redacoes.hasOwnProperty(k)) partes.push(k + ": " + d.redacoes[k]); }
+      $("prova-contagem").textContent = partes.length
+        ? "removidos antes do envio — " + partes.join("  ·  ")
+        : "nenhum identificador encontrado neste texto";
+
+      if (d.avisos && d.avisos.length) {
+        mostrar($("avisos"),
+          "Confira antes de usar: o texto gerado contém o que parece ser um documento. " +
+          "Como os identificadores foram removidos da entrada, ele não veio do seu texto. (" +
+          d.avisos.join("; ") + ")", "atencao");
+      } else { esconder($("avisos")); }
+
+      $("secao-saida").classList.remove("oculto");
+      atualizarRestantes(d.restantes_hoje);
+      $("secao-saida").scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (e) {
+      mostrar($("erro-gerar"), e.message);
+    } finally {
+      btn.disabled = false; btn.textContent = "Gerar";
+    }
+  }
+
+  // Realca "[CPF informado]" e afins sem montar HTML a partir do texto.
+  function realcarMarcadores(pre){
+    var texto = pre.textContent, re = /\[[^\]\n]{3,40}\]/g, frag = document.createDocumentFragment();
+    var ultimo = 0, m;
+    while ((m = re.exec(texto)) !== null) {
+      if (m.index > ultimo) frag.appendChild(document.createTextNode(texto.slice(ultimo, m.index)));
+      var mk = document.createElement("mark");
+      mk.textContent = m[0];
+      frag.appendChild(mk);
+      ultimo = m.index + m[0].length;
+    }
+    if (ultimo < texto.length) frag.appendChild(document.createTextNode(texto.slice(ultimo)));
+    pre.textContent = "";
+    pre.appendChild(frag);
+  }
+
+  function limpar(){
+    $("reclamacao").value = ""; $("analise").value = "";
+    $("out-cliente").value = ""; $("out-bacen").value = ""; $("out-evid").value = "";
+    document.querySelector('input[name=procedencia][value="Nao Avaliado"]').checked = true;
+    $("secao-saida").classList.add("oculto");
+    esconder($("erro-gerar")); esconder($("avisos"));
+    $("reclamacao").focus();
+  }
+
+  $("btn-entrar").addEventListener("click", entrar);
+  $("codigo").addEventListener("keydown", function(e){ if (e.key === "Enter") entrar(); });
+  $("btn-gerar").addEventListener("click", gerar);
+  $("btn-limpar").addEventListener("click", limpar);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Termos de uso e privacidade — Demonstração do Agente BACEN | Ouv.ai</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#28CCCC;--bg:#F8FAFC;--bg-dark:#0F172A;--text:#0F172A;
+--text-secondary:#475569;--text-muted:#94A3B8;--border:#E2E8F0;
+--font-sans:'Inter',system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.7}
+.wrap{max-width:760px;margin:0 auto;padding:0 1.5rem}
+header{background:var(--bg-dark);color:#fff;padding:1rem 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:1.25rem;color:#fff;text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--primary)}
+.tag{font-size:.8rem;color:#CBD5E1}
+main{padding:2.5rem 0 3rem}
+h1{font-size:1.8rem;letter-spacing:-.02em;line-height:1.25;margin-bottom:.4rem}
+.data{color:var(--text-muted);font-size:.88rem;margin-bottom:2rem}
+h2{font-size:1.1rem;margin:2rem 0 .6rem;letter-spacing:-.01em}
+p,li{color:var(--text-secondary);font-size:.97rem}
+p{margin-bottom:.8rem}
+ul{margin:0 0 .9rem 1.25rem}
+li{margin-bottom:.35rem}
+strong{color:var(--text)}
+.box{background:#fff;border:1px solid var(--border);border-left:3px solid var(--primary);
+border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.box p:last-child{margin-bottom:0}
+footer{border-top:1px solid var(--border);padding:1.5rem 0 3rem;font-size:.85rem;color:var(--text-muted)}
+footer a{color:var(--text-secondary)}
+a{color:#0F5E5C}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="https://ouv.ai">Ouv<span>.ai</span></a>
+    <span class="tag">Demonstração — termos</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Termos de uso e privacidade</h1>
+  <p class="data">Demonstração do Agente BACEN · versão 1 · setembro de 2026</p>
+
+  <p>Este documento vale <strong>apenas</strong> para a demonstração disponível em
+     <a href="https://ouv.ai/chat/bacen/">ouv.ai/chat/bacen</a>, liberada por convite.
+     Ele não se aplica à plataforma Ouv.ai contratada, que é regida por contrato próprio.</p>
+
+  <h2>1. O que a demonstração faz</h2>
+  <p>Você fornece o texto de uma reclamação e, opcionalmente, a análise interna da
+     instituição. O sistema devolve três rascunhos: resposta ao cliente, manifestação
+     técnica ao Banco Central e lista de evidências sugeridas.</p>
+  <div class="box">
+    <p><strong>Os textos gerados são rascunhos.</strong> Não constituem parecer jurídico
+       nem manifestação oficial, podem conter imprecisões e devem ser revistos por
+       profissional habilitado antes de qualquer envio ao cliente, ao Banco Central ou a
+       qualquer órgão. A responsabilidade pelo conteúdo efetivamente enviado é de quem
+       o envia.</p>
+  </div>
+
+  <h2>2. Remoção de identificadores antes do processamento</h2>
+  <p>Antes de o texto ser enviado ao modelo de linguagem, um processo automático
+     substitui identificadores por marcadores. A substituição ocorre no nosso servidor,
+     por código, e o texto resultante é exibido na tela para conferência.</p>
+  <ul>
+    <li><strong>Removidos:</strong> CPF, número de cartão, conta, agência e endereço de e-mail.</li>
+    <li><strong>Não removidos, por decisão técnica:</strong> CNPJ (dado público),
+        datas, valores e números de protocolo — removê-los tornaria a resposta inconclusiva.</li>
+    <li><strong>Não detectados:</strong> <strong>nome e endereço.</strong> Não existe
+        método determinístico para identificá-los em texto livre sem submeter o conteúdo
+        a um modelo, o que contrariaria a própria finalidade desta camada.</li>
+  </ul>
+  <div class="box">
+    <p><strong>Não insira nome, endereço ou qualquer dado que não seja necessário.</strong>
+       A remoção automática cobre as classes listadas acima e nada além delas.
+       Recomendamos utilizar casos anonimizados ou fictícios.</p>
+  </div>
+
+  <h2>3. O que armazenamos</h2>
+  <p>A Ouv.ai <strong>não armazena</strong> o texto da reclamação, o texto da análise
+     nem os rascunhos gerados. Não há campo para esse conteúdo em nossa base de dados.</p>
+  <p>Registramos apenas, por uso: data e hora, identificador do convite, quantidade de
+     identificadores removidos <em>por classe</em> (sem qualquer valor), consumo de
+     processamento e um resumo criptográfico do endereço IP. Esses registros servem para
+     controle de limites e prevenção de abuso.</p>
+
+  <h2>4. Processamento por terceiro</h2>
+  <p>A geração dos textos utiliza a API da OpenAI, contratada pela Ouv.ai. O conteúdo
+     enviado — já com os identificadores removidos — é processado por esse fornecedor.</p>
+  <div class="box">
+    <p>Conforme os termos da API da OpenAI para clientes empresariais, o conteúdo
+       enviado <strong>não é utilizado para treinar modelos</strong>.
+       <!-- REVISAR ANTES DE PUBLICAR: enquanto a conta nao tiver Zero Data Retention,
+            a frase abaixo tem de permanecer. Com ZDR concedido, substituir por
+            "e nao e retido pelo fornecedor". Afirmar retencao zero sem ZDR seria
+            claim falso sobre terceiro. -->
+       O fornecedor pode retê-lo por período limitado para fins de monitoramento de
+       abuso, conforme a política vigente dele.</p>
+  </div>
+
+  <h2>5. Uso permitido</h2>
+  <ul>
+    <li>A demonstração destina-se à avaliação do produto pela instituição convidada.</li>
+    <li>O código de acesso é pessoal e intransferível, tem prazo de validade e limites
+        diários de uso.</li>
+    <li>É vedado o uso automatizado, a tentativa de contornar limites, a extração das
+        instruções internas do sistema e a revenda ou sublicenciamento do serviço.</li>
+    <li>Podemos suspender um código de acesso a qualquer momento, sem aviso prévio,
+        em caso de uso incompatível com estes termos.</li>
+  </ul>
+
+  <h2>6. Propriedade intelectual</h2>
+  <p>O sistema, seus prompts, sua lógica de processamento e sua interface são de
+     titularidade da Ouv.ai. O acesso concedido não transfere qualquer direito sobre eles.
+     Os textos que você insere permanecem seus; os rascunhos gerados podem ser utilizados
+     livremente pela instituição convidada.</p>
+
+  <h2>7. Disponibilidade e garantias</h2>
+  <p>A demonstração é fornecida <strong>no estado em que se encontra</strong>, sem
+     garantia de disponibilidade, continuidade ou adequação a finalidade específica.
+     Pode ser interrompida ou encerrada a qualquer momento. Não há compromisso de nível
+     de serviço, que existe apenas na plataforma contratada.</p>
+
+  <h2>8. Responsabilidade</h2>
+  <p>Na máxima extensão permitida pela legislação aplicável, a Ouv.ai não responde por
+     danos decorrentes do uso dos rascunhos gerados, especialmente quando enviados sem a
+     revisão prevista na cláusula 1.</p>
+
+  <h2>9. Proteção de dados</h2>
+  <p>Se você inserir dados pessoais de terceiros, a instituição que os insere atua como
+     <strong>controladora</strong> desses dados e a Ouv.ai como <strong>operadora</strong>,
+     limitada ao processamento descrito neste documento (LGPD, Lei nº 13.709/2018).
+     A Ouv.ai não utiliza esses dados para qualquer outra finalidade, não os compartilha
+     com terceiros além do fornecedor indicado na cláusula 4 e não os retém.</p>
+  <div class="box">
+    <p><strong>Recomendação expressa:</strong> utilize casos anonimizados. Esta é uma
+       demonstração comercial, não um ambiente de produção contratado, e a base para o
+       tratamento de dados pessoais reais de titulares deve ser avaliada previamente pela
+       área competente da instituição.</p>
+  </div>
+
+  <h2>10. Encerramento e contato</h2>
+  <p>O acesso encerra-se automaticamente na data de validade do código. Pedidos de
+     esclarecimento, exclusão de registros de uso ou revogação de acesso podem ser
+     enviados para <a href="mailto:contato@ouvai.com.br">contato@ouvai.com.br</a>.</p>
+
+  <h2>11. Lei aplicável</h2>
+  <p>Estes termos são regidos pela legislação brasileira. Fica eleito o foro da comarca
+     de São Paulo/SP para dirimir eventuais controvérsias.</p>
+</main>
+
+<footer class="wrap">
+  <p>Ouv.ai — CNPJ 68.272.876/0001-20 ·
+     <a href="https://ouv.ai/chat/bacen/">voltar à demonstração</a> ·
+     <a href="mailto:contato@ouvai.com.br">contato@ouvai.com.br</a></p>
+</footer>
+
+</body>
+</html>
