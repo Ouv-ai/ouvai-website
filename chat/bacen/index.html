@@ -79,6 +79,11 @@ details.escopo ul{margin:.5rem 0 0 1.1rem}
 details.escopo li{margin:.2rem 0}
 
 .saida label{margin-top:1.1rem}
+.rotulo-linha{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+.rotulo-linha label{margin-bottom:.35rem}
+.btn-copiar{font-family:inherit;font-size:.78rem;font-weight:600;color:var(--text-secondary);background:#fff;border:1px solid var(--border);border-radius:7px;padding:.32rem .7rem;cursor:pointer;margin-bottom:.35rem;transition:.15s;white-space:nowrap}
+.btn-copiar:hover{border-color:var(--primary);color:#0F5E5C}
+.btn-copiar.ok{border-color:var(--success);color:var(--success)}
 .rodape{padding:2rem 0 3rem;font-size:.85rem;color:var(--text-muted);border-top:1px solid var(--border);margin-top:2rem}
 .rodape a{color:var(--text-secondary)}
 .oculto{display:none!important}
@@ -169,10 +174,16 @@ details.escopo li{margin:.2rem 0}
       <p class="hint">Rascunho. Não substitui a conferência do ouvidor antes do envio.</p>
       <div id="avisos" class="aviso aviso-atencao oculto"></div>
 
-      <label for="out-cliente">Resposta ao cliente</label>
+      <div class="rotulo-linha">
+        <label for="out-cliente">Resposta ao cliente</label>
+        <button type="button" class="btn-copiar" data-alvo="out-cliente">Copiar</button>
+      </div>
       <textarea id="out-cliente" rows="10"></textarea>
 
-      <label for="out-bacen">Manifestação ao BACEN</label>
+      <div class="rotulo-linha">
+        <label for="out-bacen">Manifestação ao BACEN</label>
+        <button type="button" class="btn-copiar" data-alvo="out-bacen">Copiar</button>
+      </div>
       <textarea id="out-bacen" rows="7"></textarea>
 
       <label for="out-evid">Evidências sugeridas</label>
@@ -416,6 +427,34 @@ details.escopo li{margin:.2rem 0}
     pre.appendChild(frag);
   }
 
+  // COPIA o conteudo ATUAL do campo, nao o que veio da API: os textos sao
+  // editaveis e o ouvidor quase sempre ajusta antes de levar para o RDR.
+  async function copiar(botao){
+    var campo = $(botao.getAttribute("data-alvo"));
+    if (!campo || !campo.value) return;
+    var ok = false;
+    try {
+      // `navigator.clipboard` exige contexto seguro (https) E gesto do usuario.
+      // Falha tambem quando a permissao e negada — dai o fallback.
+      await navigator.clipboard.writeText(campo.value);
+      ok = true;
+    } catch (e) {
+      try {
+        campo.focus();
+        campo.select();
+        ok = document.execCommand("copy");
+        campo.setSelectionRange(0, 0);
+      } catch (e2) { ok = false; }
+    }
+    var original = botao.textContent;
+    botao.textContent = ok ? "Copiado" : "Selecione e copie";
+    botao.classList.toggle("ok", ok);
+    setTimeout(function(){
+      botao.textContent = original;
+      botao.classList.remove("ok");
+    }, ok ? 1600 : 2600);
+  }
+
   function limpar(){
     $("reclamacao").value = ""; $("analise").value = "";
     $("out-cliente").value = ""; $("out-bacen").value = ""; $("out-evid").value = "";
@@ -430,6 +469,9 @@ details.escopo li{margin:.2rem 0}
   $("btn-gerar").addEventListener("click", gerar);
   $("btn-limpar").addEventListener("click", limpar);
   $("btn-sair").addEventListener("click", sair);
+  Array.prototype.forEach.call(document.querySelectorAll(".btn-copiar"), function(b){
+    b.addEventListener("click", function(){ copiar(b); });
+  });
 
   // Retomada na carga: se ha codigo lembrado E ele ainda vale, o formulario
   // abre direto. E' o unico ponto em que a pagina chama a API sozinha.
