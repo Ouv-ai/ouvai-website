@@ -30,6 +30,8 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em;color:#fff;text-decoration:none}
 .logo span{color:var(--primary)}
 .tag{font-size:.8rem;color:#CBD5E1}
+.btn-sair{font-family:inherit;font-size:.78rem;color:#CBD5E1;background:transparent;border:1px solid #334155;border-radius:7px;padding:.3rem .7rem;cursor:pointer}
+.btn-sair:hover{border-color:#64748B;color:#fff}
 
 .hero{padding:2.5rem 0 1.5rem}
 .hero h1{font-size:clamp(1.6rem,3.4vw,2.2rem);letter-spacing:-.02em;line-height:1.2}
@@ -91,6 +93,9 @@ details.escopo li{margin:.2rem 0}
   <div class="wrap">
     <a class="logo" href="https://ouv.ai">Ouv<span>.ai</span></a>
     <span class="tag">Agente BACEN — demonstração</span>
+    <!-- Sair APAGA o codigo lembrado. Sem ele, numa maquina compartilhada da
+         ouvidoria o proximo que sentar entra direto. -->
+    <button class="btn-sair oculto" id="btn-sair" type="button">Sair</button>
   </div>
 </header>
 
@@ -204,6 +209,28 @@ details.escopo li{margin:.2rem 0}
   var $ = function(id){ return document.getElementById(id); };
   var codigo = "";
 
+  // ==============================
+  // Codigo lembrado entre visitas
+  // ==============================
+  // O trial dura 30 dias e o ouvidor volta dezenas de vezes; obrigar a colar o
+  // codigo a cada F5 e' atrito puro. Fica no `localStorage` — o mesmo lugar
+  // onde o navegador ja guardaria uma senha salva —, e continua REVOGAVEL pelo
+  // emissor a qualquer momento, porque quem manda e' o servidor.
+  //
+  // TUDO em try/catch: `localStorage` LEVANTA (nao devolve null) em janela
+  // anonima e com dados de site bloqueados. A pagina tem de funcionar sem ele.
+  var CHAVE = "ouvai-demo-bacen";
+
+  function lembrar(valor){
+    try { localStorage.setItem(CHAVE, valor); } catch (e) { /* sem persistencia */ }
+  }
+  function lembrado(){
+    try { return localStorage.getItem(CHAVE) || ""; } catch (e) { return ""; }
+  }
+  function esquecer(){
+    try { localStorage.removeItem(CHAVE); } catch (e) { /* nada a fazer */ }
+  }
+
   function mostrar(el, texto, tipo){
     el.textContent = texto;
     el.className = "aviso aviso-" + (tipo || "erro");
@@ -250,6 +277,29 @@ details.escopo li{margin:.2rem 0}
         : "";
   }
 
+  function abrirApp(val, d){
+    codigo = val;
+    lembrar(val);
+    esconder($("erro-acesso"));
+    $("secao-acesso").classList.add("oculto");
+    $("app").classList.remove("oculto");
+    $("btn-sair").classList.remove("oculto");
+    atualizarRestantes(d.restantes_hoje);
+    document.querySelector(".tag").textContent = d.instituicao + " — demonstração";
+  }
+
+  function sair(){
+    esquecer();
+    codigo = "";
+    $("app").classList.add("oculto");
+    $("btn-sair").classList.add("oculto");
+    $("secao-acesso").classList.remove("oculto");
+    $("codigo").value = "";
+    document.querySelector(".tag").textContent = "Agente BACEN — demonstração";
+    limpar();
+    $("codigo").focus();
+  }
+
   // ---- ENTRAR
   async function entrar(){
     var val = $("codigo").value.trim();
@@ -258,14 +308,36 @@ details.escopo li{margin:.2rem 0}
     btn.disabled = true; btn.textContent = "Verificando...";
     try {
       var d = await chamar("/api/public/bacen/acesso", { codigo: val });
-      codigo = val;
-      esconder($("erro-acesso"));
-      $("secao-acesso").classList.add("oculto");
-      $("app").classList.remove("oculto");
-      atualizarRestantes(d.restantes_hoje);
-      document.querySelector(".tag").textContent = d.instituicao + " — demonstração";
+      abrirApp(val, d);
     } catch (e) {
       mostrar($("erro-acesso"), e.message);
+    } finally {
+      btn.disabled = false; btn.textContent = "Entrar";
+    }
+  }
+
+  // ---- RETOMADA: revalida o codigo lembrado contra o SERVIDOR.
+  // Nao basta ter algo guardado: o convite pode ter expirado ou sido revogado
+  // desde a ultima visita, e quem sabe disso e' a API, nao o navegador.
+  async function retomar(){
+    var val = lembrado();
+    if (!val) { $("codigo").focus(); return; }
+    var btn = $("btn-entrar");
+    btn.disabled = true; btn.textContent = "Verificando...";
+    try {
+      var d = await chamar("/api/public/bacen/acesso", { codigo: val });
+      abrirApp(val, d);
+    } catch (e) {
+      // 403 = o convite MORREU (expirou, foi desativado ou nao existe mais):
+      // apaga, senao a pessoa fica presa num loop de erro a cada visita.
+      // Qualquer outra falha (API fora, rede) PRESERVA o codigo — seria cruel
+      // fazer o avaliador procurar o e-mail de novo por causa de uma queda
+      // temporaria nossa.
+      if (/inválido|invalido|expirado|desativado/i.test(e.message)) {
+        esquecer();
+        mostrar($("erro-acesso"), e.message);
+      }
+      $("codigo").focus();
     } finally {
       btn.disabled = false; btn.textContent = "Entrar";
     }
@@ -357,6 +429,11 @@ details.escopo li{margin:.2rem 0}
   $("codigo").addEventListener("keydown", function(e){ if (e.key === "Enter") entrar(); });
   $("btn-gerar").addEventListener("click", gerar);
   $("btn-limpar").addEventListener("click", limpar);
+  $("btn-sair").addEventListener("click", sair);
+
+  // Retomada na carga: se ha codigo lembrado E ele ainda vale, o formulario
+  // abre direto. E' o unico ponto em que a pagina chama a API sozinha.
+  retomar();
 })();
 </script>
 </body>
