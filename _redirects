@@ -5,9 +5,12 @@
 # NAO criar netlify.toml com regras de dominio: o toml e avaliado ANTES deste
 # arquivo, e duas direcoes opostas geram loop infinito nos dois dominios.
 #
-# www.ouv.ai nao aparece aqui: o painel da Netlify ja redireciona qualquer alias
-# para o primary domain.
+# Nenhuma regra no sentido inverso (ouv.ai -> ouvai.com.br) pode existir aqui.
+#
+# www.ouv.ai: a Netlify ja redireciona o alias para o primary domain, mas a regra
+# explicita abaixo garante o 301 mesmo se o alias for reconfigurado no painel.
 # Regras http:// nao aparecem aqui: a Netlify termina TLS e promove para https
 # antes do motor de redirect, entao elas nunca disparariam.
+https://www.ouv.ai/* https://ouv.ai/:splat 301!
 https://ouvai.com.br/* https://ouv.ai/:splat 301!
 https://www.ouvai.com.br/* https://ouv.ai/:splat 301!

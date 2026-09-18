@@ -1,0 +1,11 @@
+# ouv.ai - dominio canonico. Site institucional, tudo publico e rastreavel.
+# Googlebot, Bingbot, OAI-SearchBot e PerplexityBot seguem a regra geral abaixo
+# (Allow: /) de proposito: nao ha bloqueio por user-agent neste arquivo.
+User-agent: *
+Allow: /
+
+# /chat/bacen/ nao e bloqueado aqui: as paginas ja trazem
+# <meta name="robots" content="noindex, nofollow">, e bloquear no robots.txt
+# impediria o rastreador de ler justamente essa meta tag.
+
+Sitemap: https://ouv.ai/sitemap.xml
