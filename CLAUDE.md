@@ -58,6 +58,19 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
   e abre o cliente de e-mail do visitante. NUNCA simular envio (compliance).
 - Mensagem de sucesso explica que o e-mail foi preparado no aplicativo do visitante
 
+## Regras de Deploy (OBRIGATÓRIAS)
+- **Antes de commitar `index.html`: comparar `https://ouv.ai/` servido com o HEAD e reportar
+  divergências.** Se o servido não corresponder ao HEAD, houve publicação fora do repositório —
+  pare e reporte antes de commitar, ou o commit sobrescreve algo que ninguém tem em git.
+  A única divergência esperada é a reescrita de links do Pretty URLs da Netlify
+  (`href="termos.html"` servido como `href='/termos'`).
+- **Todo deploy sai do `main`; nunca publicar pelo painel.** Publicação manual (drag-and-drop ou
+  `netlify deploy --prod` de um diretório local) cria um estado em produção que não existe em
+  nenhum commit, e a próxima publicação pelo `main` o apaga sem aviso.
+- Prazos por canal vivem em `assets/prazos.js` (`window.OuvPrazos`). A tabela de Canais do
+  `index.html` é estática: rode `node scripts/check-prazos.mjs` antes de commitar qualquer
+  mudança de prazo — ele falha se as duas divergirem. Testes: `node scripts/test-prazos.mjs`.
+
 ## Regras de Compliance (OBRIGATÓRIAS)
 - ZERO claims falsos: numeros citados (permissões, canais, prazos, normativos) devem refletir o produto real
 - Resolução correta: BCB nº 222/2022 (não 2024)
