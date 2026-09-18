@@ -646,10 +646,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <div class="row head"><span data-i18n="tb.h1">Canal</span><span data-i18n="tb.h2">Órgão / plataforma</span><span data-i18n="tb.h3">Prazo padrão</span><span data-i18n="tb.h4">Como entra</span><span data-i18n="tb.h5">Como sai</span></div>
       <div class="row"><div class="c1"><b>01</b>BACEN</div><div class="c2" data-h="Órgão" data-i18n="tb.r1.2">Banco Central · RDR</div><div class="c3" data-h="Prazo">10 <span data-i18n="u.bd">dias úteis</span><small data-i18n="tb.r1.n">Res. BCB 222/2022</small></div><div class="c4" data-h="Entrada" data-i18n="tb.r1.4">Web Service oficial do RDR, com certificado SISBACEN e perfil de conglomerado</div><div class="c5" data-h="Saída" data-i18n="tb.r1.5">Resposta protocolada via API com o comprovante em PDF; e-mail ao cidadão</div></div>
       <div class="row"><div class="c1"><b>02</b>Consumidor.gov</div><div class="c2" data-h="Órgão" data-i18n="tb.r2.2">Senacon · Ministério da Justiça</div><div class="c3" data-h="Prazo">10 <span data-i18n="u.cd">dias corridos</span></div><div class="c4" data-h="Entrada" data-i18n="tb.r2.4">API da plataforma, duas capturas por dia</div><div class="c5" data-h="Saída" data-i18n="tb.r2.5">Resposta pública e mensagem privada via API; interação complementar quando falta dado</div></div>
-      <div class="row"><div class="c1"><b>03</b>Reclame Aqui</div><div class="c2" data-h="Órgão" data-i18n="tb.r3.2">Plataforma privada de reputação</div><div class="c3" data-h="Prazo">5 <span data-i18n="u.bd">dias úteis</span></div><div class="c4" data-h="Entrada" data-i18n="tb.r3.4">API HugMe, duas capturas por dia</div><div class="c5" data-h="Saída" data-i18n="tb.r3.5">Resposta pública e privada via API; pedido de moderação fundamentado nos manuais da plataforma</div></div>
+      <div class="row"><div class="c1"><b>03</b>Reclame Aqui</div><div class="c2" data-h="Órgão" data-i18n="tb.r3.2">Plataforma privada de reputação</div><div class="c3" data-h="Prazo">5 <span data-i18n="u.bd">dias úteis</span><small data-i18n="tb.r3.n">Referência operacional</small></div><div class="c4" data-h="Entrada" data-i18n="tb.r3.4">API HugMe, duas capturas por dia</div><div class="c5" data-h="Saída" data-i18n="tb.r3.5">Resposta pública e privada via API; pedido de moderação fundamentado nos manuais da plataforma</div></div>
       <div class="row"><div class="c1"><b>04</b>PROCON</div><div class="c2" data-h="Órgão" data-i18n="tb.r4.2">Proconsumidor · SINDEC</div><div class="c3" data-h="Prazo">10 <span data-i18n="u.cd">dias corridos</span></div><div class="c4" data-h="Entrada" data-i18n="tb.r4.4">Webhook ou cadastro da CIP recebida do órgão, com leitura da cópia digitalizada</div><div class="c5" data-h="Saída" data-i18n="tb.r4.5">Parecer de subsídios para o jurídico; protocolo no portal do órgão</div></div>
       <div class="row"><div class="c1"><b>05</b><span data-i18n="tb.r5.1">Ouvidoria</span></div><div class="c2" data-h="Órgão" data-i18n="tb.r5.2">Canal próprio · 0800, e-mail, site</div><div class="c3" data-h="Prazo">10 <span data-i18n="u.bd">dias úteis</span><small data-i18n="tb.r5.n">Res. CMN 4.860</small></div><div class="c4" data-h="Entrada" data-i18n="tb.r5.4">Webhook do canal ou cadastro pelo ouvidor</div><div class="c5" data-h="Saída" data-i18n="tb.r5.5">E-mail ao cliente com protocolo de atendimento sequencial</div></div>
-      <div class="row"><div class="c1"><b>06</b>SAC</div><div class="c2" data-h="Órgão" data-i18n="tb.r6.2">Canal próprio · empresas não reguladas</div><div class="c3" data-h="Prazo">7 <span data-i18n="u.cd">dias corridos</span><small data-i18n="tb.r6.n">Decreto 11.034/2022</small></div><div class="c4" data-h="Entrada" data-i18n="tb.r6.4">Cadastro pelo atendente</div><div class="c5" data-h="Saída" data-i18n="tb.r6.5">E-mail ao cliente com protocolo</div></div>
+      <div class="row"><div class="c1"><b>06</b>SAC</div><div class="c2" data-h="Órgão" data-i18n="tb.r6.2">Canal próprio · SAC</div><div class="c3" data-h="Prazo">7 <span data-i18n="u.cd">dias corridos</span><small data-i18n="tb.r6.n">Ref. Decreto 11.034/2022</small></div><div class="c4" data-h="Entrada" data-i18n="tb.r6.4">Cadastro pelo atendente</div><div class="c5" data-h="Saída" data-i18n="tb.r6.5">E-mail ao cliente com protocolo</div></div>
     </div>
     <div class="table-note rv">
       <p data-i18n="tb.note">Prazos padrão. Cada canal é configurável em dias úteis ou corridos, com o calendário de feriados, sem depender de deploy. Prorrogação controlada, uma única vez, mediante motivação.</p>
@@ -819,7 +819,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <div class="stat"><b data-count="6">0</b><span data-i18n="st1">canais em um único painel</span></div>
       <div class="stat"><b data-count="10">0</b><span data-i18n="st2">agentes de IA especializados</span></div>
       <div class="stat"><b data-count="14">0</b><span data-i18n="st3">rotinas automáticas de captura e monitoramento</span></div>
-      <div class="stat"><b data-count="21">0</b><span data-i18n="st4">permissões configuráveis por perfil, sem deploy</span></div>
+      <!-- fonte: ALL_PERMISSION_KEYS em permission_service.py do produto -->
+      <div class="stat"><b data-count="22">0</b><span data-i18n="st4">permissões configuráveis por perfil, sem deploy</span></div>
       <div class="stat"><b data-count="2">0</b><span data-i18n="st5">versões de cada resposta: ao cidadão e ao órgão</span></div>
       <div class="stat"><b><span data-count="5">0</span> <small data-i18n="st6.u">anos</small></b><span data-i18n="st6">de retenção dos documentos regulatórios</span></div>
     </div>
@@ -829,10 +830,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <h3 data-i18n="sp.a">Segurança e dados</h3>
         <dl>
           <div class="spec-row"><dt data-i18n="sp1.k">Hospedagem</dt><dd data-i18n="sp1.v"><b>AWS São Paulo (sa-east-1).</b> Residência de dados no Brasil. Isolamento por cliente conforme o modelo de implantação contratado.</dd></div>
-          <div class="spec-row"><dt data-i18n="sp2.k">Criptografia</dt><dd data-i18n="sp2.v">TLS em trânsito, <b>AES-256</b> em repouso. CPF cifrado em coluna própria; credenciais de e-mail e chaves guardadas cifradas.</dd></div>
-          <div class="spec-row"><dt data-i18n="sp3.k">Acesso</dt><dd data-i18n="sp3.v"><b>RBAC com 21 permissões</b>, sessão de 15 minutos, login único por usuário, bloqueio por inatividade, política de senha com verificação contra vazamentos.</dd></div>
+          <div class="spec-row"><dt data-i18n="sp2.k">Criptografia</dt><dd data-i18n="sp2.v">TLS em trânsito e <b>criptografia em repouso</b>. CPF cifrado em coluna própria; credenciais de e-mail e chaves guardadas cifradas.</dd></div>
+          <div class="spec-row"><dt data-i18n="sp3.k">Acesso</dt><dd data-i18n="sp3.v"><b>RBAC com 22 permissões</b>, sessão de 15 minutos, login único por usuário, bloqueio por inatividade, política de senha com verificação contra vazamentos.</dd></div>
           <div class="spec-row"><dt data-i18n="sp4.k">Auditoria</dt><dd data-i18n="sp4.v">Trilha de cada ação, inclusive quem revelou um CPF e quando. Identificador de requisição de ponta a ponta.</dd></div>
-          <div class="spec-row"><dt data-i18n="sp5.k">Retenção</dt><dd data-i18n="sp5.v"><b>5 anos</b> com trava de escrita no armazenamento para os documentos regulatórios emitidos. Exclusão de anexo é sempre lógica, nunca física.</dd></div>
+          <div class="spec-row"><dt data-i18n="sp5.k">Retenção</dt><dd data-i18n="sp5.v"><b>5 anos</b> de retenção para os documentos regulatórios, com lacre de imutabilidade no armazenamento e registro, por arquivo, de quando e por que foi lacrado. Exclusão de anexo é sempre lógica, nunca física.</dd></div>
         </dl>
       </div>
       <div class="spec-col">
@@ -842,7 +843,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
           <div class="spec-row"><dt data-i18n="sp7.k">Prazos</dt><dd data-i18n="sp7.v">SLA por canal em dias úteis ou corridos, com o calendário de feriados. Alertas a 3, 2 e 1 dia do vencimento. Prorrogação única, com teto mensal monitorado.</dd></div>
           <div class="spec-row"><dt data-i18n="sp8.k">Protocolo</dt><dd data-i18n="sp8.v">Numeração sequencial, sem lacunas, com máscara configurável pela instituição, informada ao cidadão em toda resposta.</dd></div>
           <div class="spec-row"><dt data-i18n="sp9.k">Conglomerado</dt><dd data-i18n="sp9.v">Várias empresas sob a mesma operação, cada uma com o seu próprio remetente de e-mail.</dd></div>
-          <div class="spec-row"><dt data-i18n="sp10.k">Sistemas internos</dt><dd data-i18n="sp10.v">Conectores para Zendesk, Salesforce e Genesys: o histórico de contato do cliente entra na análise e alimenta o painel de causa raiz.</dd></div>
+          <div class="spec-row"><dt data-i18n="sp10.k">Sistemas internos</dt><dd data-i18n="sp10.v">Conectores com a plataforma de atendimento da instituição: o histórico de contato do cliente entra na análise e alimenta o painel de causa raiz.</dd></div>
         </dl>
       </div>
     </div>
@@ -855,12 +856,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <ol>
         <li><strong>Resolução BCB nº 222/2022</strong><span data-i18n="nm1">Resposta ao titular em 10 dias úteis, conclusiva sobre todas as ocorrências, com cópia e comprovantes inseridos no RDR. Prorrogação única e motivada.</span></li>
         <li><strong>Resolução CMN nº 4.860/2020</strong><span data-i18n="nm2">Protocolo de atendimento fornecido ao demandante; limite de prorrogações a 10% das demandas do mês, monitorado e declarado.</span></li>
-        <li><strong>Decreto nº 11.034/2022</strong><span data-i18n="nm3">Prazo de 7 dias corridos para o SAC, aplicado ao canal de empresas não reguladas.</span></li>
+        <li><strong>Decreto nº 11.034/2022</strong><span data-i18n="nm3">Prazo de 7 dias corridos, adotado como padrão do canal SAC.</span></li>
         <li><strong>Lei nº 13.709/2018 (LGPD)</strong><span data-i18n="nm4">Tratamento com base no cumprimento de obrigação legal, minimização de dados, mascaramento e revelação auditada.</span></li>
       </ol>
     </div>
     <div class="badges rv-stagger">
-      <span>LGPD</span><span>BCB 222</span><span>CMN 4.860</span><span>AES-256</span><span>TLS</span><span data-i18n="bd.audit">Trilha de auditoria</span><span>AWS · São Paulo</span><span>RBAC</span>
+      <span>LGPD</span><span>BCB 222</span><span>CMN 4.860</span><span data-i18n="bd.enc">Criptografia em repouso</span><span>TLS</span><span data-i18n="bd.audit">Trilha de auditoria</span><span>AWS · São Paulo</span><span>RBAC</span>
     </div>
   </div>
 </section>
@@ -896,8 +897,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
           <li data-i18n="md2.l2">SLAs dedicados e personalizados</li>
           <li data-i18n="md2.l3">Multi-empresa para conglomerados</li>
           <li data-i18n="md2.l4">Gerente de conta dedicado</li>
-          <li data-i18n="md2.l5">Conectores Zendesk, Salesforce e Genesys</li>
-          <li data-i18n="md2.l6">Demandas ilimitadas e analytics completo</li>
+          <li data-i18n="md2.l5">Conectores com a plataforma de atendimento da instituição</li>
+          <li data-i18n="md2.l6">Franquia de demandas dimensionada ao volume e analytics completo</li>
           <li data-i18n="md2.l7">Relatório semestral de ouvidoria e estúdio de apresentações</li>
           <li data-i18n="md2.l8">Módulos contratáveis por necessidade</li>
         </ul>
@@ -1013,10 +1014,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     'u.bd':'business days','u.cd':'calendar days','u.days':'days',
     'tb.r1.2':'Central Bank of Brazil · RDR','tb.r1.n':'Res. BCB 222/2022','tb.r1.4':'Official RDR Web Service, with SISBACEN certificate and conglomerate profile','tb.r1.5':'Answer filed via API with the PDF receipt; e-mail to the citizen',
     'tb.r2.2':'Senacon · Ministry of Justice','tb.r2.4':'Platform API, two captures a day','tb.r2.5':'Public answer and private message via API; follow-up interaction when data is missing',
-    'tb.r3.2':'Private reputation platform','tb.r3.4':'HugMe API, two captures a day','tb.r3.5':'Public and private answer via API; moderation request grounded in the platform’s manuals',
+    'tb.r3.2':'Private reputation platform','tb.r3.n':'Operational benchmark','tb.r3.4':'HugMe API, two captures a day','tb.r3.5':'Public and private answer via API; moderation request grounded in the platform’s manuals',
     'tb.r4.2':'Proconsumidor · SINDEC','tb.r4.4':'Webhook or manual entry of the CIP received from the body, with the scanned copy read','tb.r4.5':'Evidence brief for legal counsel; filing on the body’s portal',
     'tb.r5.1':'Ombudsman','tb.r5.2':'Own channel · toll-free, e-mail, website','tb.r5.n':'Res. CMN 4.860','tb.r5.4':'Channel webhook or manual entry by the ombudsman','tb.r5.5':'E-mail to the customer with a sequential case number',
-    'tb.r6.2':'Own channel · non-regulated companies','tb.r6.n':'Decree 11.034/2022','tb.r6.4':'Manual entry by the agent','tb.r6.5':'E-mail to the customer with a case number',
+    'tb.r6.2':'Own channel · SAC','tb.r6.n':'Ref. Decree 11.034/2022','tb.r6.4':'Manual entry by the agent','tb.r6.5':'E-mail to the customer with a case number',
     'tb.note':'Default deadlines. Each channel can be set to business or calendar days, with the holiday calendar, without a deploy. Controlled extension, once only, with justification.','tb.link':'See the compliance sheet',
     'ch2.k':'Journey','ch2.t':'What happens between the complaint and the answer.','ch2.a':'Four moments. In each one, AI works first and the ombudsman decides afterwards.',
     'j.s1.t':'The complaint arrives on its own.','j.s1.p':'Every day, the system fetches new cases from the RDR through the Central Bank’s official Web Service, downloads the citizen’s attachments and marks them as read. Consumidor.gov and Reclame Aqui come in via API; PROCON and the Ombudsman channel via webhook. Zero typing.','j.s1.l1':'Daily capture + change monitoring every 4h','j.s1.l2':'Reopenings and extensions detected at the source',
@@ -1050,26 +1051,26 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     'st1':'channels in a single dashboard','st2':'specialised AI agents','st3':'automated capture and monitoring routines','st4':'permissions configurable per role, no deploy','st5':'versions of every answer: citizen and regulator','st6.u':'years','st6':'retention of regulatory documents',
     'sp.a':'Security and data','sp.b':'Integration and operations',
     'sp1.k':'Hosting','sp1.v':'<b>AWS São Paulo (sa-east-1).</b> Data residency in Brazil. Per-customer isolation according to the contracted deployment model.',
-    'sp2.k':'Encryption','sp2.v':'TLS in transit, <b>AES-256</b> at rest. Tax ID encrypted in its own column; e-mail credentials and keys stored encrypted.',
-    'sp3.k':'Access','sp3.v':'<b>RBAC with 21 permissions</b>, 15-minute sessions, single login per user, inactivity lockout, password policy checked against known breaches.',
+    'sp2.k':'Encryption','sp2.v':'TLS in transit and <b>encryption at rest</b>. Tax ID encrypted in its own column; e-mail credentials and keys stored encrypted.',
+    'sp3.k':'Access','sp3.v':'<b>RBAC with 22 permissions</b>, 15-minute sessions, single login per user, inactivity lockout, password policy checked against known breaches.',
     'sp4.k':'Audit','sp4.v':'A trail of every action, including who disclosed a tax ID and when. End-to-end request identifier.',
-    'sp5.k':'Retention','sp5.v':'<b>5 years</b> with write-lock storage for issued regulatory documents. Attachment deletion is always logical, never physical.',
+    'sp5.k':'Retention','sp5.v':'<b>5 years</b> of retention for regulatory documents, with an immutability lock on storage and a per-file record of when and why it was locked. Attachment deletion is always logical, never physical.',
     'sp6.k':'Central Bank','sp6.v':'<b>Official RDR Web Service</b>, not scraping. SISBACEN certificate, conglomerate access profile, write-ahead log of every call and reconciliation every 15 minutes.',
     'sp7.k':'Deadlines','sp7.v':'SLA per channel in business or calendar days, with the holiday calendar. Alerts at 3, 2 and 1 day before expiry. Single extension, with a monitored monthly ceiling.',
     'sp8.k':'Case number','sp8.v':'Sequential, gapless numbering, with a mask configurable by the institution, given to the citizen in every answer.',
     'sp9.k':'Conglomerate','sp9.v':'Several companies under one operation, each with its own e-mail sender.',
-    'sp10.k':'Internal systems','sp10.v':'Connectors for Zendesk, Salesforce and Genesys: the customer’s contact history enters the analysis and feeds the root-cause dashboard.',
+    'sp10.k':'Internal systems','sp10.v':'Connectors with the institution’s service platform: the customer’s contact history enters the analysis and feeds the root-cause dashboard.',
     'nm.k':'Regulatory basis','nm.a':'The rules the system implements, with the regulation they come from.',
     'nm1':'Answer to the complainant within 10 business days, conclusive on every issue, with a copy and receipts inserted in the RDR. Single, justified extension.',
     'nm2':'Case number provided to the complainant; extensions capped at 10% of the month’s cases, monitored and declared.',
-    'nm3':'7-calendar-day deadline for customer service (SAC), applied to the channel for non-regulated companies.',
+    'nm3':'Seven calendar days, adopted as the standard for the SAC channel.',
     'nm4':'Processing based on compliance with a legal obligation, data minimisation, masking and audited disclosure.',
-    'bd.audit':'Audit trail',
+    'bd.enc':'Encryption at rest','bd.audit':'Audit trail',
     'ch6.k':'Deployment','ch6.t':'Start small. Prove it. Then scale.','ch6.a':'Two paths. Both end with your ombudsman answering faster and with less risk.',
     'md1.k':'Validation','md1.t':'Proof of Concept','md1.p':'For the institution that wants to see AI working on its own cases before deciding. Controlled environment, real data, measured results.',
     'md1.l1':'Isolated homologation environment','md1.l2':'Historical data and Central Bank homologation','md1.l3':'Security validation with your InfoSec','md1.l4':'Results report and projected ROI','md1.l5':'Dedicated technical support',
     'md2.k':'Deployment','md2.k2':'Annual licence','md2.t':'Enterprise','md2.p':'Full operation, integrated with the institution’s ecosystem. Dedicated infrastructure, tailored SLAs and an account manager who knows your ombudsman office.',
-    'md2.l1':'Full integration: Central Bank + channels + e-mail','md2.l2':'Dedicated, customised SLAs','md2.l3':'Multi-company for conglomerates','md2.l4':'Dedicated account manager','md2.l5':'Zendesk, Salesforce and Genesys connectors','md2.l6':'Unlimited cases and full analytics','md2.l7':'Half-yearly ombudsman report and presentation studio','md2.l8':'Modules contracted as needed',
+    'md2.l1':'Full integration: Central Bank + channels + e-mail','md2.l2':'Dedicated, customised SLAs','md2.l3':'Multi-company for conglomerates','md2.l4':'Dedicated account manager','md2.l5':'Connectors with the institution’s service platform','md2.l6':'Case allowance sized to volume and full analytics','md2.l7':'Half-yearly ombudsman report and presentation studio','md2.l8':'Modules contracted as needed',
     'md.note':'A bank that already has a service system and wants only the Ombudsman module? Modules are switched on by contract, not by deploy.',
     'ct.k':'Demo','ct.t':'Let’s talk about your ombudsman office.','ct.a':'In one hour we show the system running on a case from your most critical channel. No promise slides: screen, data and deadline.',
     'f.name':'Full name <i>*</i>','f.req':'Required field','f.email':'Corporate e-mail <i>*</i>','f.emailErr':'Use your institution’s e-mail (Gmail, Outlook and similar are not accepted)',
