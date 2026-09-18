@@ -200,7 +200,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .t-chan{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
 .t-chan i{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(40,204,204,.2);animation:pulse 1.8s infinite}
 .t-proto{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.55);letter-spacing:.06em}
-.t-body{padding:1.1rem 1.25rem .6rem;min-height:228px}
+.t-body{padding:1.1rem 1.25rem .6rem;min-height:228px;position:relative}
+/* a camada que sai vira sobreposicao e so entao desaparece: o corpo do card
+   nunca fica sem conteudo na troca de ciclo (crossfade, nao corte) */
+.t-stack-out{position:absolute;left:1.25rem;right:1.25rem;top:1.1rem;pointer-events:none;transition:opacity .8s var(--ease-out)}
+.t-stack-gone{opacity:0}
 .t-line{display:grid;grid-template-columns:52px 1fr;gap:.8rem;padding:.42rem 0;font-size:.86rem;line-height:1.4;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
 .t-line.in{opacity:1;transform:none}
 .t-line time{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.45);padding-top:.15rem}
@@ -533,6 +537,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .marquee-track{animation:none}
 }
 </style>
+<noscript><style>
+  /* sem JS nada recebe .in; o conteudo que ja esta no HTML fica visivel */
+  .t-line,.rv,.rv-stagger>*{opacity:1;transform:none}
+</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Ir para o conteúdo</a>
@@ -615,10 +623,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
           <span class="t-chan"><i></i><span id="tChan">BACEN · RDR</span></span>
           <span class="t-proto" id="tProto">OUV-2026-000418</span>
         </div>
-        <div class="t-body" id="tBody"></div>
+        <!-- primeiro estado completo no HTML: o card nunca abre vazio, mesmo antes do JS -->
+        <div class="t-body" id="tBody"><div class="t-stack"><div class="t-line in"><time>09:12</time><div><span class="who">Captura</span><b>Demanda capturada</b> pelo Web Service do RDR. 2 anexos do cidadão baixados.</div></div><div class="t-line in"><time>09:12</time><div><span class="who">Agente 01</span>Triagem: <em>Cartão de crédito › Cobrança não reconhecida</em>.</div></div><div class="t-line in"><time>09:13</time><div><span class="who">Agente 02</span>Direcionador: fila <em>Cartões</em>, prioridade alta. Briefing enviado ao backoffice.</div></div><div class="t-line in"><time>D+2</time><div><span class="who">Backoffice</span>Solução registrada: estorno efetuado, comprovante anexado.</div></div><div class="t-line in"><time>D+2</time><div><span class="who">Agente 05</span>Rascunho pronto: resposta ao cliente + manifestação ao BACEN.</div></div></div></div>
         <span class="t-stamp" id="tStamp" data-i18n="ticket.stamp">Aprovado pelo ouvidor</span>
         <div class="t-foot">
-          <div class="t-sla"><span data-i18n="ticket.sla">Prazo do canal</span><b id="tSla">—</b></div>
+          <div class="t-sla"><span data-i18n="ticket.sla">Prazo do canal</span><b id="tSla">10 dias úteis</b></div>
           <div class="t-bar"><i id="tBar"></i></div>
         </div>
       </div>
@@ -669,10 +678,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <div class="j-grid">
       <div class="j-sticky">
         <div class="j-frame">
-          <video class="on" muted loop playsinline preload="none" aria-hidden="true" src="videos/captura_automatica.mp4" data-j="0"></video>
-          <video muted loop playsinline preload="none" aria-hidden="true" src="videos/classificacao_inteligente.mp4" data-j="1"></video>
-          <video muted loop playsinline preload="none" aria-hidden="true" src="videos/resposta_com_ia_generativa.mp4" data-j="2"></video>
-          <video muted loop playsinline preload="none" aria-hidden="true" src="videos/envio_simultaneo.mp4" data-j="3"></video>
+          <video class="on" muted loop playsinline preload="none" poster="videos/poster-captura_automatica.jpg" aria-hidden="true" src="videos/captura_automatica.mp4" data-j="0"></video>
+          <video muted loop playsinline preload="none" poster="videos/poster-classificacao_inteligente.jpg" aria-hidden="true" src="videos/classificacao_inteligente.mp4" data-j="1"></video>
+          <video muted loop playsinline preload="none" poster="videos/poster-resposta_com_ia_generativa.jpg" aria-hidden="true" src="videos/resposta_com_ia_generativa.mp4" data-j="2"></video>
+          <video muted loop playsinline preload="none" poster="videos/poster-envio_simultaneo.jpg" aria-hidden="true" src="videos/envio_simultaneo.mp4" data-j="3"></video>
           <span class="j-tag" id="jTag">01 / 04 · Captura</span>
         </div>
         <div class="j-progress" id="jProg"><i class="on"></i><i></i><i></i><i></i></div>
@@ -684,7 +693,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
             <h3 data-i18n="j.s1.t">A demanda chega sozinha.</h3>
             <p data-i18n="j.s1.p">Todo dia, o sistema busca as novas demandas no RDR pelo Web Service oficial do Banco Central, baixa os anexos do cidadão e marca a leitura. Consumidor.gov e Reclame Aqui entram por API; PROCON e Ouvidoria por webhook. Zero digitação.</p>
             <ul><li data-i18n="j.s1.l1">Captura diária + monitoramento de mudanças a cada 4h</li><li data-i18n="j.s1.l2">Reabertura e prorrogação detectadas na fonte</li></ul>
-            <div class="j-inline"><video muted loop playsinline preload="none" aria-hidden="true" src="videos/captura_automatica.mp4"></video></div>
+            <div class="j-inline"><video muted loop playsinline preload="none" poster="videos/poster-captura_automatica.jpg" aria-hidden="true" src="videos/captura_automatica.mp4"></video></div>
           </div>
         </article>
         <article class="j-step" data-j="1">
@@ -693,7 +702,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
             <h3 data-i18n="j.s2.t">Dois agentes leem antes de você.</h3>
             <p data-i18n="j.s2.p">A Triagem identifica o assunto e resume o caso. O Direcionador define área, prioridade e escreve o texto técnico que vai ao backoffice. Classificação em até cinco níveis, fila sugerida. O ouvidor confirma ou corrige.</p>
             <ul><li data-i18n="j.s2.l1">Árvore de classificadores editável, com busca semântica</li><li data-i18n="j.s2.l2">Se a IA falhar, a demanda entra como nova para análise manual</li></ul>
-            <div class="j-inline"><video muted loop playsinline preload="none" aria-hidden="true" src="videos/classificacao_inteligente.mp4"></video></div>
+            <div class="j-inline"><video muted loop playsinline preload="none" poster="videos/poster-classificacao_inteligente.jpg" aria-hidden="true" src="videos/classificacao_inteligente.mp4"></video></div>
           </div>
         </article>
         <article class="j-step" data-j="2">
@@ -702,7 +711,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
             <h3 data-i18n="j.s3.t">O rascunho chega pronto para a sua decisão.</h3>
             <p data-i18n="j.s3.p">Com a solução do backoffice em mãos, o agente de Contexto analisa o dossiê inteiro e sugere a procedência. Os modelos institucionais mais parecidos são recuperados por similaridade semântica. A Escrita produz duas versões: uma ao cidadão, outra ao órgão. Regenere quantas vezes quiser. A procedência final é sua.</p>
             <ul><li data-i18n="j.s3.l1">Guardrail jurídico: a IA não cita norma ao cidadão</li><li data-i18n="j.s3.l2">Aprovação por um segundo perfil antes do envio, quando a regra da instituição exige</li></ul>
-            <div class="j-inline"><video muted loop playsinline preload="none" aria-hidden="true" src="videos/resposta_com_ia_generativa.mp4"></video></div>
+            <div class="j-inline"><video muted loop playsinline preload="none" poster="videos/poster-resposta_com_ia_generativa.jpg" aria-hidden="true" src="videos/resposta_com_ia_generativa.mp4"></video></div>
           </div>
         </article>
         <article class="j-step" data-j="3">
@@ -711,7 +720,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
             <h3 data-i18n="j.s4.t">Um clique. Dois destinos. Um comprovante.</h3>
             <p data-i18n="j.s4.p">O e-mail sai ao cliente pelo SMTP da instituição. A resposta é protocolada no órgão pela API, com o comprovante em PDF anexado ao RDR, como pede a Resolução BCB 222. Cada envio recebe um protocolo de atendimento sequencial, sem lacunas. Se a API do órgão falhar, nada se perde: a pendência fica visível, com trilha, até a baixa.</p>
             <ul><li data-i18n="j.s4.l1">Registro write-ahead de cada chamada ao Banco Central</li><li data-i18n="j.s4.l2">Reenvio idempotente ao órgão: nunca duas respostas no RDR</li></ul>
-            <div class="j-inline"><video muted loop playsinline preload="none" aria-hidden="true" src="videos/envio_simultaneo.mp4"></video></div>
+            <div class="j-inline"><video muted loop playsinline preload="none" poster="videos/poster-envio_simultaneo.jpg" aria-hidden="true" src="videos/envio_simultaneo.mp4"></video></div>
           </div>
         </article>
       </div>
@@ -1157,19 +1166,40 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   function addDays(d,n,bd){const r=new Date(d);let k=0;while(k<n){r.setDate(r.getDate()+1);if(!bd||(r.getDay()!==0&&r.getDay()!==6))k++}return r}
   function fmt(d,l){return d.toLocaleDateString(l==='en'?'en-GB':'pt-BR',{day:'2-digit',month:'2-digit'})}
   function slaLabel(c,l){const due=addDays(new Date(),c.sla[0],c.sla[1]==='bd');const u=c.sla[1]==='bd'?(l==='en'?'business days':'dias úteis'):(l==='en'?'calendar days':'dias corridos');return `${c.sla[0]} ${u} · ${fmt(due,l)}`}
-  let ci=0,timers=[];
+  let ci=0,timers=[],primeiraVolta=true;
+  const linhaHTML=ln=>`<time>${ln[0]}</time><div><span class="who">${ln[1]}</span>${ln[2]}</div>`;
   function runTicket(){
     timers.forEach(clearTimeout);timers=[];
     const c=CH[ci],l=lang,lines=c[l];
-    tChan.textContent=c.n;tProto.textContent=c.proto;tBody.innerHTML='';tStamp.classList.remove('in');tBar.style.width='0';
+    tChan.textContent=c.n;tProto.textContent=c.proto;tStamp.classList.remove('in');tBar.style.width='0';
     arcSegs.forEach((s,i)=>s.classList.toggle('on',i===c.seg));arcKey.classList.remove('on');
     tSla.textContent=slaLabel(c,l);
-    lines.forEach((ln,i)=>{const el=document.createElement('div');el.className='t-line';el.innerHTML=`<time>${ln[0]}</time><div><span class="who">${ln[1]}</span>${ln[2]}</div>`;tBody.appendChild(el);
+    $$('.t-stack-out',tBody).forEach(n=>n.remove());
+    const anterior=tBody.querySelector('.t-stack');
+    let els,adotado=false;
+    if(primeiraVolta&&anterior&&anterior.children.length===lines.length&&l==='pt'){
+      els=[...anterior.children];adotado=true;    // o primeiro estado ja veio no HTML, e visivel
+    }else{
+      const nova=document.createElement('div');nova.className='t-stack';
+      els=lines.map(ln=>{const el=document.createElement('div');el.className='t-line';el.innerHTML=linhaHTML(ln);nova.appendChild(el);return el});
+      if(anterior){                               // a camada anterior so sai depois que a nova comeca a entrar
+        anterior.classList.add('t-stack-out');
+        timers.push(setTimeout(()=>anterior.classList.add('t-stack-gone'),500));
+        timers.push(setTimeout(()=>anterior.remove(),1500));
+      }
+      tBody.appendChild(nova);
+    }
+    primeiraVolta=false;
+    els.forEach((el,i)=>{if(!adotado)el.classList.remove('in');
       timers.push(setTimeout(()=>{el.classList.add('in');tBar.style.width=`${Math.round(((i+1)/(lines.length+1))*100)}%`},600+i*900))});
     timers.push(setTimeout(()=>{tStamp.classList.add('in');arcKey.classList.add('on');tBar.style.width='100%'},600+lines.length*900+300));
     timers.push(setTimeout(()=>{ci=(ci+1)%CH.length;runTicket()},600+lines.length*900+3600));
   }
-  if(reduce){const c=CH[0];tChan.textContent=c.n;tProto.textContent=c.proto;tBody.innerHTML=c[lang].map(ln=>`<div class="t-line in"><time>${ln[0]}</time><div><span class="who">${ln[1]}</span>${ln[2]}</div></div>`).join('');tStamp.classList.add('in');tBar.style.width='100%';arcSegs[0].classList.add('on');arcKey.classList.add('on');tSla.textContent=slaLabel(c,lang)}
+  if(reduce){const c=CH[0];tChan.textContent=c.n;tProto.textContent=c.proto;
+    let st=tBody.querySelector('.t-stack');
+    if(!st||lang!=='pt'){tBody.innerHTML=`<div class="t-stack">${c[lang].map(ln=>`<div class="t-line">${linhaHTML(ln)}</div>`).join('')}</div>`;st=tBody.querySelector('.t-stack')}
+    $$('.t-line',st).forEach(el=>el.classList.add('in'));   // estado final estatico, sem ciclo
+    tStamp.classList.add('in');tBar.style.width='100%';arcSegs[0].classList.add('on');arcKey.classList.add('on');tSla.textContent=slaLabel(c,lang)}
   else runTicket();
 
   /* ============================================================
