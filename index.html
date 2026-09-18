@@ -1000,6 +1000,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   </div>
 </footer>
 
+<!-- fonte unica de prazos: assets/prazos.js. A tabela de Canais continua
+     estatica no HTML; scripts/check-prazos.mjs falha se as duas divergirem. -->
+<script src="assets/prazos.js"></script>
 <script>
 (function(){
   'use strict';
@@ -1143,29 +1146,36 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
      HERO TICKET — simulação ilustrativa (dados fictícios)
      ============================================================ */
   const CH=[
-    {n:'BACEN · RDR',proto:'OUV-2026-000418',sla:[10,'bd'],seg:0,
+    {n:'BACEN · RDR',proto:'OUV-2026-000418',canal:'bacen',seg:0,
      pt:[['09:12','Captura','<b>Demanda capturada</b> pelo Web Service do RDR. 2 anexos do cidadão baixados.'],['09:12','Agente 01','Triagem: <em>Cartão de crédito › Cobrança não reconhecida</em>.'],['09:13','Agente 02','Direcionador: fila <em>Cartões</em>, prioridade alta. Briefing enviado ao backoffice.'],['D+2','Backoffice','Solução registrada: estorno efetuado, comprovante anexado.'],['D+2','Agente 05','Rascunho pronto: resposta ao cliente + manifestação ao BACEN.']],
      en:[['09:12','Capture','<b>Case captured</b> through the RDR Web Service. 2 citizen attachments downloaded.'],['09:12','Agent 01','Triage: <em>Credit card › Unrecognised charge</em>.'],['09:13','Agent 02','Router: <em>Cards</em> queue, high priority. Brief sent to the back office.'],['D+2','Back office','Resolution recorded: refund issued, receipt attached.'],['D+2','Agent 05','Draft ready: customer answer + statement to the Central Bank.']]},
-    {n:'Consumidor.gov',proto:'OUV-2026-000419',sla:[10,'cd'],seg:1,
+    {n:'Consumidor.gov',proto:'OUV-2026-000419',canal:'consumidor',seg:1,
      pt:[['12:30','Captura','<b>Reclamação capturada</b> pela API da plataforma.'],['12:30','Agente 01','Triagem: <em>Empréstimo › Portabilidade não concluída</em>.'],['12:31','Agente 08','Preparo: faltam dados do contrato de destino. Interação redigida ao consumidor.'],['D+1','Consumidor','Respondeu à interação com o número do contrato.'],['D+3','Agente 05','Rascunho pronto: resposta privada resolutiva + pública sem dado sensível.']],
      en:[['12:30','Capture','<b>Complaint captured</b> through the platform API.'],['12:30','Agent 01','Triage: <em>Loan › Portability not completed</em>.'],['12:31','Agent 08','Preparation: destination contract data missing. Interaction drafted to the consumer.'],['D+1','Consumer','Replied with the contract number.'],['D+3','Agent 05','Draft ready: resolving private answer + public one with no sensitive data.']]},
-    {n:'Reclame Aqui',proto:'OUV-2026-000420',sla:[5,'bd'],seg:2,
+    {n:'Reclame Aqui',proto:'OUV-2026-000420',canal:'reclameaqui',seg:2,
      pt:[['08:00','Captura','<b>Reclamação capturada</b> pela API HugMe.'],['08:00','Agente 01','Triagem: <em>Conta corrente › Tarifa em desacordo</em>.'],['08:01','Agente 07','Moderação: não cabe. Orientação de resposta pública gerada.'],['D+1','Backoffice','Tarifa revisada, ajuste lançado.'],['D+1','Agente 05','Rascunho pronto: resposta pública + mensagem privada.']],
      en:[['08:00','Capture','<b>Complaint captured</b> through the HugMe API.'],['08:00','Agent 01','Triage: <em>Current account › Disputed fee</em>.'],['08:01','Agent 07','Moderation: not applicable. Public reply guidance generated.'],['D+1','Back office','Fee reviewed, adjustment posted.'],['D+1','Agent 05','Draft ready: public answer + private message.']]},
-    {n:'PROCON',proto:'OUV-2026-000421',sla:[10,'cd'],seg:3,
+    {n:'PROCON',proto:'OUV-2026-000421',canal:'procon',seg:3,
      pt:[['10:44','Cadastro','<b>CIP cadastrada</b> a partir do ofício do órgão. Cópia digitalizada lida.'],['10:44','Agente 01','Triagem: <em>Consignado › Contratação contestada</em>.'],['10:46','Agente 06','Subsídios: 4 essenciais, 2 complementares. Parecer pronto para o jurídico.'],['D+3','Jurídico','Subsídios reunidos; minuta revisada.'],['D+4','Ouvidor','Resposta protocolada no portal; baixa registrada.']],
      en:[['10:44','Entry','<b>CIP entered</b> from the body’s notice. Scanned copy read.'],['10:44','Agent 01','Triage: <em>Payroll loan › Disputed contract</em>.'],['10:46','Agent 06','Evidence brief: 4 essential, 2 complementary. Ready for legal counsel.'],['D+3','Legal','Evidence gathered; draft reviewed.'],['D+4','Ombudsman','Answer filed on the portal; case cleared.']]},
-    {n:'Ouvidoria',proto:'OUV-2026-000422',sla:[10,'bd'],seg:4,
+    {n:'Ouvidoria',proto:'OUV-2026-000422',canal:'ouvidoria',seg:4,
      pt:[['15:02','Cadastro','<b>Demanda registrada</b> pelo 0800. Protocolo gerado e informado ao cliente.'],['15:02','Agente 01','Triagem: <em>Atendimento › Demora na resolução</em>.'],['15:03','Agente 02','Direcionador: fila <em>Canais</em>, prioridade média.'],['D+1','Backoffice','Histórico do CRM consultado: 3 contatos anteriores.'],['D+2','Agente 05','Rascunho pronto: resposta ao cliente por e-mail.']],
      en:[['15:02','Entry','<b>Case registered</b> from the toll-free line. Case number generated and given to the customer.'],['15:02','Agent 01','Triage: <em>Service › Delay in resolution</em>.'],['15:03','Agent 02','Router: <em>Channels</em> queue, medium priority.'],['D+1','Back office','CRM history consulted: 3 previous contacts.'],['D+2','Agent 05','Draft ready: customer answer by e-mail.']]},
-    {n:'SAC',proto:'OUV-2026-000423',sla:[7,'cd'],seg:5,
+    {n:'SAC',proto:'OUV-2026-000423',canal:'sac',seg:5,
      pt:[['11:20','Cadastro','<b>Reclamação cadastrada</b> pelo atendente.'],['11:20','Agente 01','Triagem: <em>Entrega › Produto não recebido</em>.'],['11:21','Agente 02','Direcionador: fila <em>Logística</em>, prioridade alta.'],['D+1','Backoffice','Rastreio localizado, reenvio agendado.'],['D+1','Agente 05','Rascunho pronto: resposta ao cliente.']],
      en:[['11:20','Entry','<b>Complaint entered</b> by the agent.'],['11:20','Agent 01','Triage: <em>Delivery › Product not received</em>.'],['11:21','Agent 02','Router: <em>Logistics</em> queue, high priority.'],['D+1','Back office','Tracking found, reshipment scheduled.'],['D+1','Agent 05','Draft ready: customer answer.']]}
   ];
   const tBody=$('#tBody'),tChan=$('#tChan'),tProto=$('#tProto'),tSla=$('#tSla'),tBar=$('#tBar'),tStamp=$('#tStamp'),arcSegs=$$('#heroArc .seg'),arcKey=$('#heroArc .keystone');
-  function addDays(d,n,bd){const r=new Date(d);let k=0;while(k<n){r.setDate(r.getDate()+1);if(!bd||(r.getDay()!==0&&r.getDay()!==6))k++}return r}
   function fmt(d,l){return d.toLocaleDateString(l==='en'?'en-GB':'pt-BR',{day:'2-digit',month:'2-digit'})}
-  function slaLabel(c,l){const due=addDays(new Date(),c.sla[0],c.sla[1]==='bd');const u=c.sla[1]==='bd'?(l==='en'?'business days':'dias úteis'):(l==='en'?'calendar days':'dias corridos');return `${c.sla[0]} ${u} · ${fmt(due,l)}`}
+  // prazo e vencimento vem de assets/prazos.js, que conhece os feriados.
+  // sem o script o card mantem o rotulo estatico do HTML em vez de quebrar.
+  function slaLabel(c,l){
+    const P=window.OuvPrazos;if(!P)return '';
+    const ch=P.canal(c.canal);if(!ch)return '';
+    const venc=P.parse(P.calcularPrazo(P.fmt(new Date()),c.canal).vencimento);
+    const u=ch.tipo==='bd'?(l==='en'?'business days':'dias úteis'):(l==='en'?'calendar days':'dias corridos');
+    return `${ch.n} ${u} · ${fmt(venc,l)}`;
+  }
   let ci=0,timers=[],primeiraVolta=true;
   const linhaHTML=ln=>`<time>${ln[0]}</time><div><span class="who">${ln[1]}</span>${ln[2]}</div>`;
   function runTicket(){
@@ -1173,7 +1183,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     const c=CH[ci],l=lang,lines=c[l];
     tChan.textContent=c.n;tProto.textContent=c.proto;tStamp.classList.remove('in');tBar.style.width='0';
     arcSegs.forEach((s,i)=>s.classList.toggle('on',i===c.seg));arcKey.classList.remove('on');
-    tSla.textContent=slaLabel(c,l);
+    const lab=slaLabel(c,l);if(lab)tSla.textContent=lab;
     $$('.t-stack-out',tBody).forEach(n=>n.remove());
     const anterior=tBody.querySelector('.t-stack');
     let els,adotado=false;
@@ -1199,7 +1209,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     let st=tBody.querySelector('.t-stack');
     if(!st||lang!=='pt'){tBody.innerHTML=`<div class="t-stack">${c[lang].map(ln=>`<div class="t-line">${linhaHTML(ln)}</div>`).join('')}</div>`;st=tBody.querySelector('.t-stack')}
     $$('.t-line',st).forEach(el=>el.classList.add('in'));   // estado final estatico, sem ciclo
-    tStamp.classList.add('in');tBar.style.width='100%';arcSegs[0].classList.add('on');arcKey.classList.add('on');tSla.textContent=slaLabel(c,lang)}
+    tStamp.classList.add('in');tBar.style.width='100%';arcSegs[0].classList.add('on');arcKey.classList.add('on');const lab0=slaLabel(c,lang);if(lab0)tSla.textContent=lab0}
   else runTicket();
 
   /* ============================================================
