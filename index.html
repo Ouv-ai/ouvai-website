@@ -439,6 +439,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .f-ok h3{font-size:1.05rem;margin-bottom:.4rem;font-weight:700}
 .f-ok p{font-size:.9rem;color:rgba(255,255,255,.75)}
 .f-ok a{color:var(--teal);text-decoration:underline}
+/* honeypot: fora da tela, sem display:none (o bot precisa "ver" o campo) */
+.sr-hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.f-grid[hidden]{display:none}
+.f-err{grid-column:1/-1;font-size:.82rem;line-height:1.45;color:#FCA5A5;border:1px solid rgba(248,113,113,.38);background:rgba(248,113,113,.08);border-radius:10px;padding:.8rem 1rem}
+.f-err[hidden]{display:none}
+.f-err a{color:#FCA5A5;text-decoration:underline}
+.btn .b-send{display:none}
+.btn.sending .b-idle,.btn.sending .arr{display:none}
+.btn.sending .b-send{display:inline}
+.btn[disabled]{opacity:.6;cursor:progress;pointer-events:none}
 
 /* =============================================================
    FOOTER
@@ -933,22 +943,32 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <a href="https://www.linkedin.com/company/ouv-ai/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>LinkedIn · Ouv.ai</a>
       </div>
     </div>
-    <form class="form rv" id="leadForm" novalidate>
+    <form class="form rv" id="leadForm" name="demo" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="demo">
+      <input type="hidden" name="idioma" id="fLang">
+      <input type="hidden" name="pagina" id="fPage">
+      <input type="hidden" name="referrer" id="fRef">
+      <input type="hidden" name="utm_source" id="fUtmS">
+      <input type="hidden" name="utm_medium" id="fUtmM">
+      <input type="hidden" name="utm_campaign" id="fUtmC">
+      <div class="sr-hp" aria-hidden="true"><label>Não preencha este campo <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></div>
       <div class="f-grid">
         <div class="field"><label for="fName" data-i18n="f.name">Nome completo <i>*</i></label><input id="fName" name="nome" type="text" required autocomplete="name"><span class="err" data-i18n="f.req">Campo obrigatório</span></div>
         <div class="field"><label for="fEmail" data-i18n="f.email">E-mail corporativo <i>*</i></label><input id="fEmail" name="email" type="email" required autocomplete="email"><span class="err" data-i18n="f.emailErr">Use o e-mail da instituição (Gmail, Outlook e similares não são aceitos)</span></div>
         <div class="field"><label for="fOrg" data-i18n="f.org">Empresa / instituição <i>*</i></label><input id="fOrg" name="empresa" type="text" required autocomplete="organization"><span class="err" data-i18n="f.req">Campo obrigatório</span></div>
         <div class="field"><label for="fRole" data-i18n="f.role">Cargo</label><input id="fRole" name="cargo" type="text" data-i18n-ph="f.rolePh" placeholder="ex.: Ouvidor, Diretor de CX" autocomplete="organization-title"></div>
         <div class="field full"><label for="fVol" data-i18n="f.vol">Volume mensal de demandas</label><select id="fVol" name="volume"><option value="" data-i18n="f.volSel">Selecione</option><option value="0-500">0 – 500</option><option value="501-2000">501 – 2.000</option><option value="2000+" data-i18n="f.volMore">Mais de 2.000</option></select></div>
+        <div class="field full"><label for="fOrigem" data-i18n="f.origem">Como conheceu a Ouv.ai?</label><select id="fOrigem" name="origem"><option value="" data-i18n="f.volSel">Selecione</option><option value="busca-google" data-i18n="f.og1">Busca no Google</option><option value="resposta-ia" data-i18n="f.og2">Resposta de IA (ChatGPT, Gemini, Perplexity, Copilot)</option><option value="linkedin" data-i18n="f.og3">LinkedIn</option><option value="indicacao" data-i18n="f.og4">Indicação</option><option value="evento" data-i18n="f.og5">Evento</option><option value="outro" data-i18n="f.og6">Outro</option></select></div>
         <div class="field full"><label for="fMsg" data-i18n="f.msg">Como podemos ajudar a sua operação hoje? <i>*</i></label><textarea id="fMsg" name="mensagem" required></textarea><span class="err" data-i18n="f.req">Campo obrigatório</span></div>
+        <div class="f-err" id="fErr" role="alert" hidden data-i18n="f.errSend">Não foi possível enviar agora. Tente novamente em instantes — ou escreva direto para <a href="mailto:contato@ouvai.com.br">contato@ouvai.com.br</a>.</div>
         <div class="f-foot">
-          <button class="btn btn-teal" type="submit"><span data-i18n="cta.demo">Solicitar demonstração</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          <small data-i18n="f.priv">Nada é armazenado aqui: a mensagem abre no seu próprio e-mail, endereçada a contato@ouvai.com.br.</small>
+          <button class="btn btn-teal" type="submit"><span class="b-idle" data-i18n="cta.demo">Solicitar demonstração</span><span class="b-send" data-i18n="f.sending">Enviando…</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <small data-i18n="f.priv">Ao enviar, você concorda que a Ouv.ai use estes dados apenas para responder ao seu contato, conforme a <a href="privacidade.html">Política de Privacidade</a>.</small>
         </div>
       </div>
       <div class="f-ok" id="fOk" role="status">
-        <h3 data-i18n="f.okT">Sua mensagem está pronta.</h3>
-        <p data-i18n="f.okP">Abrimos o seu aplicativo de e-mail com tudo preenchido; basta enviar. Se ele não abriu, escreva direto para <a href="mailto:contato@ouvai.com.br">contato@ouvai.com.br</a>.</p>
+        <h3 data-i18n="f.okT">Recebemos o seu pedido.</h3>
+        <p data-i18n="f.okP">Respondemos em até 1 dia útil pelo e-mail informado.</p>
       </div>
     </form>
   </div>
@@ -1087,8 +1107,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     'ct.k':'Demo','ct.t':'Let’s talk about your ombudsman office.','ct.a':'In one hour we show the system running on a case from your most critical channel. No promise slides: screen, data and deadline.',
     'f.name':'Full name <i>*</i>','f.req':'Required field','f.email':'Corporate e-mail <i>*</i>','f.emailErr':'Use your institution’s e-mail (Gmail, Outlook and similar are not accepted)',
     'f.org':'Company / institution <i>*</i>','f.role':'Role','f.rolePh':'e.g. Ombudsman, CX Director','f.vol':'Monthly complaint volume','f.volSel':'Select','f.volMore':'More than 2,000',
-    'f.msg':'How can we help your operation today? <i>*</i>','f.priv':'Nothing is stored here: the message opens in your own e-mail client, addressed to contato@ouvai.com.br.',
-    'f.okT':'Your message is ready.','f.okP':'We opened your e-mail app with everything filled in; just hit send. If it did not open, write directly to <a href="mailto:contato@ouvai.com.br">contato@ouvai.com.br</a>.',
+    'f.msg':'How can we help your operation today? <i>*</i>','f.priv':'By submitting, you agree that Ouv.ai may use this data solely to reply to your enquiry, as described in our <a href="privacidade.html">Privacy Policy</a>.',
+    'f.okT':'We have received your request.','f.okP':'We reply within 1 business day to the e-mail you provided.',
+    'f.errSend':'We could not send your message right now. Please try again in a moment — or write directly to <a href="mailto:contato@ouvai.com.br">contato@ouvai.com.br</a>.','f.sending':'Sending…',
+    'f.origem':'How did you hear about Ouv.ai?','f.og1':'Google search','f.og2':'AI answer (ChatGPT, Gemini, Perplexity, Copilot)','f.og3':'LinkedIn','f.og4':'Referral','f.og5':'Event','f.og6':'Other',
     'ft.p':'Intelligent ombudsman management for financial institutions. Six channels, ten AI agents and one human approval before any answer goes out.',
     'ft.nav':'Navigation','ft.contact':'Contact','ft.legal':'Legal entity','ft.rights':'All rights reserved.','ft.terms':'Terms of Use','ft.priv':'Privacy Policy','ft.top':'Top'
   };
@@ -1248,26 +1270,60 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   rail.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();rail.scrollBy({left:step(),behavior:'smooth'})}if(e.key==='ArrowLeft'){e.preventDefault();rail.scrollBy({left:-step(),behavior:'smooth'})}});
 
   /* ============================================================
-     FORM — sem backend: valida e monta mailto (nada é armazenado)
+     FORM — Netlify Forms: POST via fetch, sucesso inline.
+     A validação (obrigatórios + bloqueio de e-mail pessoal) é a mesma;
+     o mailto sobrou apenas como ALTERNATIVA manual quando o envio falha.
      ============================================================ */
   const PERSONAL=/@(gmail|googlemail|outlook|hotmail|live|msn|yahoo|ymail|icloud|me|mac|aol|protonmail|proton|zoho|uol|bol|terra|ig|globo|r7|zipmail|yandex|gmx)\./i;
   const form=$('#leadForm');
+  const fGrid=$('.f-grid',form),fErr=$('#fErr'),fOk=$('#fOk'),fBtn=$('button[type="submit"]',form);
+
+  // UTM da primeira visita da sessão: sem UTM na URL, mantém o que já foi guardado.
+  const UTM=(()=>{
+    let saved=null;
+    try{saved=JSON.parse(sessionStorage.getItem('ouv-utm')||'null')}catch(e){}
+    if(saved&&typeof saved==='object')return saved;
+    const q=new URLSearchParams(location.search),fresh={};let has=false;
+    ['utm_source','utm_medium','utm_campaign'].forEach(k=>{const v=q.get(k);if(v){fresh[k]=v.slice(0,200);has=true}});
+    if(has){try{sessionStorage.setItem('ouv-utm',JSON.stringify(fresh))}catch(e){}}
+    return fresh;
+  })();
+
+  let sending=false;
   form.addEventListener('submit',e=>{
-    e.preventDefault();let ok=true;
+    e.preventDefault();
+    if(sending)return;                      // trava o duplo envio
+    let ok=true;
     $$('.field',form).forEach(f=>f.classList.remove('invalid'));
     ['fName','fEmail','fOrg','fMsg'].forEach(id=>{const el=$('#'+id);if(!el.value.trim()){el.closest('.field').classList.add('invalid');ok=false}});
     const em=$('#fEmail');
     if(em.value.trim()&&(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)||PERSONAL.test(em.value))){em.closest('.field').classList.add('invalid');ok=false}
     if(!ok){const first=$('.field.invalid input,.field.invalid textarea',form);if(first)first.focus();return}
-    const en=lang==='en';
-    const v={nome:$('#fName').value.trim(),email:em.value.trim(),empresa:$('#fOrg').value.trim(),cargo:$('#fRole').value.trim(),volume:$('#fVol').value,msg:$('#fMsg').value.trim()};
-    const subject=(en?'Demo request — ':'Solicitação de demonstração — ')+v.empresa;
-    const body=en?`Name: ${v.nome}\nCorporate e-mail: ${v.email}\nCompany: ${v.empresa}\nRole: ${v.cargo||'-'}\nMonthly volume: ${v.volume||'-'}\n\nMessage:\n${v.msg}`
-      :`Nome: ${v.nome}\nE-mail corporativo: ${v.email}\nEmpresa: ${v.empresa}\nCargo: ${v.cargo||'-'}\nVolume mensal: ${v.volume||'-'}\n\nMensagem:\n${v.msg}`;
-    location.href=`mailto:contato@ouvai.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    $('#fOk').classList.add('show');$('#fOk').scrollIntoView({behavior:'smooth',block:'nearest'});
+
+    // contexto (ocultos declarados no HTML, para a Netlify registrar os campos)
+    $('#fLang').value=lang;
+    $('#fPage').value=location.pathname;
+    $('#fRef').value=document.referrer||'';
+    $('#fUtmS').value=UTM.utm_source||'';
+    $('#fUtmM').value=UTM.utm_medium||'';
+    $('#fUtmC').value=UTM.utm_campaign||'';
+
+    fErr.hidden=true;
+    sending=true;fBtn.disabled=true;fBtn.classList.add('sending');
+
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
+      .then(r=>{
+        if(!r.ok)throw new Error('HTTP '+r.status);
+        fGrid.hidden=true;
+        fOk.classList.add('show');
+        fOk.scrollIntoView({behavior:'smooth',block:'nearest'});
+        form.reset();
+      })
+      // falha de rede ou resposta !ok: erro inline, dados preservados, mailto como alternativa
+      .catch(()=>{fErr.hidden=false;fErr.scrollIntoView({behavior:'smooth',block:'nearest'})})
+      .finally(()=>{sending=false;fBtn.disabled=false;fBtn.classList.remove('sending')});
   });
-  $$('input,textarea',form).forEach(el=>el.addEventListener('input',()=>el.closest('.field').classList.remove('invalid')));
+  $$('input,textarea',form).forEach(el=>el.addEventListener('input',()=>{const fl=el.closest('.field');if(fl)fl.classList.remove('invalid')}));
 
   // idioma salvo: aplicado por ultimo, com tudo declarado
   try{const saved=localStorage.getItem('ouv-lang');if(saved==='en')setLang('en')}catch(e){}
