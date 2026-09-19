@@ -425,7 +425,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .field label i{color:var(--teal);font-style:normal}
 .field input,.field select,.field textarea{width:100%;font:inherit;font-size:.95rem;color:#fff;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:.85rem 1rem;transition:border-color .3s,background .3s;appearance:none}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2328CCCC' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
-.field select option{color:var(--ink)}
+/* Lista nativa do select no tema escuro do formulario.
+   color-scheme: dark faz o navegador desenhar o popup (fundo e scrollbar) em
+   dark; sem isso ele vem branco, destoando do formulario.
+   O popup e pintado fora da pagina, entao nao compoe com o fundo translucido
+   dos inputs: option usa o tom solido equivalente (--ink-2).
+   LIMITE VERIFICADO no popup real do Chrome: a linha ATIVA continua com o
+   realce azul do sistema — nem option:checked nem accent-color a alcancam.
+   O teal abaixo vale onde a lista e desenhada pela pagina (select[size],
+   e o popup do Firefox). Trocar por componente custom resolveria o azul,
+   mas custaria acessibilidade e o seletor nativo do mobile.
+   Safari e iOS usam o seletor do sistema e ignoram o estilo de option. */
+.form{color-scheme:dark}
+.field select option,.field select optgroup{background-color:var(--ink-2);color:var(--white)}
+.field select option:checked{background-color:var(--teal);color:var(--ink)}
+.field select optgroup{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
 .field textarea{min-height:120px;resize:vertical}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);background:rgba(40,204,204,.06)}
 .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.3)}
