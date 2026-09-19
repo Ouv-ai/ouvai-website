@@ -49,14 +49,21 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 8. Deployment Models (PoC + Enterprise)
 9. Metrics (KPIs)
 10. Compliance (LGPD, segurança)
-11. Contato (formulario B2B com validacao de e-mail corporativo — envio via mailto)
+11. Contato (formulario B2B com validacao de e-mail corporativo — envio via Netlify Forms)
 12. Footer
 
 ## Formulário de Contato
 - Validação client-side: campos obrigatórios + bloqueio de e-mails pessoais (Gmail, Outlook, etc.)
-- Submissão: SEM backend — monta mailto: para contato@ouvai.com.br com a mensagem preenchida
-  e abre o cliente de e-mail do visitante. NUNCA simular envio (compliance).
-- Mensagem de sucesso explica que o e-mail foi preparado no aplicativo do visitante
+- **Submissão: Netlify Forms** (`name="demo"`, `data-netlify`, honeypot `bot-field`), via
+  `fetch` POST urlencoded para `/`, com sucesso inline. NÃO voltar para `mailto:` — o mailto
+  dependia do cliente de e-mail do visitante e perdia quem usa webmail ou máquina travada.
+  O `mailto:` sobrou só como ALTERNATIVA manual quando o envio falha; NUNCA automático.
+- NUNCA simular envio (compliance): o sucesso só aparece com `response.ok`.
+- Campos ocultos (`idioma`, `pagina`, `referrer`, `utm_*`) precisam estar **declarados no HTML** —
+  a Netlify registra as colunas na detecção do deploy, não no POST.
+- A Netlify remove `data-netlify` e `netlify-honeypot` do HTML servido depois de detectar o
+  form. Isso é esperado: no servido, confira `name="demo"` + o oculto `form-name`.
+- Cada mudança de campo aqui exige atualizar a seção 3 da `privacidade.html` (o que é coletado).
 
 ## Regras de Deploy (OBRIGATÓRIAS)
 - **Antes de commitar `index.html`: comparar `https://ouv.ai/` servido com o HEAD e reportar
@@ -70,6 +77,19 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 - Prazos por canal vivem em `assets/prazos.js` (`window.OuvPrazos`). A tabela de Canais do
   `index.html` é estática: rode `node scripts/check-prazos.mjs` antes de commitar qualquer
   mudança de prazo — ele falha se as duas divergirem. Testes: `node scripts/test-prazos.mjs`.
+
+## Regras de Screenshot (OBRIGATÓRIAS)
+- **Screenshots SOMENTE via navegador headless** (Playwright/Chromium headless):
+  `page.screenshot()` / `locator.screenshot()`.
+- **NUNCA capturar a tela real do sistema operacional nem janelas do desktop, em hipótese
+  alguma** — sem `CopyFromScreen`, `PrintWindow`, `BitBlt` ou equivalente. Capturar a tela expõe
+  o que estiver aberto na máquina: numa tentativa de fotografar o popup nativo do `<select>`,
+  o browser perdeu o primeiro plano e a captura pegou outro projeto aberto no editor.
+- Quando algo só for verificável fora do headless (popup nativo do `<select>`, menu do SO,
+  diálogo de arquivo), **descreva o passo para conferência manual** em vez de capturar.
+- Para a lista de um `<select>`: `select[size=N]` renderiza dentro da página com a mesma
+  cascata de `option` e serve como evidência headless — rotulando como aproximação, porque o
+  realce da linha ativa do popup nativo não aparece nela.
 
 ## Regras de Compliance (OBRIGATÓRIAS)
 - ZERO claims falsos: numeros citados (permissões, canais, prazos, normativos) devem refletir o produto real
