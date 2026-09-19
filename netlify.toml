@@ -1,0 +1,16 @@
+# Gate de deploy. APENAS [build].
+#
+# NAO acrescentar regra de redirect ou de dominio aqui: o toml e avaliado ANTES
+# do _redirects, e as duas direcoes opostas derrubam os dois dominios. Toda
+# regra de redirect vive no _redirects. (Regra do CLAUDE.md.)
+#
+# O comando abaixo roda a cada deploy. Saida diferente de zero = build falha e
+# a Netlify NAO publica: o que estava no ar continua no ar.
+
+[build]
+  command = "node scripts/test-prazos.mjs && node scripts/check-prazos.mjs"
+  publish = "."
+
+[build.environment]
+  # Fixa a versao para o gate nao depender da imagem de build padrao mudar.
+  NODE_VERSION = "20"
