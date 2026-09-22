@@ -851,13 +851,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     </div>
 
     <div class="stats rv-stagger">
-      <div class="stat"><b data-count="6">0</b><span data-i18n="st1">canais em um único painel</span></div>
-      <div class="stat"><b data-count="10">0</b><span data-i18n="st2">agentes de IA especializados</span></div>
-      <div class="stat"><b data-count="14">0</b><span data-i18n="st3">rotinas automáticas de captura e monitoramento</span></div>
+      <div class="stat"><b data-count>6</b><span data-i18n="st1">canais em um único painel</span></div>
+      <div class="stat"><b data-count>10</b><span data-i18n="st2">agentes de IA especializados</span></div>
+      <div class="stat"><b data-count>14</b><span data-i18n="st3">rotinas automáticas de captura e monitoramento</span></div>
       <!-- fonte: ALL_PERMISSION_KEYS em permission_service.py do produto -->
-      <div class="stat"><b data-count="22">0</b><span data-i18n="st4">permissões configuráveis por perfil, sem deploy</span></div>
-      <div class="stat"><b data-count="2">0</b><span data-i18n="st5">versões de cada resposta: ao cidadão e ao órgão</span></div>
-      <div class="stat"><b><span data-count="5">0</span> <small data-i18n="st6.u">anos</small></b><span data-i18n="st6">de retenção dos documentos regulatórios</span></div>
+      <div class="stat"><b data-count>22</b><span data-i18n="st4">permissões configuráveis por perfil, sem deploy</span></div>
+      <div class="stat"><b data-count>2</b><span data-i18n="st5">versões de cada resposta: ao cidadão e ao órgão</span></div>
+      <div class="stat"><b><span data-count>5</span> <small data-i18n="st6.u">anos</small></b><span data-i18n="st6">de retenção dos documentos regulatórios</span></div>
     </div>
 
     <div class="spec rv">
@@ -1174,11 +1174,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   addEventListener('beforeprint',revealAll);
 
   /* ============================================================
-     CONTADORES
+     CONTADORES — o valor final e o texto do HTML: sem JS, sem scroll ou
+     com reduced-motion, e ele que aparece. O JS le esse texto, anima de 0
+     quando o numero entra na tela e devolve o texto original no fim.
+     threshold 0: o zero entra junto com o numero; com .6 o valor final
+     apareceria antes e piscaria para 0 (linhas de baixo no mobile).
      ============================================================ */
-  const cnt=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;cnt.unobserve(e.target);const el=e.target,to=+el.dataset.count;if(reduce){el.textContent=to;return}
-    const t0=performance.now(),d=1100;(function f(t){const p=Math.min(1,(t-t0)/d),ease=1-Math.pow(1-p,3);el.textContent=Math.round(to*ease);if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});
-  $$('[data-count]').forEach(el=>cnt.observe(el));
+  if(!reduce){
+    const cnt=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;cnt.unobserve(e.target);const el=e.target,fim=el.textContent,to=parseInt(fim,10);if(!(to>0))return;
+      const t0=performance.now(),d=1100;(function f(t){const p=Math.min(1,(t-t0)/d),ease=1-Math.pow(1-p,3);el.textContent=p<1?Math.round(to*ease):fim;if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:0});
+    $$('[data-count]').forEach(el=>cnt.observe(el));
+  }
 
   /* ============================================================
      HERO TICKET — simulação ilustrativa (dados fictícios)
