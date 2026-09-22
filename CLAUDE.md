@@ -113,7 +113,7 @@ Repositório de produção: https://github.com/Ouv-ai/ouvai-website
 ## Vídeos Demo (How It Works)
 - `videos/captura_automatica.mp4` — Step 01
 - `videos/classificacao_inteligente.mp4` — Step 02
-- `videos/resposta_com_ia_generativa.mp4` — Step 03
+- `videos/resposta_assistida.mp4` — Step 03
 - `videos/envio_simultaneo.mp4` — Step 04
 
 ## Comandos

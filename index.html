@@ -18,7 +18,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#0B1220">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'><g%20fill='none'%20stroke='%2328CCCC'%20stroke-width='11'%20stroke-linecap='round'><path%20d='M20%2073%20V57%20A30%2030%200%200%201%2024.56%2041.10'/><path%20d='M27.19%2037.52%20A30%2030%200%200%201%2040.98%2028.39'/><path%20d='M59.02%2028.39%20A30%2030%200%200%201%2072.81%2037.52'/><path%20d='M75.44%2041.10%20A30%2030%200%200%201%2080%2057%20V73'/></g><path%20d='M40.68%2022.23%20L59.32%2022.23%20L56.47%2032.85%20L43.53%2032.85%20Z'%20fill='%2328CCCC'/></svg>">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -704,7 +706,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <div class="j-frame">
           <video class="on" muted loop playsinline preload="none" poster="videos/poster-captura_automatica.jpg" aria-hidden="true" src="videos/captura_automatica.mp4" data-j="0"></video>
           <video muted loop playsinline preload="none" poster="videos/poster-classificacao_inteligente.jpg" aria-hidden="true" src="videos/classificacao_inteligente.mp4" data-j="1"></video>
-          <video muted loop playsinline preload="none" poster="videos/poster-resposta_com_ia_generativa.jpg" aria-hidden="true" src="videos/resposta_com_ia_generativa.mp4" data-j="2"></video>
+          <video muted loop playsinline preload="none" poster="videos/poster-resposta_assistida.jpg" aria-hidden="true" src="videos/resposta_assistida.mp4" data-j="2"></video>
           <video muted loop playsinline preload="none" poster="videos/poster-envio_simultaneo.jpg" aria-hidden="true" src="videos/envio_simultaneo.mp4" data-j="3"></video>
           <span class="j-tag" id="jTag">01 / 04 · Captura</span>
         </div>
@@ -735,7 +737,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
             <h3 data-i18n="j.s3.t">O rascunho chega pronto para a sua decisão.</h3>
             <p data-i18n="j.s3.p">Com a solução do backoffice em mãos, o agente de Contexto analisa o dossiê inteiro e sugere a procedência. Os modelos institucionais mais parecidos são recuperados por similaridade semântica. A Escrita produz duas versões: uma ao cidadão, outra ao órgão. Regenere quantas vezes quiser. A procedência final é sua.</p>
             <ul><li data-i18n="j.s3.l1">Guardrail jurídico: a IA não cita norma ao cidadão</li><li data-i18n="j.s3.l2">Aprovação por um segundo perfil antes do envio, quando a regra da instituição exige</li></ul>
-            <div class="j-inline"><video muted loop playsinline preload="none" poster="videos/poster-resposta_com_ia_generativa.jpg" aria-hidden="true" src="videos/resposta_com_ia_generativa.mp4"></video></div>
+            <div class="j-inline"><video muted loop playsinline preload="none" poster="videos/poster-resposta_assistida.jpg" aria-hidden="true" src="videos/resposta_assistida.mp4"></video></div>
           </div>
         </article>
         <article class="j-step" data-j="3">
@@ -849,13 +851,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     </div>
 
     <div class="stats rv-stagger">
-      <div class="stat"><b data-count="6">0</b><span data-i18n="st1">canais em um único painel</span></div>
-      <div class="stat"><b data-count="10">0</b><span data-i18n="st2">agentes de IA especializados</span></div>
-      <div class="stat"><b data-count="14">0</b><span data-i18n="st3">rotinas automáticas de captura e monitoramento</span></div>
+      <div class="stat"><b data-count>6</b><span data-i18n="st1">canais em um único painel</span></div>
+      <div class="stat"><b data-count>10</b><span data-i18n="st2">agentes de IA especializados</span></div>
+      <div class="stat"><b data-count>14</b><span data-i18n="st3">rotinas automáticas de captura e monitoramento</span></div>
       <!-- fonte: ALL_PERMISSION_KEYS em permission_service.py do produto -->
-      <div class="stat"><b data-count="22">0</b><span data-i18n="st4">permissões configuráveis por perfil, sem deploy</span></div>
-      <div class="stat"><b data-count="2">0</b><span data-i18n="st5">versões de cada resposta: ao cidadão e ao órgão</span></div>
-      <div class="stat"><b><span data-count="5">0</span> <small data-i18n="st6.u">anos</small></b><span data-i18n="st6">de retenção dos documentos regulatórios</span></div>
+      <div class="stat"><b data-count>22</b><span data-i18n="st4">permissões configuráveis por perfil, sem deploy</span></div>
+      <div class="stat"><b data-count>2</b><span data-i18n="st5">versões de cada resposta: ao cidadão e ao órgão</span></div>
+      <div class="stat"><b><span data-count>5</span> <small data-i18n="st6.u">anos</small></b><span data-i18n="st6">de retenção dos documentos regulatórios</span></div>
     </div>
 
     <div class="spec rv">
@@ -1172,11 +1174,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   addEventListener('beforeprint',revealAll);
 
   /* ============================================================
-     CONTADORES
+     CONTADORES — o valor final e o texto do HTML: sem JS, sem scroll ou
+     com reduced-motion, e ele que aparece. O JS le esse texto, anima de 0
+     quando o numero entra na tela e devolve o texto original no fim.
+     threshold 0: o zero entra junto com o numero; com .6 o valor final
+     apareceria antes e piscaria para 0 (linhas de baixo no mobile).
      ============================================================ */
-  const cnt=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;cnt.unobserve(e.target);const el=e.target,to=+el.dataset.count;if(reduce){el.textContent=to;return}
-    const t0=performance.now(),d=1100;(function f(t){const p=Math.min(1,(t-t0)/d),ease=1-Math.pow(1-p,3);el.textContent=Math.round(to*ease);if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});
-  $$('[data-count]').forEach(el=>cnt.observe(el));
+  if(!reduce){
+    const cnt=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;cnt.unobserve(e.target);const el=e.target,fim=el.textContent,to=parseInt(fim,10);if(!(to>0))return;
+      const t0=performance.now(),d=1100;(function f(t){const p=Math.min(1,(t-t0)/d),ease=1-Math.pow(1-p,3);el.textContent=p<1?Math.round(to*ease):fim;if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:0});
+    $$('[data-count]').forEach(el=>cnt.observe(el));
+  }
 
   /* ============================================================
      HERO TICKET — simulação ilustrativa (dados fictícios)
