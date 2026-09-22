@@ -115,7 +115,7 @@ Dominios bloqueados: gmail, outlook, hotmail, yahoo, icloud, aol, protonmail, zo
 |------|---------|--------|
 | 01 — Captura Automatica | `videos/captura_automatica.mp4` | Ativo |
 | 02 — Classificacao Inteligente | `videos/classificacao_inteligente.mp4` | Ativo |
-| 03 — Resposta com IA Generativa | `videos/resposta_com_ia_generativa.mp4` | Ativo |
+| 03 — Resposta Assistida | `videos/resposta_assistida.mp4` | Ativo |
 | 04 — Envio Simultaneo | — | Placeholder (aguardando video) |
 
 Videos: autoplay, loop, muted, sem controles, sem fullscreen.
@@ -181,7 +181,7 @@ SITE_OUV.AI/
 ├── videos/
 │   ├── captura_automatica.mp4
 │   ├── classificacao_inteligente.mp4
-│   └── resposta_com_ia_generativa.mp4
+│   └── resposta_assistida.mp4
 └── backend/
     ├── .env.example        # Template de configuracao SMTP
     ├── requirements.txt    # FastAPI, uvicorn, pydantic-settings
